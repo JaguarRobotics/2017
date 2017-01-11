@@ -1,5 +1,7 @@
 package edu.jaguarbots.steamworks;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -40,4 +42,11 @@ public class RobotMap {
     public static final int leftStick              = 0;
     public static final int rightStick             = 1;
     public static final int manipulator            = 2;
+    
+    
+    /*These below may be temporary*/
+	public static int solClimber;
+	public static int climberLimitSwitch;
+	public static AnalogInput gyro;
+	public static int solGearShift;
 }
