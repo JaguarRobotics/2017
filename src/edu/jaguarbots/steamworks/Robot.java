@@ -24,10 +24,6 @@ public class Robot extends IterativeRobot
     private final SendableChooser                    positionChooser  = new SendableChooser();
     private final SendableChooser                    gearsChooser  = new SendableChooser();
     private final SendableChooser                    crossChooser   = new SendableChooser();
-    /*-
-    private final SendableChooser                    goalChooser      = new SendableChooser();
-    private final SendableChooser                    defenseChooser   = new SendableChooser();
-    // */
     
 //    Compressor compresser = new Compressor(RobotMap.pwmCompresser);
 
@@ -45,26 +41,6 @@ public class Robot extends IterativeRobot
     {
     	Yes, No
     }
-    
-    
-    /*New enums are above*/
-    /*Old enums are below*/
-    /*-
-    public enum Defense
-    {
-        Portcullis, Cheval, Moat, Ramparts, Rockwall, Terrain, Low
-    }
-
-    public enum Position
-    {
-        One, Two, Three, Four, Five, Spy
-    }
-
-    public enum Goal
-    {
-        Left, Middle, Right
-    }
-    // */
 
     
     /**
@@ -93,29 +69,6 @@ public class Robot extends IterativeRobot
         crossChooser.addDefault("Yes", CrossLine1.No);
         crossChooser.addObject("null", null);
         SmartDashboard.putData("Cross Baseline", crossChooser);
-
-//        positionChooser.addDefault("One", Position.One);
-//        positionChooser.addObject("Two", Position.Two);
-//        positionChooser.addObject("Three", Position.Three);
-//        positionChooser.addObject("Four", Position.Four);
-//        positionChooser.addObject("Five", Position.Five);
-//        positionChooser.addObject("Spy", Position.Spy);
-//        positionChooser.addObject("null", null);
-//        SmartDashboard.putData("Position", positionChooser);
-//        goalChooser.addDefault("Left", Goal.Left);
-//        goalChooser.addObject("Middle", Goal.Middle);
-//        goalChooser.addObject("Right", Goal.Right);
-//        goalChooser.addObject("null", null);
-//        SmartDashboard.putData("Goal", goalChooser);
-//        defenseChooser.addObject("Portcullis", Defense.Portcullis);
-//        defenseChooser.addObject("Cheval De Frise", Defense.Cheval);
-//        defenseChooser.addObject("Moat", Defense.Moat);
-//        defenseChooser.addObject("Ramparts", Defense.Ramparts);
-//        defenseChooser.addObject("Rockwall", Defense.Rockwall);
-//        defenseChooser.addObject("Rough Terrain", Defense.Terrain);
-//        defenseChooser.addDefault("Low Bar", Defense.Low);
-//        defenseChooser.addObject("null", null);
-//        SmartDashboard.putData("Defense", defenseChooser);
         
 //        compresser.setClosedLoopControl(true);                              //should turn on the compresser
     }
@@ -150,9 +103,6 @@ public class Robot extends IterativeRobot
         final Position1 position = (Position1) positionChooser.getSelected();
         final Gears1 gears = (Gears1) gearsChooser.getSelected();
         final CrossLine1 cross = (CrossLine1) crossChooser.getSelected();
-//        final Position position = (Position) positionChooser.getSelected();
-//        final Goal goal = (Goal) goalChooser.getSelected();
-//        final Defense defense = (Defense) defenseChooser.getSelected();
         if(position == null && gears == null && cross == null)
         {
             autonomousCommand = new Autonomous();
@@ -162,19 +112,6 @@ public class Robot extends IterativeRobot
             autonomousCommand = new Autonomous(position, gears, cross);
         }
         if (autonomousCommand != null) autonomousCommand.start();
-//        if (position == Position.Spy)
-//        {
-//            autonomousCommand = new Autonomous(true);
-//        }
-//        else if(defense == null && goal == null && position == null)
-//        {
-//            autonomousCommand = new Autonomous();
-//        }
-//        else
-//        {
-//            autonomousCommand = new Autonomous(defense, position, goal);
-//        }
-//        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
