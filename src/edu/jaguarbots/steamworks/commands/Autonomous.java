@@ -12,19 +12,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Autonomous extends CommandGroup
 {
     /**
-     * Default, drives forward 5
+     * Default, does nothing as of yet
      */
     public Autonomous()
     {
-        moveToRamp();
+        
     }
 
+    
     /**
      * If spybot position.
      * 
      * @param spyShoot
      *            true if we want to shoot, false to drive up to defense.
      */
+    /*-
     public Autonomous(final boolean spyShoot)
     {
         if (spyShoot)
@@ -38,8 +40,9 @@ public class Autonomous extends CommandGroup
             addSequential(new EncoderDrive(-5));
         }
     }
+    // */
 
-    /**
+    /**-
      * Selects autonomous route based on defense to cross, position in, and what
      * goal to shoot in.
      * 
@@ -51,6 +54,7 @@ public class Autonomous extends CommandGroup
      * @param goal
      *            enum: Left, Middle, or Right
      */
+    /*-
     public Autonomous(final Robot.Defense defense,
                     final Robot.Position position, final Robot.Goal goal)
     {
@@ -104,8 +108,26 @@ public class Autonomous extends CommandGroup
                     break;
             }
         }
-    }
+    }// */
+    
+    /**
+     * Selects autonomous route based on defense to cross, position in, and what
+     * goal to shoot in.
+     * 
+     * @param position
+     *            enum: Left, Middle, or Right
+     * @param gears
+     *            enum: One, Two, or Three
+     * @param cross
+     *            enum: Yes or No
+     */
+    public Autonomous(final Robot.Position1 position,
+                   final Robot.Gears1 gears, final Robot.CrossLine1 cross)
+   {
+       
+   }
 
+    /*-
     private void shoot(final Robot.Position position, final Robot.Goal goal)
     {
         switch (position)
@@ -229,4 +251,5 @@ public class Autonomous extends CommandGroup
         //addSequential(new AimHorizontal());
         //addSequential(new ShooterFire());
     }
+    // */
 }
