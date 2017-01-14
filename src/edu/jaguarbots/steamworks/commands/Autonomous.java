@@ -30,8 +30,8 @@ public class Autonomous extends CommandGroup
      * @param cross
      *            enum: Yes or No
      */
-    public Autonomous(final Robot.Position1 position,
-                   final Robot.Gears1 gears, final Robot.CrossLine1 cross)
+    public Autonomous(final Robot.Position position,
+                   final Robot.Gears gears, final Robot.CrossLine cross)
    {
        
    }

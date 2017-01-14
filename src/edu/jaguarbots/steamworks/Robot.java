@@ -27,17 +27,17 @@ public class Robot extends IterativeRobot
     
 //    Compressor compresser = new Compressor(RobotMap.pwmCompresser);
 
-    public enum Position1
+    public enum Position
     {
     	Left, Middle, Right
     }
     
-    public enum Gears1
+    public enum Gears
     {
     	One, Two, Three
     }
     
-    public enum CrossLine1
+    public enum CrossLine
     {
     	Yes, No
     }
@@ -55,18 +55,18 @@ public class Robot extends IterativeRobot
             e.printStackTrace();
         }
         
-        positionChooser.addDefault("Left", Position1.Left);
-        positionChooser.addObject("Middle", Position1.Middle);
-        positionChooser.addObject("Right", Position1.Right);
+        positionChooser.addDefault("Left", Position.Left);
+        positionChooser.addObject("Middle", Position.Middle);
+        positionChooser.addObject("Right", Position.Right);
         SmartDashboard.putData("Position", positionChooser);
-        gearsChooser.addDefault("One", Gears1.One);
-        gearsChooser.addObject("Two", Gears1.Two);
-        gearsChooser.addObject("Three", Gears1.Three);
+        gearsChooser.addDefault("One", Gears.One);
+        gearsChooser.addObject("Two", Gears.Two);
+        gearsChooser.addObject("Three", Gears.Three);
         gearsChooser.addObject("null", null);
         SmartDashboard.putData("Gears", gearsChooser);
-        crossChooser.addObject("Yes", CrossLine1.Yes);
-        crossChooser.addObject("No", CrossLine1.No);
-        crossChooser.addDefault("Yes", CrossLine1.No);
+        crossChooser.addObject("Yes", CrossLine.Yes);
+        crossChooser.addObject("No", CrossLine.No);
+        crossChooser.addDefault("Yes", CrossLine.No);
         crossChooser.addObject("null", null);
         SmartDashboard.putData("Cross Baseline", crossChooser);
         
@@ -100,9 +100,9 @@ public class Robot extends IterativeRobot
      */
     public void autonomousInit()
     {
-        final Position1 position = (Position1) positionChooser.getSelected();
-        final Gears1 gears = (Gears1) gearsChooser.getSelected();
-        final CrossLine1 cross = (CrossLine1) crossChooser.getSelected();
+        final Position position = (Position) positionChooser.getSelected();
+        final Gears gears = (Gears) gearsChooser.getSelected();
+        final CrossLine cross = (CrossLine) crossChooser.getSelected();
         if(position == null && gears == null && cross == null)
         {
             autonomousCommand = new Autonomous();
