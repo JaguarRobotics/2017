@@ -12,4 +12,4 @@ cat <<EOF >> email.txt
 
 Thank you!
 EOF
-sendemail -f "$FROM_EMAIL" -u "Lightning McSteam's Code Update" -t "$TO_EMAIL" -s smtp.gmail.com:587 -o tls=yes -xu "$FROM_EMAIL" -xp "$FROM_PASSWORD" -o message-file=email.txt -a code.zip
+sendemail -l email.log -f "$FROM_EMAIL" -u "Lightning McSteam's Code Update" -t "$TO_EMAIL" -s smtp.gmail.com:587 -o tls=yes -xu "$FROM_EMAIL" -xp "$FROM_PASSWORD" -o message-file=email.txt -a code.zip

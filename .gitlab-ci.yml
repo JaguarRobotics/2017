@@ -1,4 +1,6 @@
 build:
+  artifacts:
+  - email.log
   image: zachdeibert/email
   only:
   - master
