@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ping -c 4 google.com
+
 zip -r code.zip $(ls -A | grep -v "^.git$")
 cat <<EOF > email.txt
 Hello, Garry.  This is an automated email you requested about Lightning McSteam's code.
