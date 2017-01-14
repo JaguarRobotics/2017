@@ -4,7 +4,6 @@ package edu.jaguarbots.steamworks;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.jaguarbots.steamworks.commands.Autonomous;
 import edu.jaguarbots.steamworks.commands.CommandBase;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -23,8 +22,8 @@ public class Robot extends IterativeRobot
     private Command                            autonomousCommand;
     // vars for auto
     private final SendableChooser                    positionChooser  = new SendableChooser();
-    private final SendableChooser                    goalChooser      = new SendableChooser();
-    private final SendableChooser                    defenseChooser   = new SendableChooser();
+    private final SendableChooser                    gearsChooser  = new SendableChooser();
+    private final SendableChooser                    crossChooser   = new SendableChooser();
     
 //    Compressor compresser = new Compressor(RobotMap.pwmCompresser);
 
@@ -42,23 +41,6 @@ public class Robot extends IterativeRobot
     {
     	Yes, No
     }
-    
-    /*New enums are above*/
-    /*Old enums are below*/
-    public enum Defense
-    {
-        Portcullis, Cheval, Moat, Ramparts, Rockwall, Terrain, Low
-    }
-
-    public enum Position
-    {
-        One, Two, Three, Four, Five, Spy
-    }
-
-    public enum Goal
-    {
-        Left, Middle, Right
-    }
 
     
     /**
@@ -72,29 +54,22 @@ public class Robot extends IterativeRobot
         } catch(Exception e){
             e.printStackTrace();
         }
-
-        positionChooser.addDefault("One", Position.One);
-        positionChooser.addObject("Two", Position.Two);
-        positionChooser.addObject("Three", Position.Three);
-        positionChooser.addObject("Four", Position.Four);
-        positionChooser.addObject("Five", Position.Five);
-        positionChooser.addObject("Spy", Position.Spy);
-        positionChooser.addObject("null", null);
+        
+        positionChooser.addDefault("Left", Position1.Left);
+        positionChooser.addObject("Middle", Position1.Middle);
+        positionChooser.addObject("Right", Position1.Right);
         SmartDashboard.putData("Position", positionChooser);
-        goalChooser.addDefault("Left", Goal.Left);
-        goalChooser.addObject("Middle", Goal.Middle);
-        goalChooser.addObject("Right", Goal.Right);
-        goalChooser.addObject("null", null);
-        SmartDashboard.putData("Goal", goalChooser);
-        defenseChooser.addObject("Portcullis", Defense.Portcullis);
-        defenseChooser.addObject("Cheval De Frise", Defense.Cheval);
-        defenseChooser.addObject("Moat", Defense.Moat);
-        defenseChooser.addObject("Ramparts", Defense.Ramparts);
-        defenseChooser.addObject("Rockwall", Defense.Rockwall);
-        defenseChooser.addObject("Rough Terrain", Defense.Terrain);
-        defenseChooser.addDefault("Low Bar", Defense.Low);
-        defenseChooser.addObject("null", null);
-        SmartDashboard.putData("Defense", defenseChooser);
+        gearsChooser.addDefault("One", Gears1.One);
+        gearsChooser.addObject("Two", Gears1.Two);
+        gearsChooser.addObject("Three", Gears1.Three);
+        gearsChooser.addObject("null", null);
+        SmartDashboard.putData("Gears", gearsChooser);
+        crossChooser.addObject("Yes", CrossLine1.Yes);
+        crossChooser.addObject("No", CrossLine1.No);
+        crossChooser.addDefault("Yes", CrossLine1.No);
+        crossChooser.addObject("null", null);
+        SmartDashboard.putData("Cross Baseline", crossChooser);
+        
 //        compresser.setClosedLoopControl(true);                              //should turn on the compresser
     }
 
@@ -125,20 +100,16 @@ public class Robot extends IterativeRobot
      */
     public void autonomousInit()
     {
-        final Position position = (Position) positionChooser.getSelected();
-        final Goal goal = (Goal) goalChooser.getSelected();
-        final Defense defense = (Defense) defenseChooser.getSelected();
-        if (position == Position.Spy)
-        {
-            autonomousCommand = new Autonomous(true);
-        }
-        else if(defense == null && goal == null && position == null)
+        final Position1 position = (Position1) positionChooser.getSelected();
+        final Gears1 gears = (Gears1) gearsChooser.getSelected();
+        final CrossLine1 cross = (CrossLine1) crossChooser.getSelected();
+        if(position == null && gears == null && cross == null)
         {
             autonomousCommand = new Autonomous();
         }
         else
         {
-            autonomousCommand = new Autonomous(defense, position, goal);
+            autonomousCommand = new Autonomous(position, gears, cross);
         }
         if (autonomousCommand != null) autonomousCommand.start();
     }

@@ -29,10 +29,10 @@ public class RobotMap {
     //sol
 
     // digital ios
-    public static final int leftEncoderAChannel    = 0;
-    public static final int leftEncoderBChannel    = 1;
-    public static final int rightEncoderAChannel   = 2;
-    public static final int rightEncoderBChannel   = 3;
+    public static final int leftEncoderAChannel    = 1;
+    public static final int leftEncoderBChannel    = 2;
+    public static final int rightEncoderAChannel   = 3;
+    public static final int rightEncoderBChannel   = 4;
 //    public static final int climberLimitSwitch = 7;
 
     //spi
