@@ -1,0 +1,17 @@
+build:
+  image: zachdeibert/email
+  only:
+  - master
+  - garry-emails
+  script:
+  - zip -r code.zip $(ls -A)
+  - echo "Hello, Garry.  This is an automated email you requested about Lightning McSteam's code." > email.txt
+  - echo "I have attached a zip of the robot code to this email for you." >> email.txt
+  - echo >> email.txt
+  - echo "Change information:" >> email.txt
+  - git log -1 >> email.txt
+  - echo >> email.txt
+  - echo "Thank you!" >> email.txt
+  - sendemail -f "$FROM_EMAIL" -u "Lightning McSteam's Code Update" -t "$TO_EMAIL" -s smtp.gmail.com:587 -o tls=yes -xu "$FROM_EMAIL" -xp "$FROM_PASSWORD" -o message-file=email.txt -a code.zip
+  tags:
+  - docker
