@@ -156,7 +156,6 @@ public class DriveSubsystem extends Subsystem
      * @param left speed
      * @param right speed
      */
-    @SuppressWarnings("deprecation")
 	public void driveTank(double left, double right)
     {
 //        if (Math.abs(left) == 1 && Math.abs(right) == 1 && left == right)

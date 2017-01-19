@@ -2,7 +2,6 @@ package edu.jaguarbots.steamworks.subsystems;
 
 import edu.jaguarbots.steamworks.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
