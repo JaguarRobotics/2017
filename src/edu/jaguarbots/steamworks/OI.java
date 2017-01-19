@@ -126,7 +126,7 @@ import edu.jaguarbots.steamworks.RobotMap;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI implements RobotMap {
 	public OI() throws InterruptedException {
 		
 //		if(Manipulator.getIsXbox() == false){
@@ -196,9 +196,9 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	public final Joystick Joystick1 = new Joystick(RobotMap.LEFT_JOYSTICK_PORT);
-	public final Joystick Joystick2 = new Joystick(RobotMap.RIGHT_JOYSTICK_PORT);
-	public final Joystick Manipulator = new Joystick(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+	public final Joystick Joystick1 = new Joystick(LEFT_JOYSTICK_PORT);
+	public final Joystick Joystick2 = new Joystick(RIGHT_JOYSTICK_PORT);
+	public final Joystick Manipulator = new Joystick(MANIPULATOR_JOYSTICK_PORT);
 
 	public final Button Joystick1_Button1 = new JoystickButton(Joystick1, 1);
 	public final Button Joystick1_Button2 = new JoystickButton(Joystick1, 2);
