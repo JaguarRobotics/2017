@@ -22,9 +22,9 @@ public class RobotMap {
   //pwms
     public static final int leftDrive              = 0;
     public static final int rightDrive             = 1;
+    public static final int climberMotor        = 2;
 
     //relays
-    public static final int relayClimberMotor        = 1;
     
     //sol
 

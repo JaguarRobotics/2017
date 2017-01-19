@@ -2,9 +2,10 @@ package edu.jaguarbots.steamworks.subsystems;
 
 import edu.jaguarbots.steamworks.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,7 +20,7 @@ public class ClimberSubsystem extends Subsystem
   /**
    * Motor for ascending and descending
    */
-  private Relay        climberMotor = new Relay(RobotMap.relayClimberMotor);
+  private SpeedController climberMotor = new Talon(RobotMap.climberMotor);
   /**
    * Solenoid for raising and lowering the arm for climbing
    */
@@ -59,8 +60,8 @@ public class ClimberSubsystem extends Subsystem
    */
   public void motorForward()
   {
-  	climberMotor.set(Value.kOn);
-      climberMotor.set(Value.kForward);
+//  	climberMotor.set(Value.kOn);
+      climberMotor.set(1.0);
       // TODO find out which direction is forward and which is backward
   }
 
@@ -77,8 +78,8 @@ public class ClimberSubsystem extends Subsystem
    */
   public void motorBackward()
   {
-  	climberMotor.set(Value.kOn);
-      climberMotor.set(Value.kReverse);
+//  	climberMotor.set(Value.kOn);
+      climberMotor.set(-1.0);
       // TODO find out which direction is forward and which is backward
   }
 
