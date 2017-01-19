@@ -1,28 +1,25 @@
 package edu.jaguarbots.steamworks.subsystems;
 
-import edu.jaguarbots.steamworks.IOFactory;
-import edu.jaguarbots.steamworks.RobotMap;
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class DriveSubsystem extends Subsystem
+public class DriveSubsystem extends SubsystemBase
 {
     /**
      * left drive motor
      */
-    private static SpeedController leftDrive     = IOFactory.motor(RobotMap.leftDrive, RobotMap.leftDriveType);
+    private static SpeedController leftDrive     = motor(LEFT_DRIVE_MOTOR_PORT, LEFT_DRIVE_MOTOR_TYPE);
     /**
      * right drive motor
      */
-    private static SpeedController rightDrive    = IOFactory.motor(RobotMap.rightDrive, RobotMap.rightDriveType);
+    private static SpeedController rightDrive    = motor(RIGHT_DRIVE_MOTOR_PORT, RIGHT_DRIVE_MOTOR_TYPE);
     /**
      * Class that controls both drive motors
      */
@@ -30,13 +27,11 @@ public class DriveSubsystem extends Subsystem
     /**
      * Encoder on left side of drive
      */
-    private Encoder                leftEncoder   = new Encoder(RobotMap.leftEncoderAChannel,
-                    RobotMap.leftEncoderBChannel);
+    private Encoder                leftEncoder   = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
     /**
      * Encoder on right side of drive
      */
-    private Encoder                rightEncoder  = new Encoder(RobotMap.rightEncoderAChannel,
-                    RobotMap.rightEncoderBChannel);
+    private Encoder                rightEncoder  = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
     /**
      * distance left encoder has traveled.
      */
@@ -61,16 +56,16 @@ public class DriveSubsystem extends Subsystem
     /**
      * Diameter of pulleys, used for encoder calculations.
      */
-    private double            diameter        = 6; // TODO change to diameter of pulleys
-    
+    // TODO change to diameter of pulleys
+    private double                 diameter      = 6;
     /**
      * Gyroscope that measures angle of robot.
      */
-    private AnalogGyro             gyro          = new AnalogGyro(RobotMap.gyro);
+    private AnalogGyro             gyro          = new AnalogGyro(GYRO_PORT);
     /**
      * Solenoid to shift gears.
      */
-    private static Solenoid        gearSol       = new Solenoid(RobotMap.solGearShift);
+    private static Solenoid        gearSol       = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
     /**
      * Current left motor speed.
      */
@@ -298,12 +293,11 @@ public class DriveSubsystem extends Subsystem
     {
         setDefaultCommand(new DriveTank());
     }
-    
+
     /**
      * Toggle between high and low gear
      */
     public void gearShiftToggle()
     {
-    	
     }
 }

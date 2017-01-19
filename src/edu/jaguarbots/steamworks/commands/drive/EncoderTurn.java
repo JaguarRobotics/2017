@@ -1,6 +1,5 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
-import edu.jaguarbots.steamworks.RobotMap;
 import edu.jaguarbots.steamworks.commands.CommandBase;
 
 /**
@@ -48,8 +47,7 @@ public class EncoderTurn extends CommandBase
     @Override
     protected boolean isFinished()
     {
-        return Math.max(driveSubsystem.getEncoderLeft(), driveSubsystem.getEncoderRight()) > angle
-                        * RobotMap.ROBOT_WIDTH;
+        return Math.max(driveSubsystem.getEncoderLeft(), driveSubsystem.getEncoderRight()) > angle * ROBOT_WIDTH;
     }
 
     @Override

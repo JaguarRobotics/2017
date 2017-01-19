@@ -1,11 +1,8 @@
 package edu.jaguarbots.steamworks.subsystems;
 
-import edu.jaguarbots.steamworks.IOFactory;
-import edu.jaguarbots.steamworks.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Subsystem for the mechanism to scale the castle in end game
@@ -14,20 +11,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @since 2016
  * @version 2016
  */
-public class ClimberSubsystem extends Subsystem
+public class ClimberSubsystem extends SubsystemBase
 {
     /**
      * Motor for ascending and descending
      */
-    private SpeedController climberMotor = IOFactory.motor(RobotMap.climberMotor, RobotMap.climberMotorType);
+    private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE);
     /**
      * Solenoid for raising and lowering the arm for climbing
      */
-    private Solenoid        climberSol   = new Solenoid(RobotMap.solClimber);
+    private Solenoid        climberSol   = new Solenoid(SOLENOID_CLIMBER_PORT);
     /**
      * Limit switch to ensure robot does not climb too high
      */
-    private DigitalInput    climberLimit = new DigitalInput(RobotMap.climberLimitSwitch);
+    private DigitalInput    climberLimit = new DigitalInput(CLIMBER_LIMIT_SWITCH_PORT);
     // private double POV;
 
     // private boolean isShooterUp;

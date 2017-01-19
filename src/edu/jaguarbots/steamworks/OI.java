@@ -196,9 +196,9 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	public final Joystick Joystick1 = new Joystick(RobotMap.leftStick);
-	public final Joystick Joystick2 = new Joystick(RobotMap.rightStick);
-	public final Joystick Manipulator = new Joystick(RobotMap.manipulator);
+	public final Joystick Joystick1 = new Joystick(RobotMap.LEFT_JOYSTICK_PORT);
+	public final Joystick Joystick2 = new Joystick(RobotMap.RIGHT_JOYSTICK_PORT);
+	public final Joystick Manipulator = new Joystick(RobotMap.MANIPULATOR_JOYSTICK_PORT);
 
 	public final Button Joystick1_Button1 = new JoystickButton(Joystick1, 1);
 	public final Button Joystick1_Button2 = new JoystickButton(Joystick1, 2);

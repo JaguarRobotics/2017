@@ -21,7 +21,7 @@ public class IOFactory
      * Creates a motor
      * 
      * @param channel
-     *            The PWM channel that the Jaguar is attached to. 0-9 are on-board, 10-19 are on the MXP port
+     *            The PWM channel that the motor is attached to. 0-9 are on-board, 10-19 are on the MXP port
      * @param motor
      *            The type of motor to create
      * @return The motor object
