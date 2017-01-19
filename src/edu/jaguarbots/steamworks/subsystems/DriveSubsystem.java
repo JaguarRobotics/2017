@@ -69,7 +69,7 @@ public class DriveSubsystem extends Subsystem
     /**
      * Diameter of pulleys, used for encoder calculations.
      */
-    private double            diameter        = 21; // TODO change to diameter of pulleys
+    private double            diameter        = 6; // TODO change to diameter of pulleys
     
     /**
      * Gyroscope that measures angle of robot.
