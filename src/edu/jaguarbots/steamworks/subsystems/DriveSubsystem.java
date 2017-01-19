@@ -310,4 +310,12 @@ public class DriveSubsystem extends Subsystem
     {
         setDefaultCommand(new DriveTank());
     }
+    
+    /**
+     * Toggle between high and low gear
+     */
+    public void gearShiftToggle()
+    {
+    	
+    }
 }
