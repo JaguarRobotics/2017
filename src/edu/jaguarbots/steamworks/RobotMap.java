@@ -45,4 +45,11 @@ public class RobotMap
     public static int           climberLimitSwitch;
     public static AnalogInput   gyro;
     public static int           solGearShift;
+    // Robot Design
+    /**
+     * The width of the robot (between the center of masses of both wheels) in inches
+     * 
+     * @since 2017
+     */
+    public static final double  ROBOT_WIDTH          = 32;
 }
