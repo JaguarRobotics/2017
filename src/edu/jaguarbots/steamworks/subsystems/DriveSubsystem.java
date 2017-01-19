@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,12 +18,12 @@ public class DriveSubsystem extends Subsystem
     /**
      * left drive motor
      */
-    private static Victor     leftDrive       = new Victor(RobotMap.leftDrive);
+    private static SpeedController      leftDrive      = new Talon(RobotMap.leftDrive);
     
     /**
      * right drive motor
      */
-    private static Victor     rightDrive      = new Victor(RobotMap.rightDrive);
+    private static SpeedController     rightDrive      = new Talon(RobotMap.rightDrive);
     
     /**
      * Class that controls both drive motors
