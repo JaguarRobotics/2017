@@ -4,74 +4,83 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
 
 /**
  * Drives the robot based on a distance gotten from encoders.
- * @author Jack
- *
+ * 
+ * @author Jack, Zach Deibert
+ * @since 2016
+ * @version 2017
  */
 public class EncoderDrive extends CommandBase
 {
+    /**
+     * The distance to travel
+     * 
+     * @since 2016
+     */
     private double distance;
-    private double speed = .7;
-    private boolean end;
-    private double powers[] = new double[2];
-    
+    /**
+     * The speed to travel at (between 0 and 1)
+     * 
+     * @since 2016
+     */
+    private double speed;
+
     /**
      * Drives a certain distance at a speed of .7
-     * @param distance to drive in inches.
+     * 
+     * @param distance
+     *            to drive in inches.
+     * @since 2016
      */
     public EncoderDrive(double distance)
     {
-        requires(driveSubsystem);
-        this.distance=distance;
-        end = false;
+        this(distance, 0.7);
     }
+
     /**
      * Drives a certain distance at a certain speed.
-     * @param distance to travel in inches.
-     * @param speed to run motors at.
+     * 
+     * @param distance
+     *            to travel in inches.
+     * @param speed
+     *            to run motors at.
+     * @since 2016
      */
     public EncoderDrive(double distance, double speed)
     {
         requires(driveSubsystem);
-        this.distance=distance;
+        this.distance = distance;
         this.speed = speed;
-        end = false;
     }
+
+    @Override
     protected void initialize()
     {
         driveSubsystem.startEncoders();
         driveSubsystem.resetEncoders(true, true);
-        //driveSubsystem.driveTank(speed, speed);
-        
-        
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute()
     {
-        powers = driveSubsystem.getMotorPowers();
-        driveSubsystem.driveTank(speed*powers[0], speed*powers[1]);
-        
-        if (driveSubsystem.getEncoderLeft() >= distance || driveSubsystem.getEncoderRight() >= distance)
-        { 
-            end=true;
-        }
+        double[] powers = driveSubsystem.getMotorPowers();
+        driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished()
     {
-        return end;
+        return driveSubsystem.getEncoderLeft() >= distance || driveSubsystem.getEncoderRight() >= distance;
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end()
     {
         driveSubsystem.driveTank(0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    @Override
     protected void interrupted()
     {
+        end();
     }
 }
