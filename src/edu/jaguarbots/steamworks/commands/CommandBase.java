@@ -1,8 +1,9 @@
 package edu.jaguarbots.steamworks.commands;
 
 import edu.jaguarbots.steamworks.OI;
-import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
+import edu.jaguarbots.steamworks.RobotMap;
 import edu.jaguarbots.steamworks.subsystems.ClimberSubsystem;
+import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Nathan Gawith
  */
-public abstract class CommandBase extends Command
+public abstract class CommandBase extends Command implements RobotMap
 {
     /**
      * This is the oi
