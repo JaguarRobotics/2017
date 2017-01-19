@@ -1,5 +1,6 @@
 package edu.jaguarbots.steamworks;
 
+import static edu.jaguarbots.steamworks.MotorID.Talon;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
@@ -13,11 +14,11 @@ public interface RobotMap
 {
     // PWMs
     public static final int         LEFT_DRIVE_MOTOR_PORT     = 0;
-    public static final MotorID     LEFT_DRIVE_MOTOR_TYPE     = MotorID.Talon;
+    public static final MotorID     LEFT_DRIVE_MOTOR_TYPE     = Talon;
     public static final int         RIGHT_DRIVE_MOTOR_PORT    = 1;
-    public static final MotorID     RIGHT_DRIVE_MOTOR_TYPE    = MotorID.Talon;
+    public static final MotorID     RIGHT_DRIVE_MOTOR_TYPE    = Talon;
     public static final int         CLIMBER_MOTOR_PORT        = 2;
-    public static final MotorID     CLIMBER_MOTOR_TYPE        = MotorID.Talon;
+    public static final MotorID     CLIMBER_MOTOR_TYPE        = Talon;
     // Digital I/Os
     public static final int         LEFT_ENCODER_CHANNEL_A    = 1;
     public static final int         LEFT_ENCODER_CHANNEL_B    = 2;
