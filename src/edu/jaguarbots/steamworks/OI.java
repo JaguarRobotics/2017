@@ -48,7 +48,7 @@ public class OI implements RobotMap {
 			//ManipulatorXbox_RStick.whenPressed(new IntakeMiddle());			//9
 			//ManipulatorXbox_LStick.whenPressed(new Ascend());				//10
 //		}
-		Joystick1_Button2.toggleWhenPressed(new GearShift()); //This eventually needs to be a command that toggles between the two gears unless I'm dumb and can't find it
+		Joystick1_Button2.whenPressed(new GearShift());
 		/*
 		 * +----------------------------+
 		 * |            ^  ^            |

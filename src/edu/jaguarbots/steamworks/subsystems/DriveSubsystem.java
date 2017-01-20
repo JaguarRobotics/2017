@@ -273,7 +273,7 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * Extends solenoid to shift gears on wheels.
      */
-    public static void gearShiftOut()
+    public static void gearShiftHigh()
     {
         gearSol.set(false);
     }
@@ -281,7 +281,7 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * Retracts solenoid to shift back gear on wheels.
      */
-    public static void gearShiftIn()
+    public static void gearShiftLow()
     {
         gearSol.set(true);
     }
@@ -297,7 +297,4 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * Toggle between high and low gear
      */
-    public void gearShiftToggle()
-    {
-    }
 }
