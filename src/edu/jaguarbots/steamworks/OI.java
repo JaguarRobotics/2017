@@ -3,6 +3,9 @@ package edu.jaguarbots.steamworks;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.jaguarbots.steamworks.commands.climber.Ascend;
+import edu.jaguarbots.steamworks.commands.climber.Descend;
+import edu.jaguarbots.steamworks.commands.climber.Stop;
 import edu.jaguarbots.steamworks.commands.drive.*;
 import edu.jaguarbots.steamworks.RobotMap;
 
@@ -12,52 +15,10 @@ import edu.jaguarbots.steamworks.RobotMap;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-		
-	    //code from 2016 for backup dualshock/playstation controller. 
-//		if(Manipulator.getIsXbox() == false){
-//			Manipulator_L1.whileHeld(new Intake());							//1
-//		 	Manipulator_L3.whenPressed(new IntakeMiddle());					//2
-//		 	Manipulator_R1.whileHeld(new Output());							//3
-//		 	Manipulator_R3.whenPressed(new Ascend());						//4
-//		 	Manipulator_R2.whenPressed(new ShooterFire());					//5
-//		 	Manipulator_Start.whenPressed(new Down());						//6
-//		 	Manipulator_Select.whenPressed(new Grab());						//7
-//		 	Manipulator_DpadLeft.whenPressed(new IntakeBottom());			//8
-//		 	Manipulator_DpadRight.whenPressed(new IntakeTop());				//9
-//		 	Manipulator_DpadUp.whenPressed(new ShooterUp());				//10
-//		 	Manipulator_DpadDown.whenPressed(new ShooterDown());			//11
-//		} else{
-		/*
-		 * does it?
-		 * +----------------------------+
-		 * |  This needs to be changed  |
-		 * |        in the future       |
-		 * |            |  |            |
-		 * |            v  v            |
-		 * +----------------------------+
-		 */
-	        //this is from 2016 and currently only serves as a reference
-			//ManipulatorXbox_A.whenPressed(new ShooterDown());				//1
-			//ManipulatorXbox_B.whenPressed(new IntakeBottom());				//2
-			//ManipulatorXbox_X.whenPressed(new IntakeTop());					//3
-			//ManipulatorXbox_Y.whenPressed(new ShooterUp());					//4
-			//ManipulatorXbox_LB.whileHeld(new Intake());						//5
-			//ManipulatorXbox_RB.whileHeld(new Output());						//6
-			//ManipulatorXbox_Back.whenPressed(new Down());					//7
-			//ManipulatorXbox_Start.whenPressed(new Grab());					//8
-			//ManipulatorXbox_RStick.whenPressed(new IntakeMiddle());			//9
-			//ManipulatorXbox_LStick.whenPressed(new Ascend());				//10
-//		}
 		Joystick1_Button2.whenPressed(new GearShift());
-		/*
-		 * +----------------------------+
-		 * |            ^  ^            |
-		 * |            |  |            |
-		 * |  This needs to be changed  |
-		 * |        in the future       |
-		 * +----------------------------+
-		 * does it?
-		 * */
+		ManipulatorXbox_RB.whenPressed(new Ascend()); //5
+	    ManipulatorXbox_LB.whenPressed(new Descend()); //6
+	    ManipulatorXbox_Start.whenPressed(new Stop()); //8
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
