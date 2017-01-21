@@ -16,7 +16,7 @@ public class GearShiftLow extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	DriveSubsystem.gearShiftIn();
+    	DriveSubsystem.gearShiftLow();
     }
 
     // Called repeatedly when this Command is scheduled to run

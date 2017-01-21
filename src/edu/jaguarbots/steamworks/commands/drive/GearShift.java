@@ -17,12 +17,12 @@ public class GearShift extends CommandBase
     @Override
     protected void initialize()
     {
-        boolean isOut = DriveSubsystem.getGearShift();
-        if(isOut){
-            DriveSubsystem.gearShiftIn();
+        boolean isHighGear = DriveSubsystem.getGearShift();
+        if(isHighGear){
+            DriveSubsystem.gearShiftLow();
         }
-        if(isOut == false){
-            DriveSubsystem.gearShiftOut();
+        if(isHighGear == false){
+            DriveSubsystem.gearShiftHigh();
         }
         
     }
