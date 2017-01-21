@@ -15,11 +15,16 @@ import edu.jaguarbots.steamworks.RobotMap;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-		Joystick1_Button2.whenPressed(new GearShift());
-		ManipulatorXbox_RB.whenPressed(new Ascend()); //5
-	    ManipulatorXbox_LB.whenPressed(new Descend()); //6
-	    ManipulatorXbox_Start.whenPressed(new Stop()); //8
-	}
+	    Joystick0_Button2.whileHeld(new GearShift()); //either joystick works, no need to hold both
+		Joystick1_Button2.whileHeld(new GearShift());
+		Joystick1_Button3.whenPressed(new Stop()); 
+		Joystick1_Button4.whenPressed(new Ascend()); 
+	    Joystick1_Button5.whenPressed(new Descend()); 
+	    //alternative control scheme using lower buttons
+/*		Joystick1_Button6.whenPressed(new Ascend()); 
+	    Joystick1_Button7.whenPressed(new Descend()); 
+	    Joystick1_Button11.whenPressed(new Stop()); 
+*/	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -73,7 +78,8 @@ public class OI implements RobotMap {
 	public final Button Joystick1_Button10 = new JoystickButton(Joystick1, 10);
 	public final Button Joystick1_Button11 = new JoystickButton(Joystick1, 11);
 
-	public final Button ManipulatorXbox_A = new JoystickButton(Manipulator, 1);
+	//No manipulator for 2017 game. Robot doesn't do enough to warrant one. Here for future use.
+/*	public final Button ManipulatorXbox_A = new JoystickButton(Manipulator, 1);
 	public final Button ManipulatorXbox_B = new JoystickButton(Manipulator, 2);
 	public final Button ManipulatorXbox_X = new JoystickButton(Manipulator, 3);
 	public final Button ManipulatorXbox_Y = new JoystickButton(Manipulator, 4);
@@ -82,7 +88,7 @@ public class OI implements RobotMap {
 	public final Button ManipulatorXbox_Back = new JoystickButton(Manipulator, 7);
 	public final Button ManipulatorXbox_Start = new JoystickButton(Manipulator, 8);
 	public final Button ManipulatorXbox_LStick = new JoystickButton(Manipulator, 9);
-	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);
+	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);*/
 	
 	//Dualshock/Playstation buttons. currently unlikely to be used.
 /*	public final Button Manipulator_Select = new JoystickButton(Manipulator, 1);
