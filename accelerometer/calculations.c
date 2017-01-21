@@ -1,5 +1,5 @@
 #include "calculations.h"
-#include <cmath.h>
+#include <math.h>
 
 float timeSlice = 1/1600;
 float xAcceleration = 0.0;
