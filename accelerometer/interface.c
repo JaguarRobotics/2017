@@ -56,7 +56,7 @@ static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_
 
     message = (char *) kmalloc(1024, GFP_KERNEL);
     sprintf(message, "Hello, world %d\n", counter++);
-    while (length && *message) {
+    while (length-- && *message) {
         put_user(*(message++), (buffer++));
         ++bytes_read;
     }
