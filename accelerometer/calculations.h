@@ -2,6 +2,7 @@
 #define FRC1810_CALCULATIONS_H
 
 // Calculation related functions
+typedef long num_t;
 float timeSlice;
 float xAcceleration;
 float yAcceleration;
