@@ -7,6 +7,10 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
  */
 public class DriveTank extends CommandBase
 {
+    /**
+     * below is an image of the idea we are using for joystick vs motor power.
+     * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+     */
     public DriveTank()
     {
         requires(driveSubsystem);
@@ -21,6 +25,10 @@ public class DriveTank extends CommandBase
     }
 
     // Called repeatedly when this Command is scheduled to run
+    /**
+     * below is an image of the idea we are using for joystick vs motor power.
+     * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+     */
     protected void execute()
     {
     	double powNum = 2;
@@ -30,12 +38,12 @@ public class DriveTank extends CommandBase
     	double aj1 = Math.abs(j1);
     	double pj0 = Math.pow(aj0, powNum);
     	double pj1 = Math.pow(aj1, powNum);
+        if(Math.abs(pj0) > aj0)
+        	pj0 = aj0;
+        if(Math.abs(pj1) > aj1)
+        	pj1 = aj1;
         left = pj0 * (aj0 / j0);
         right = pj1 * (aj1 / j1);
-//        if(Math.abs(left) < j0)
-//        	left = left;
-//        else
-//        	left = j0;
         driveSubsystem.driveTank(-left, -right);
     }
 
