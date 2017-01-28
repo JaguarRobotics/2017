@@ -29,7 +29,7 @@ public class DriveTurn extends CommandBase
     @Override
     protected void initialize()
     {
-        angle = turnAmount + driveSubsystem.getGyro();
+        angle = turnAmount /*+ driveSubsystem.getGyro()*/;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DriveTurn extends CommandBase
     @Override
     protected boolean isFinished()
     {
-        return (turnAmount >= 0 && driveSubsystem.getGyro() >= angle) || (turnAmount < 0 && driveSubsystem.getGyro() <= angle);
+        return (turnAmount >= 0 /*&& driveSubsystem.getGyro() >= angle*/) || (turnAmount < 0 /*&& driveSubsystem.getGyro() <= angle*/);
     }
 
     @Override

@@ -54,14 +54,18 @@ public class DriveSubsystem extends SubsystemBase
     // */
     // private boolean inAdjustedDrive = false;
     /**
-     * Diameter of pulleys, used for encoder calculations.
+     * Diameter of pulleys, used for encoder calculations. (in inches)
      */
     // TODO change to diameter of pulleys
     private double                 diameter      = 6;
     /**
+     * pulses per rotation for the encoders.
+     */
+    private int ppr = 400;
+    /**
      * Gyroscope that measures angle of robot.
      */
-    private AnalogGyro             gyro          = new AnalogGyro(GYRO_PORT);
+    //private AnalogGyro             gyro          = new AnalogGyro(GYRO_PORT);
     /**
      * Solenoid to shift gears.
      */
@@ -121,8 +125,8 @@ public class DriveSubsystem extends SubsystemBase
      */
     public void startEncoders()
     {
-        leftEncoder.setDistancePerPulse(Math.PI * diameter / 400);
-        rightEncoder.setDistancePerPulse(Math.PI * diameter / 400);
+        leftEncoder.setDistancePerPulse(Math.PI * diameter / ppr);
+        rightEncoder.setDistancePerPulse(Math.PI * diameter / ppr);
     }
 
     /**
@@ -218,7 +222,7 @@ public class DriveSubsystem extends SubsystemBase
      *            counter-clockwise angle to turn to. Pass in negative to turn clockwise.
      * @param speed
      *            at which to turn.
-     */
+     *//*
     public void gyroTurnToAngle(double angle, double speed)
     {
         if (angle < 0)
@@ -236,15 +240,15 @@ public class DriveSubsystem extends SubsystemBase
             }
         }
         robotStop();
-    }
+    }*/
 
     /**
      * @return current gyroscope angle.
-     */
+     *//*
     public double getGyro()
     {
         return gyro.getAngle();
-    }
+    }*/
 
     /**
      * @return left encoder distance

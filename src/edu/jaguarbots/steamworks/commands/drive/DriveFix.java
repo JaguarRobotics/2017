@@ -28,14 +28,13 @@ public class DriveFix extends CommandBase
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-        driveSubsystem.gyroTurnToAngle(startAngle, speed);
-
+        /*driveSubsystem.gyroTurnToAngle(startAngle, speed);*/
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished()
     {
-        return (driveSubsystem.getGyro() >= startAngle);
+        return /*(driveSubsystem.getGyro() >= startAngle)*/true;
     }
 
     // Called once after isFinished returns true

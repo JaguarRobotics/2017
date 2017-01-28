@@ -15,9 +15,9 @@ public class Autonomous extends CommandGroup
     public Autonomous()
     {
         addSequential(new EncoderDrive(6 * 12));
-        addSequential(new DriveTurn(360));
+        addSequential(new EncoderTurn(360));
         addSequential(new EncoderDrive(-6 * 12));
-        addSequential(new DriveTurn(360));
+        addSequential(new EncoderTurn(-360));
     }
     
     /**
@@ -32,8 +32,106 @@ public class Autonomous extends CommandGroup
      *            enum: Yes or No
      */
     public Autonomous(final Robot.Position position,
-                   final Robot.Gears gears, final Robot.CrossLine cross)
-   {
-       
-   }
+    		final Robot.Gears gears, final Robot.CrossLine cross)
+    {
+		switch(position)
+		{
+			case Left:
+				switch(gears)
+				{
+					case One:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Two:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Three:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+				}
+				break;
+			case Middle:
+				switch(gears)
+				{
+					case One:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Two:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Three:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+				}
+				break;
+			case Right:
+				switch(gears)
+				{
+					case One:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Two:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+					case Three:
+						switch(cross)
+						{
+							case Yes:
+								break;
+							case No:
+								break;
+						}
+						break;
+				}
+				break;
+		}
+   	}
 }
