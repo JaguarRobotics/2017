@@ -40,4 +40,10 @@ public class Stop extends CommandBase
     protected void interrupted()
     {
     }
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
 }

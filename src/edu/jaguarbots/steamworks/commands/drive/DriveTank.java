@@ -23,7 +23,15 @@ public class DriveTank extends CommandBase
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-        left = oi.Joystick0.getY();
+    	double powNum = 2;
+    	double j0 = oi.Joystick0.getY();
+    	double j1 = oi.Joystick1.getY();
+    	double aj0 = Math.abs(j0);
+    	double aj1 = Math.abs(j1);
+    	double pj0 = Math.pow(aj0, powNum);
+    	double pj1 = Math.pow(aj1, powNum);
+        left = pj0 * (aj0 / j0);
+        left = pj1 * (aj1 / j1);
         right = oi.Joystick1.getY();
         driveSubsystem.driveTank(-left, -right);
     }

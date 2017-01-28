@@ -1,6 +1,7 @@
 package edu.jaguarbots.steamworks.commands;
 
 import edu.jaguarbots.steamworks.Robot;
+import edu.jaguarbots.steamworks.commands.drive.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -13,7 +14,10 @@ public class Autonomous extends CommandGroup
      */
     public Autonomous()
     {
-        
+        addSequential(new EncoderDrive(6 * 12));
+        addSequential(new DriveTurn(360));
+        addSequential(new EncoderDrive(-6 * 12));
+        addSequential(new DriveTurn(360));
     }
     
     /**
