@@ -31,8 +31,11 @@ public class DriveTank extends CommandBase
     	double pj0 = Math.pow(aj0, powNum);
     	double pj1 = Math.pow(aj1, powNum);
         left = pj0 * (aj0 / j0);
-        left = pj1 * (aj1 / j1);
-        right = oi.Joystick1.getY();
+        right = pj1 * (aj1 / j1);
+//        if(Math.abs(left) < j0)
+//        	left = left;
+//        else
+//        	left = j0;
         driveSubsystem.driveTank(-left, -right);
     }
 

@@ -3,9 +3,9 @@ package edu.jaguarbots.steamworks;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.jaguarbots.steamworks.commands.climber.Ascend;
-import edu.jaguarbots.steamworks.commands.climber.Descend;
-import edu.jaguarbots.steamworks.commands.climber.Stop;
+//import edu.jaguarbots.steamworks.commands.climber.Ascend;
+//import edu.jaguarbots.steamworks.commands.climber.Descend;
+//import edu.jaguarbots.steamworks.commands.climber.Stop;
 import edu.jaguarbots.steamworks.commands.drive.*;
 import edu.jaguarbots.steamworks.RobotMap;
 
@@ -15,11 +15,12 @@ import edu.jaguarbots.steamworks.RobotMap;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-	    Joystick0_Button2.whileHeld(new GearShift()); //either joystick works, no need to hold both
-		Joystick1_Button2.whileHeld(new GearShift());
-		Joystick1_Button3.whenPressed(new Stop()); 
-		Joystick1_Button4.whenPressed(new Ascend()); 
-	    Joystick1_Button5.whenPressed(new Descend()); 
+	    Joystick0_Button2.whenPressed(new GearShiftLow()); //either joystick works, no need to hold both
+	    Joystick0_Button3.whenPressed(new GearShiftHigh());
+		Joystick1_Button2.whenPressed(new GearShiftLow());
+		Joystick1_Button3.whenPressed(new GearShiftHigh()); 
+//		Joystick1_Button4.whenPressed(new Ascend()); 
+//	    Joystick1_Button5.whenPressed(new Descend()); 
 	    //alternative control scheme using lower buttons
 /*		Joystick1_Button6.whenPressed(new Ascend()); 
 	    Joystick1_Button7.whenPressed(new Descend()); 

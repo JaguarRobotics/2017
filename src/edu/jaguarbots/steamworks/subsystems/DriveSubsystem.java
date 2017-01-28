@@ -69,7 +69,7 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * Solenoid to shift gears.
      */
-    private static Solenoid        gearSol       = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
+    //private static Solenoid        gearSol       = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
     /**
      * Current left motor speed.
      */
@@ -271,7 +271,8 @@ public class DriveSubsystem extends SubsystemBase
      */
     public static boolean getGearShift()
     {
-        return gearSol.get();
+    	return true;
+        //return gearSol.get();
     }
 
     /**
@@ -279,7 +280,7 @@ public class DriveSubsystem extends SubsystemBase
      */
     public static void gearShiftHigh()
     {
-        gearSol.set(false);
+        //gearSol.set(false);
     }
 
     /**
@@ -287,7 +288,7 @@ public class DriveSubsystem extends SubsystemBase
      */
     public static void gearShiftLow()
     {
-        gearSol.set(true);
+        //gearSol.set(true);
     }
 
     /**

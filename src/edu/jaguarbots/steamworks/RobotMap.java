@@ -25,9 +25,9 @@ public interface RobotMap
     public static final int         RIGHT_ENCODER_CHANNEL_A   = 3;
     public static final int         RIGHT_ENCODER_CHANNEL_B   = 4;
     // Joysticks
-    public static final int         LEFT_JOYSTICK_PORT        = 0;
-    public static final int         RIGHT_JOYSTICK_PORT       = 1;
-    public static final int         MANIPULATOR_JOYSTICK_PORT = 2;
+    public static final int         LEFT_JOYSTICK_PORT        = 1;
+    public static final int         RIGHT_JOYSTICK_PORT       = 2;
+    public static final int         MANIPULATOR_JOYSTICK_PORT = 3;
     // Robot Design
     /**
      * The width of the robot (between the center of masses of both wheels) in inches

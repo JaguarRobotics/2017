@@ -26,7 +26,7 @@ public abstract class CommandBase extends Command implements RobotMap
     /**
      * This creates the climber subsystem
      */
-    public static final ClimberSubsystem climberSubsystem  = new ClimberSubsystem();
+   // public static final ClimberSubsystem climberSubsystem  = new ClimberSubsystem();
 
     public CommandBase()
     {
