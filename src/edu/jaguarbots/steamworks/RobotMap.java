@@ -20,10 +20,10 @@ public interface RobotMap
     public static final int         CLIMBER_MOTOR_PORT        = 2;
     public static final MotorID     CLIMBER_MOTOR_TYPE        = Talon;
     // Digital I/Os
-    public static final int         LEFT_ENCODER_CHANNEL_A    = 1;
-    public static final int         LEFT_ENCODER_CHANNEL_B    = 2;
-    public static final int         RIGHT_ENCODER_CHANNEL_A   = 3;
-    public static final int         RIGHT_ENCODER_CHANNEL_B   = 4;
+    public static final int         LEFT_ENCODER_CHANNEL_A    = 0;
+    public static final int         LEFT_ENCODER_CHANNEL_B    = 1;
+    public static final int         RIGHT_ENCODER_CHANNEL_A   = 2;
+    public static final int         RIGHT_ENCODER_CHANNEL_B   = 3;
     // Joysticks
     public static final int         LEFT_JOYSTICK_PORT        = 1;
     public static final int         RIGHT_JOYSTICK_PORT       = 2;
@@ -36,8 +36,8 @@ public interface RobotMap
      */
     public static final double      ROBOT_WIDTH               = 32;
     // Temporary?
-    public static final int         SOLENOID_CLIMBER_PORT     = -1;
-    public static final int         CLIMBER_LIMIT_SWITCH_PORT = -1;
+    public static final int         SOLENOID_CLIMBER_PORT     = 500;
+    public static final int         CLIMBER_LIMIT_SWITCH_PORT = 5001;
     public static final AnalogInput GYRO_PORT                 = null;
     //Gear Shifting Solenoid is on "pcm" port 0.
     public static final int         SOLENOID_GEAR_SHIFT_PORT  = 0;

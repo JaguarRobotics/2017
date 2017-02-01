@@ -1,6 +1,7 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
 import edu.jaguarbots.steamworks.commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drives the robot in teleop based on left and right joystick inputs.
@@ -31,6 +32,8 @@ public class DriveTank extends CommandBase
      */
     protected void execute()
     {
+        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
     	double powNum = 2;
     	double j0 = oi.Joystick0.getY();
     	double j1 = oi.Joystick1.getY();

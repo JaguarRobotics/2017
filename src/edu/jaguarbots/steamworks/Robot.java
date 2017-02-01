@@ -2,6 +2,7 @@
 package edu.jaguarbots.steamworks;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.jaguarbots.steamworks.commands.Autonomous;
 import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.wpi.first.wpilibj.command.Command;
@@ -55,20 +56,22 @@ public class Robot extends IterativeRobot
             e.printStackTrace();
         }
         
-        positionChooser.addDefault("Left", Position.Left);
-        positionChooser.addObject("Middle", Position.Middle);
-        positionChooser.addObject("Right", Position.Right);
-        SmartDashboard.putData("Position", positionChooser);
-        gearsChooser.addDefault("One", Gears.One);
-        gearsChooser.addObject("Two", Gears.Two);
-        gearsChooser.addObject("Three", Gears.Three);
-        gearsChooser.addObject("null", null);
-        SmartDashboard.putData("Gears", gearsChooser);
-        crossChooser.addObject("Yes", CrossLine.Yes);
-        crossChooser.addObject("No", CrossLine.No);
-        crossChooser.addDefault("Yes", CrossLine.No);
-        crossChooser.addObject("null", null);
-        SmartDashboard.putData("Cross Baseline", crossChooser);
+//        positionChooser.addDefault("Left", Position.Left);
+//        positionChooser.addObject("Middle", Position.Middle);
+//        positionChooser.addObject("Right", Position.Right);
+//        SmartDashboard.putData("Position", positionChooser);
+//        gearsChooser.addDefault("One", Gears.One);
+//        gearsChooser.addObject("Two", Gears.Two);
+//        gearsChooser.addObject("Three", Gears.Three);
+//        gearsChooser.addObject("null", null);
+//        SmartDashboard.putData("Gears", gearsChooser);
+//        crossChooser.addObject("Yes", CrossLine.Yes);
+//        crossChooser.addObject("No", CrossLine.No);
+//        crossChooser.addDefault("Yes", CrossLine.No);
+//        crossChooser.addObject("null", null);
+//        SmartDashboard.putData("Cross Baseline", crossChooser);
+        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
         
 //        compresser.setClosedLoopControl(true);                              //should turn on the compresser
     }
