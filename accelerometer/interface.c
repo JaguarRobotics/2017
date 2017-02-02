@@ -3,6 +3,7 @@
 #include <linux/device.h>
 #include <linux/fs.h>
 #include <linux/kernel.h>
+#include <linux/kthread.h>
 #include <linux/module.h>
 #include <linux/slab.h>
 #include "calculations.h"
@@ -25,17 +26,19 @@ static int device_open(struct inode *, struct file *);
 static int device_release(struct inode *, struct file *);
 static ssize_t device_read(struct file *, char *, size_t, loff_t *);
 static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
+int calculation_thread(void *);
 
 static dev_t first;
 static struct class *cl;
 static struct cdev c_dev;
-static char outputFormat[FORMAT_BUFFER_SIZE];
 static struct file_operations fops = {
     .read = device_read,
     .write = device_write,
     .open = device_open,
     .release = device_release
 };
+static char outputFormat[FORMAT_BUFFER_SIZE];
+static struct task_struct *thread;
 
 static int __init accelerometer_init(void) {
     int ret;
@@ -60,14 +63,22 @@ static int __init accelerometer_init(void) {
         return ret;
     }
     sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
+    if (!(thread = kthread_run(&calculation_thread, NULL, "accelerometer"))) {
+        printk(KERN_ALERT "Unable to start calculations thread.\n");
+    }
+    printk(KERN_INFO "Accelerometer driver initialized.\n");
     return 0;
 }
 
 static void __exit accelerometer_exit(void) {
+    if (thread) {
+        kthread_stop(thread);
+    }
     cdev_del(&c_dev);
     device_destroy(cl, first);
     class_destroy(cl);
     unregister_chrdev_region(first, 1);
+    printk(KERN_INFO "Accelerometer driver shut down.\n");
 }
 
 static int device_open(struct inode *inode, struct file *filp) {
@@ -99,7 +110,7 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
     int bytes_read = 0;
 
     if (!filp->private_data) {
-        printk(KERN_ALERT "Private data was not allocated on open()\n");
+        printk(KERN_ALERT "Private data was not allocated on open().\n");
     }
     data = (struct file_read_data *) filp->private_data;
     if (!*data->ptr) {
@@ -116,6 +127,11 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
 }
 
 static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
+    return 0;
+}
+
+int calculation_thread(void *data) {
+    calculationLoop();
     return 0;
 }
 

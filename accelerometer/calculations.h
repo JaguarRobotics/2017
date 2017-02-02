@@ -8,5 +8,6 @@ typedef long num_t;
 // Calculation related functions
 num_t getXPosition(void);
 num_t getYPosition(void);
+void calculationLoop(void);
 
 #endif
