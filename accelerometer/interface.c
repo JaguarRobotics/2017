@@ -52,15 +52,15 @@ static int device_release(struct inode *inode, struct file *file) {
 
 static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_t *offset) {
     char *message;
+    char alloc[32];
     int bytes_read = 0;
 
-    message = (char *) kmalloc(1024, GFP_KERNEL);
+    message = alloc;
     sprintf(message, "Hello, world %d\n", counter++);
-    while (length-- && *message) {
-        put_user(*(message++), (buffer++));
+    while (--length && *message) {
+        put_user(*(message++), buffer++);
         ++bytes_read;
     }
-    kfree(message);
     return bytes_read;
 }
 
