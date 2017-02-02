@@ -1,9 +1,10 @@
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/fs.h>
-#include <linux/slab.h>
 #include <asm/uaccess.h>
+#include <linux/cdev.h>
+#include <linux/device.h>
+#include <linux/fs.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/slab.h>
 #include "calculations.h"
 
 MODULE_LICENSE("Dual MIT/GPL");
@@ -25,7 +26,9 @@ static int device_release(struct inode *, struct file *);
 static ssize_t device_read(struct file *, char *, size_t, loff_t *);
 static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
 
-static int major;
+static dev_t first;
+static struct class *cl;
+static struct cdev c_dev;
 static char outputFormat[FORMAT_BUFFER_SIZE];
 static struct file_operations fops = {
     .read = device_read,
@@ -35,19 +38,36 @@ static struct file_operations fops = {
 };
 
 static int __init accelerometer_init(void) {
-    if ((major = register_chrdev(0, "accelerometer", &fops)) < 0) {
-        printk(KERN_ALERT "Registering char device failed with %d\n", major);
-        return major;
+    int ret;
+
+    if ((ret = alloc_chrdev_region(&first, 0, 1, "accelerometer")) < 0) {
+        return ret;
     }
-    printk(KERN_INFO "Accelerometer was assigned the major number %d.\n", major);
-    printk(KERN_INFO "To connect to the driver, try running:\n");
-    printk(KERN_INFO "'mknod /dev/accelerometer c %d 0'.\n", major);
+    if ((cl = class_create(THIS_MODULE, "chardrv")) == NULL) {
+        unregister_chrdev_region(first, 1);
+        return -1;
+    }
+    if (device_create(cl, NULL, first, NULL, "accelerometer") == NULL) {
+        class_destroy(cl);
+        unregister_chrdev_region(first, 1);
+        return -1;
+    }
+    cdev_init(&c_dev, &fops);
+    if ((ret = cdev_add(&c_dev, first, 1)) < 0) {
+        device_destroy(cl, first);
+        class_destroy(cl);
+        unregister_chrdev_region(first, 1);
+        return ret;
+    }
     sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
     return 0;
 }
 
 static void __exit accelerometer_exit(void) {
-    unregister_chrdev(major, "accelerometer");
+    cdev_del(&c_dev);
+    device_destroy(cl, first);
+    class_destroy(cl);
+    unregister_chrdev_region(first, 1);
 }
 
 static int device_open(struct inode *inode, struct file *filp) {
