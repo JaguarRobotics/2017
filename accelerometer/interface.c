@@ -40,17 +40,17 @@ static void __exit accelerometer_exit(void) {
     unregister_chrdev(major, "accelerometer");
 }
 
-static int device_open(struct inode *inode, struct file *file) {
+static int device_open(struct inode *inode, struct file *filp) {
     try_module_get(THIS_MODULE);
     return 0;
 }
 
-static int device_release(struct inode *inode, struct file *file) {
+static int device_release(struct inode *inode, struct file *filp) {
     module_put(THIS_MODULE);
     return 0;
 }
 
-static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_t *offset) {
+static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_t *offset) {
     char *message;
     char alloc[32];
     int bytes_read = 0;
@@ -64,7 +64,7 @@ static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_
     return bytes_read;
 }
 
-static ssize_t device_write(struct file *file, const char *buffer, size_t length, loff_t *offset) {
+static ssize_t device_write(struct file *filp, const char *buffer, size_t length, loff_t *offset) {
     return 0;
 }
 
