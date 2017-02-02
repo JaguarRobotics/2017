@@ -59,6 +59,11 @@ num_t getYPosition(void) {
     return yPosition;
 }
 
+num_t getRotation(void) {
+    // TODO implement this method
+    return 0;
+}
+
 void calculationLoop(void) {
     printk(KERN_INFO "Starting accelerometer calculations.\n");
     while (!kthread_should_stop()) {

@@ -62,7 +62,7 @@ static int __init accelerometer_init(void) {
         unregister_chrdev_region(first, 1);
         return ret;
     }
-    sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
+    sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
     if (!(thread = kthread_run(&calculation_thread, NULL, "accelerometer"))) {
         printk(KERN_ALERT "Unable to start calculations thread.\n");
     }
@@ -107,6 +107,7 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
     struct file_read_data *data;
     num_t x;
     num_t y;
+    num_t rot;
     int bytes_read = 0;
 
     if (!filp->private_data) {
@@ -116,7 +117,8 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
     if (!*data->ptr) {
         x = getXPosition();
         y = getYPosition();
-        sprintf(data->buffer, outputFormat, x / MULTIPLICATIVE_CONSTANT, x % MULTIPLICATIVE_CONSTANT, y / MULTIPLICATIVE_CONSTANT, y % MULTIPLICATIVE_CONSTANT);
+        rot = getRotation();
+        sprintf(data->buffer, outputFormat, x / MULTIPLICATIVE_CONSTANT, x % MULTIPLICATIVE_CONSTANT, y / MULTIPLICATIVE_CONSTANT, y % MULTIPLICATIVE_CONSTANT, rot / MULTIPLICATIVE_CONSTANT, rot % MULTIPLICATIVE_CONSTANT);
         data->ptr = data->buffer;
     }
     while (--length && *data->ptr) {
