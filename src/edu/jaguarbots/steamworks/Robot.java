@@ -1,14 +1,12 @@
 
 package edu.jaguarbots.steamworks;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.jaguarbots.steamworks.commands.Autonomous;
 import edu.jaguarbots.steamworks.commands.CommandBase;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -22,9 +20,9 @@ public class Robot extends IterativeRobot
 {
     private Command                            autonomousCommand;
     // vars for auto
-    private final SendableChooser                    positionChooser  = new SendableChooser();
-    private final SendableChooser                    gearsChooser  = new SendableChooser();
-    private final SendableChooser                    crossChooser   = new SendableChooser();
+//    private final SendableChooser                    positionChooser  = new SendableChooser();
+//    private final SendableChooser                    gearsChooser  = new SendableChooser();
+//    private final SendableChooser                    crossChooser   = new SendableChooser();
     
 //    Compressor compresser = new Compressor(RobotMap.pwmCompresser);
 
@@ -103,18 +101,20 @@ public class Robot extends IterativeRobot
      */
     public void autonomousInit()
     {
-        final Position position = (Position) positionChooser.getSelected();
-        final Gears gears = (Gears) gearsChooser.getSelected();
-        final CrossLine cross = (CrossLine) crossChooser.getSelected();
-        if(position == null && gears == null && cross == null)
-        {
-            autonomousCommand = new Autonomous();
-        }
-        else
-        {
-            autonomousCommand = new Autonomous(position, gears, cross);
-        }
-        if (autonomousCommand != null) autonomousCommand.start();
+        autonomousCommand = new Autonomous();
+        autonomousCommand.start();
+//        final Position position = (Position) positionChooser.getSelected();
+//        final Gears gears = (Gears) gearsChooser.getSelected();
+//        final CrossLine cross = (CrossLine) crossChooser.getSelected();
+//        if(position == null && gears == null && cross == null)
+//        {
+//            autonomousCommand = new Autonomous();
+//        }
+//        else
+//        {
+//            autonomousCommand = new Autonomous(position, gears, cross);
+//        }
+//        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**

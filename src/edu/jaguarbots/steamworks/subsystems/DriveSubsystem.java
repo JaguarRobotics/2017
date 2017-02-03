@@ -1,7 +1,6 @@
 package edu.jaguarbots.steamworks.subsystems;
 
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;

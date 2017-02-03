@@ -55,8 +55,8 @@ public class EncoderDrive extends CommandBase
     @Override
     protected void initialize()
     {
-        driveSubsystem.startEncoders();
         driveSubsystem.resetEncoders(true, true);
+        driveSubsystem.startEncoders();
     }
 
     @Override
