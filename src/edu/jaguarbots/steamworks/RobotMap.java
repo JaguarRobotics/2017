@@ -1,7 +1,7 @@
 package edu.jaguarbots.steamworks;
 
 import static edu.jaguarbots.steamworks.MotorID.Talon;
-import edu.wpi.first.wpilibj.AnalogInput;
+import static edu.jaguarbots.steamworks.MotorID.Spark;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into to a variable name. This provides
@@ -18,7 +18,7 @@ public interface RobotMap
     public static final int         RIGHT_DRIVE_MOTOR_PORT    = 1;
     public static final MotorID     RIGHT_DRIVE_MOTOR_TYPE    = Talon;
     public static final int         CLIMBER_MOTOR_PORT        = 2;
-    public static final MotorID     CLIMBER_MOTOR_TYPE        = Talon;
+    public static final MotorID     CLIMBER_MOTOR_TYPE        = Spark;
     // Digital I/Os
     public static final int         LEFT_ENCODER_CHANNEL_A    = 0;
     public static final int         LEFT_ENCODER_CHANNEL_B    = 1;
@@ -38,7 +38,6 @@ public interface RobotMap
     // Temporary?
     public static final int         SOLENOID_CLIMBER_PORT     = 500;
     public static final int         CLIMBER_LIMIT_SWITCH_PORT = 5001;
-    public static final AnalogInput GYRO_PORT                 = null;
     //Gear Shifting Solenoid is on "pcm" port 0.
     public static final int         SOLENOID_GEAR_SHIFT_PORT  = 0;
 }

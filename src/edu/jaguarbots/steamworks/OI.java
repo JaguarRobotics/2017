@@ -3,9 +3,8 @@ package edu.jaguarbots.steamworks;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.jaguarbots.steamworks.commands.climber.Ascend;
-//import edu.jaguarbots.steamworks.commands.climber.Descend;
-//import edu.jaguarbots.steamworks.commands.climber.Stop;
+import edu.jaguarbots.steamworks.commands.climber.Ascend;
+import edu.jaguarbots.steamworks.commands.climber.Descend;
 import edu.jaguarbots.steamworks.commands.drive.*;
 import edu.jaguarbots.steamworks.RobotMap;
 
@@ -15,17 +14,15 @@ import edu.jaguarbots.steamworks.RobotMap;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-	    Joystick0_Button2.whenPressed(new GearShiftLow()); //either joystick works, no need to hold both
+	    Joystick0_Button1.whileHeld(new Ascend()); //climber
+	    Joystick1_Button1.whileHeld(new Ascend()); 
+	    Joystick0_Button2.whenPressed(new GearShiftLow()); //gear shifting
 	    Joystick0_Button3.whenPressed(new GearShiftHigh());
 		Joystick1_Button2.whenPressed(new GearShiftLow());
-		Joystick1_Button3.whenPressed(new GearShiftHigh()); 
-//		Joystick1_Button4.whenPressed(new Ascend()); 
-//	    Joystick1_Button5.whenPressed(new Descend()); 
-	    //alternative control scheme using lower buttons
-/*		Joystick1_Button6.whenPressed(new Ascend()); 
-	    Joystick1_Button7.whenPressed(new Descend()); 
-	    Joystick1_Button11.whenPressed(new Stop()); 
-*/	}
+		Joystick1_Button3.whenPressed(new GearShiftHigh());
+		Joystick0_Button6.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
+		Joystick1_Button6.whileHeld(new Descend());
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -91,7 +88,7 @@ public class OI implements RobotMap {
 	public final Button ManipulatorXbox_LStick = new JoystickButton(Manipulator, 9);
 	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);*/
 	
-	//Dualshock/Playstation buttons. currently unlikely to be used.
+	//Dualshock/Playstation controller buttons if needed. currently unlikely to be used.
 /*	public final Button Manipulator_Select = new JoystickButton(Manipulator, 1);
 	public final Button Manipulator_L3 = new JoystickButton(Manipulator, 2);
 	public final Button Manipulator_R3 = new JoystickButton(Manipulator, 3);
