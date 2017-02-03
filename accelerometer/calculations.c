@@ -60,8 +60,7 @@ num_t getYPosition(void) {
 }
 
 num_t getRotation(void) {
-    // TODO implement this method
-    return 0;
+    return angle;
 }
 
 void calculationLoop(void) {
