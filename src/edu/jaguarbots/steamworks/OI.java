@@ -22,6 +22,8 @@ public class OI implements RobotMap {
 		Joystick1_Button3.whenPressed(new GearShiftHigh());
 		Joystick0_Button6.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
 		Joystick1_Button6.whileHeld(new Descend());
+		Joystick0_Button10.whenPressed(new EncoderDrive(36));
+		Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
