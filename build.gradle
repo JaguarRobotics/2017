@@ -5,11 +5,14 @@ repositories {
     maven {
         url "http://first.wpi.edu/FRC/roborio/maven/release/"
     }
+    mavenCentral()
 }
 
 dependencies {
     compile "edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT"
     compile "edu.wpi.first.wpilibj:wpilibJavaFinal:0.1.0-SNAPSHOT"
+	compile "org.apache.logging.log4j:log4j-api:2.3"
+	compile "org.apache.logging.log4j:log4j-core:2.3"
 }
 
 sourceSets {
