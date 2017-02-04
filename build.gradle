@@ -12,7 +12,7 @@ dependencies {
     compile "edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT"
     compile "edu.wpi.first.wpilibj:wpilibJavaFinal:0.1.0-SNAPSHOT"
 	compile "org.apache.logging.log4j:log4j-api:2.3"
-	compile "org.apache.logging.log4j:log4j-core:2.3"
+	runtime "org.apache.logging.log4j:log4j-core:2.3"
 }
 
 sourceSets {
@@ -27,4 +27,13 @@ eclipse {
     project {
         natures "edu.wpi.first.wpilib.plugins.core.nature.FRCProjectNature"
     }
+}
+
+task copyRuntimeLibs(type: Copy) {
+	into "libs"
+	from configurations.runtime
+}
+
+build {
+	dependsOn copyRuntimeLibs
 }
