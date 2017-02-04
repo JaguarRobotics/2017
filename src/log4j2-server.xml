@@ -16,8 +16,12 @@
 	<Loggers>
 		<Root level="all">
 			<AppenderRef ref="Console" level="info" />
-			<AppenderRef ref="LogFile" level="debug" />
+			<AppenderRef ref="LogFile" level="trace" />
 		</Root>
+		<Logger name="org.apache.logging.log4j.core.net.server.UdpSocketServer.5400" level="info" additivity="false">
+			<AppenderRef ref="Console" level="info" />
+			<AppenderRef ref="LogFile" level="warn" />
+		</Logger>
 		<!--
 			How to debug a certain class (or package):
 			
