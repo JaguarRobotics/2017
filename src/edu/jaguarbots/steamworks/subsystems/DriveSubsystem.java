@@ -115,6 +115,7 @@ public class DriveSubsystem extends SubsystemBase
         double theta = 4 * Math.atan(Math.sqrt(sqrt));
         powers[0] = Math.abs(Math.cos(theta));
         powers[1] = 1;
+        System.out.println("(" + leftEncoderValue + ", " + rightEncoderValue + ")  powers[0] = " + powers[0] + " powers[1] = " + powers[1]);
         return powers;
     }
 
