@@ -17,7 +17,6 @@ int readAccelerometer(accel_axis_t axis) {
 }
 
 void initAccelerometer(void) {
-
 }
 
 void deinitAccelerometer(void) {
