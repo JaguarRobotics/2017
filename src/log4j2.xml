@@ -5,11 +5,7 @@
 		<Console name="Console">
 			<PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%t/%level] %msg%n" />
 		</Console>
-		<Socket name="Remote" host="0.0.0.0" port="514" protocol="UDP">
-			<PatternLayout>
-				<pattern>${hostName} java %d{yyyy-MM-dd HH:mm:ss,SSS}{GMT} %p %t %c %M - %m%n</pattern>
-			</PatternLayout>
-		</Socket>
+		<Socket name="Remote" host="0.0.0.0" port="5400" protocol="UDP"></Socket>
 	</Appenders>
 	<Loggers>
 		<Root level="all">
