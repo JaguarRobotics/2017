@@ -22,11 +22,13 @@ abstract class SubsystemBase extends Subsystem implements RobotMap
      *            The PWM channel that the motor is attached to. 0-9 are on-board, 10-19 are on the MXP port
      * @param motor
      *            The type of motor to create
+     * @param name
+     *            The name of the motor (for the log)
      * @return The motor object
      * @since 2017
      */
-    protected static SpeedController motor(int channel, MotorID motor)
+    protected static SpeedController motor(int channel, MotorID motor, String name)
     {
-        return IOFactory.motor(channel, motor);
+        return IOFactory.motor(channel, motor, name);
     }
 }

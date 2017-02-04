@@ -1,5 +1,6 @@
 package edu.jaguarbots.steamworks;
 
+import edu.jaguarbots.steamworks.test.DebuggingMotorProxy;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SD540;
 import edu.wpi.first.wpilibj.Spark;
@@ -24,27 +25,37 @@ public class IOFactory
      *            The PWM channel that the motor is attached to. 0-9 are on-board, 10-19 are on the MXP port
      * @param motor
      *            The type of motor to create
+     * @param name
+     *            The name of the motor (for the log)
      * @return The motor object
      * @since 2017
      */
-    public static SpeedController motor(int channel, MotorID motor)
+    public static SpeedController motor(int channel, MotorID motor, String name)
     {
+        final SpeedController impl;
         switch (motor)
         {
             case CANTJaguar:
-                return new Jaguar(channel);
+                impl = new Jaguar(channel);
+                break;
             case SD540:
-                return new SD540(channel);
+                impl = new SD540(channel);
+                break;
             case Spark:
-                return new Spark(channel);
+                impl = new Spark(channel);
+                break;
             case Talon:
-                return new Talon(channel);
+                impl = new Talon(channel);
+                break;
             case Victor:
-                return new Victor(channel);
+                impl = new Victor(channel);
+                break;
             case VictorSP:
-                return new VictorSP(channel);
+                impl = new VictorSP(channel);
+                break;
             default:
                 throw new UnsupportedOperationException("Invalid motor type");
         }
+        return new DebuggingMotorProxy(impl, name);
     }
 }

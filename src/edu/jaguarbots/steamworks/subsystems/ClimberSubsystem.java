@@ -16,7 +16,7 @@ public class ClimberSubsystem extends SubsystemBase
     /**
      * Motor for ascending and descending
      */
-    private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE);
+    private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE, "climber");
     /**
      * Solenoid for raising and lowering the arm for climbing
      */
