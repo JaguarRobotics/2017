@@ -31,14 +31,14 @@ public class DebuggingMotorProxy implements SpeedController
     public void pidWrite(double output)
     {
         parent.pidWrite(output);
-        LOG.trace("{}.pidWrite({})", name, output);
+        LOG.trace("{}.pidWrite=\"{}\"", name, output);
     }
 
     @Override
     public double get()
     {
         double res = parent.get();
-        LOG.trace("{}.get() = {}", name, res);
+        LOG.trace("{}.get=\"{}\"", name, res);
         return res;
     }
 
@@ -46,21 +46,21 @@ public class DebuggingMotorProxy implements SpeedController
     public void set(double speed)
     {
         parent.set(speed);
-        LOG.trace("{}.set({})", name, speed);
+        LOG.trace("{}.set=\"{}\"", name, speed);
     }
 
     @Override
     public void setInverted(boolean isInverted)
     {
         parent.setInverted(isInverted);
-        LOG.trace("{}.setInverted({})", name, isInverted);
+        LOG.trace("{}.setInverted=\"{}\"", name, isInverted);
     }
 
     @Override
     public boolean getInverted()
     {
         boolean res = parent.getInverted();
-        LOG.trace("{}.getInverted() = {}", name, res);
+        LOG.trace("{}.getInverted=\"{}\"", name, res);
         return res;
     }
 
@@ -68,14 +68,14 @@ public class DebuggingMotorProxy implements SpeedController
     public void disable()
     {
         parent.disable();
-        LOG.trace("{}.disable()", name);
+        LOG.trace("{}.disable", name);
     }
 
     @Override
     public void stopMotor()
     {
         parent.stopMotor();
-        LOG.trace("{}.stopMotor()", name);
+        LOG.trace("{}.stopMotor", name);
     }
 
     /**

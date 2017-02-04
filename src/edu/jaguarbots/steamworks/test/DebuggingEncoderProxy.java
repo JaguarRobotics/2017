@@ -28,7 +28,7 @@ public class DebuggingEncoderProxy extends Encoder
     public int getFPGAIndex()
     {
         int res = super.getFPGAIndex();
-        LOG.trace("{}.getFPGAIndex() = {}", name, res);
+        LOG.trace("{}.getFPGAIndex=\"{}\"", name, res);
         return res;
     }
 
@@ -36,7 +36,7 @@ public class DebuggingEncoderProxy extends Encoder
     public int getEncodingScale()
     {
         int res = super.getEncodingScale();
-        LOG.trace("{}.getEncodingScale() = {}", name, res);
+        LOG.trace("{}.getEncodingScale=\"{}\"", name, res);
         return res;
     }
 
@@ -44,14 +44,14 @@ public class DebuggingEncoderProxy extends Encoder
     public void free()
     {
         super.free();
-        LOG.trace("{}.free()", name);
+        LOG.trace("{}.free", name);
     }
 
     @Override
     public int getRaw()
     {
         int res = super.getRaw();
-        LOG.trace("{}.getRaw() = {}", name, res);
+        LOG.trace("{}.getRaw=\"{}\"", name, res);
         return res;
     }
 
@@ -59,7 +59,7 @@ public class DebuggingEncoderProxy extends Encoder
     public int get()
     {
         int res = super.get();
-        LOG.trace("{}.get() = {}", name, res);
+        LOG.trace("{}.get=\"{}\"", name, res);
         return res;
     }
 
@@ -67,21 +67,21 @@ public class DebuggingEncoderProxy extends Encoder
     public void reset()
     {
         super.reset();
-        LOG.trace("{}.reset()", name);
+        LOG.trace("{}.reset", name);
     }
 
     @Override
     public void setMaxPeriod(double maxPeriod)
     {
         super.setMaxPeriod(maxPeriod);
-        LOG.trace("{}.setMaxPeriod({})", name, maxPeriod);
+        LOG.trace("{}.setMaxPeriod=\"{}\"", name, maxPeriod);
     }
 
     @Override
     public boolean getStopped()
     {
         boolean res = super.getStopped();
-        LOG.trace("{}.getStopped() = {}", name, res);
+        LOG.trace("{}.getStopped=\"{}\"", name, res);
         return res;
     }
 
@@ -89,7 +89,7 @@ public class DebuggingEncoderProxy extends Encoder
     public boolean getDirection()
     {
         boolean res = super.getDirection();
-        LOG.trace("{}.getDirection() = {}", name, res);
+        LOG.trace("{}.getDirection=\"{}\"", name, res);
         return res;
     }
 
@@ -97,7 +97,7 @@ public class DebuggingEncoderProxy extends Encoder
     public double getDistance()
     {
         double res = super.getDistance();
-        LOG.trace("{}.getDistance() = {}", name, res);
+        LOG.trace("{}.getDistance=\"{}\"", name, res);
         return res;
     }
 
@@ -105,7 +105,7 @@ public class DebuggingEncoderProxy extends Encoder
     public double getRate()
     {
         double res = super.getRate();
-        LOG.trace("{}.getRate() = {}", name, res);
+        LOG.trace("{}.getRate=\"{}\"", name, res);
         return res;
     }
 
@@ -113,35 +113,35 @@ public class DebuggingEncoderProxy extends Encoder
     public void setMinRate(double minRate)
     {
         super.setMinRate(minRate);
-        LOG.trace("{}.setMinRate({})", name, minRate);
+        LOG.trace("{}.setMinRate=\"{}\"", name, minRate);
     }
 
     @Override
     public void setDistancePerPulse(double distancePerPulse)
     {
         super.setDistancePerPulse(distancePerPulse);
-        LOG.trace("{}.setDistancePerPulse({})", name, distancePerPulse);
+        LOG.trace("{}.setDistancePerPulse=\"{}\"", name, distancePerPulse);
     }
 
     @Override
     public void setReverseDirection(boolean reverseDirection)
     {
         super.setReverseDirection(reverseDirection);
-        LOG.trace("{}.setReverseDirection({})", name, reverseDirection);
+        LOG.trace("{}.setReverseDirection=\"{}\"", name, reverseDirection);
     }
 
     @Override
     public void setSamplesToAverage(int samplesToAverage)
     {
         super.setSamplesToAverage(samplesToAverage);
-        LOG.trace("{}.setSamplesToAverage({})", name, samplesToAverage);
+        LOG.trace("{}.setSamplesToAverage=\"{}\"", name, samplesToAverage);
     }
 
     @Override
     public int getSamplesToAverage()
     {
         int res = super.getSamplesToAverage();
-        LOG.trace("{}.getSamplesToAverage() = {}", name, res);
+        LOG.trace("{}.getSamplesToAverage=\"{}\"", name, res);
         return res;
     }
 
@@ -149,14 +149,14 @@ public class DebuggingEncoderProxy extends Encoder
     public void setPIDSourceType(PIDSourceType pidSource)
     {
         super.setPIDSourceType(pidSource);
-        LOG.trace("{}.setPIDSourceType({})", name, pidSource);
+        LOG.trace("{}.setPIDSourceType=\"{}\"", name, pidSource);
     }
 
     @Override
     public PIDSourceType getPIDSourceType()
     {
         PIDSourceType res = super.getPIDSourceType();
-        LOG.trace("{}.getPIDSourceType() = {}", name, res);
+        LOG.trace("{}.getPIDSourceType=\"{}\"", name, res);
         return res;
     }
 
@@ -164,7 +164,7 @@ public class DebuggingEncoderProxy extends Encoder
     public double pidGet()
     {
         double res = super.pidGet();
-        LOG.trace("{}.pidGet() = {}", name, res);
+        LOG.trace("{}.pidGet=\"{}\"", name, res);
         return res;
     }
 
@@ -172,35 +172,35 @@ public class DebuggingEncoderProxy extends Encoder
     public void setIndexSource(int channel)
     {
         super.setIndexSource(channel);
-        LOG.trace("{}.setIndexSource({})", name, channel);
+        LOG.trace("{}.setIndexSource=\"{}\"", name, channel);
     }
 
     @Override
     public void setIndexSource(DigitalSource source)
     {
         super.setIndexSource(source);
-        LOG.trace("{}.setIndexSource({})", name, source);
+        LOG.trace("{}.setIndexSource=\"{}\"", name, source);
     }
 
     @Override
     public void setIndexSource(int channel, IndexingType type)
     {
         super.setIndexSource(channel, type);
-        LOG.trace("{}.setIndexSource({}, {})", name, channel, type);
+        LOG.trace("{}.setIndexSource=\"{}\":{}", name, channel, type);
     }
 
     @Override
     public void setIndexSource(DigitalSource source, IndexingType type)
     {
         super.setIndexSource(source, type);
-        LOG.trace("{}.setIndexSource({}, {})", name, source, type);
+        LOG.trace("{}.setIndexSource=\"{}\":{}", name, source, type);
     }
 
     @Override
     public String getSmartDashboardType()
     {
         String res = super.getSmartDashboardType();
-        LOG.trace("{}.getSmartDashboardType() = {}", name, res);
+        LOG.trace("{}.getSmartDashboardType=\"{}\"", name, res);
         return res;
     }
 
@@ -208,14 +208,14 @@ public class DebuggingEncoderProxy extends Encoder
     public void initTable(ITable subtable)
     {
         super.initTable(subtable);
-        LOG.trace("{}.initTable({})", name, subtable);
+        LOG.trace("{}.initTable=\"{}\"", name, subtable);
     }
 
     @Override
     public ITable getTable()
     {
         ITable res = super.getTable();
-        LOG.trace("{}.getTable() = {}", name, res);
+        LOG.trace("{}.getTable=\"{}\"", name, res);
         return res;
     }
 
@@ -223,21 +223,21 @@ public class DebuggingEncoderProxy extends Encoder
     public void updateTable()
     {
         super.updateTable();
-        LOG.trace("{}.updateTable()", name);
+        LOG.trace("{}.updateTable", name);
     }
 
     @Override
     public void startLiveWindowMode()
     {
         super.startLiveWindowMode();
-        LOG.trace("{}.startLiveWindowMode()", name);
+        LOG.trace("{}.startLiveWindowMode", name);
     }
 
     @Override
     public void stopLiveWindowMode()
     {
         super.stopLiveWindowMode();
-        LOG.trace("{}.stopLiveWindowMode()");
+        LOG.trace("{}.stopLiveWindowMode");
     }
 
     /**

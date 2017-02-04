@@ -11,5 +11,10 @@ class LogTester
         log.info("Hello, world!");
         log.trace("This is a trace message");
         log.fatal("Goodbye, world!");
+        for (int i = -10; i <= 10; ++i)
+        {
+            log.trace("test=\"{}\"", ((double) i) * (double) i);
+            log.trace("i={}", i);
+        }
     }
 }
