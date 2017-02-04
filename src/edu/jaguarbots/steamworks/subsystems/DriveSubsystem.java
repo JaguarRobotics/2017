@@ -14,11 +14,11 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * left drive motor
      */
-    private static SpeedController leftDrive     = motor(LEFT_DRIVE_MOTOR_PORT, LEFT_DRIVE_MOTOR_TYPE, "left");
+    private static SpeedController leftDrive     = motor(LEFT_DRIVE_MOTOR_PORT, LEFT_DRIVE_MOTOR_TYPE, "leftMotor");
     /**
      * right drive motor
      */
-    private static SpeedController rightDrive    = motor(RIGHT_DRIVE_MOTOR_PORT, RIGHT_DRIVE_MOTOR_TYPE, "right");
+    private static SpeedController rightDrive    = motor(RIGHT_DRIVE_MOTOR_PORT, RIGHT_DRIVE_MOTOR_TYPE, "rightMotor");
     /**
      * Class that controls both drive motors
      */
@@ -26,11 +26,13 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * Encoder on left side of drive
      */
-    private Encoder                leftEncoder   = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
+    private Encoder                leftEncoder   = encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B,
+                    "leftEncoder");
     /**
      * Encoder on right side of drive
      */
-    private Encoder                rightEncoder  = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
+    private Encoder                rightEncoder  = encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B,
+                    "rightEncoder");
     /**
      * distance left encoder has traveled.
      */
@@ -60,11 +62,11 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * pulses per rotation for the encoders.
      */
-    private int ppr = 400;
+    private int                    ppr           = 400;
     /**
      * Gyroscope that measures angle of robot.
      */
-    //private AnalogGyro             gyro          = new AnalogGyro(GYRO_PORT);
+    // private AnalogGyro gyro = new AnalogGyro(GYRO_PORT);
     /**
      * Solenoid to shift gears.
      */
@@ -213,7 +215,6 @@ public class DriveSubsystem extends SubsystemBase
     {
         robotDrive.tankDrive(0, 0);
     }
-
     /**
      * Turns robot to an angle based on gyroscope.
      * 
@@ -222,33 +223,16 @@ public class DriveSubsystem extends SubsystemBase
      * @param speed
      *            at which to turn.
      *//*
-    public void gyroTurnToAngle(double angle, double speed)
-    {
-        if (angle < 0)
-        {
-            if (gyro.getAngle() > angle)
-            {
-                robotTurn(-speed);
-            }
-        }
-        else if (angle > 0)
-        {
-            if (gyro.getAngle() < angle)
-            {
-                robotTurn(speed);
-            }
-        }
-        robotStop();
-    }*/
+       * public void gyroTurnToAngle(double angle, double speed) { if (angle < 0) { if (gyro.getAngle() > angle) {
+       * robotTurn(-speed); } } else if (angle > 0) { if (gyro.getAngle() < angle) { robotTurn(speed); } } robotStop();
+       * }
+       */
 
     /**
      * @return current gyroscope angle.
      *//*
-    public double getGyro()
-    {
-        return gyro.getAngle();
-    }*/
-
+       * public double getGyro() { return gyro.getAngle(); }
+       */
     /**
      * @return left encoder distance
      */
@@ -270,7 +254,7 @@ public class DriveSubsystem extends SubsystemBase
      */
     public static boolean getGearShift()
     {
-    	//return true;
+        // return true;
         return gearSol.get();
     }
 
@@ -297,7 +281,6 @@ public class DriveSubsystem extends SubsystemBase
     {
         setDefaultCommand(new DriveTank());
     }
-
     /**
      * Toggle between high and low gear
      */

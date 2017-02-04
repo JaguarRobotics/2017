@@ -1,6 +1,8 @@
 package edu.jaguarbots.steamworks;
 
+import edu.jaguarbots.steamworks.test.DebuggingEncoderProxy;
 import edu.jaguarbots.steamworks.test.DebuggingMotorProxy;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SD540;
 import edu.wpi.first.wpilibj.Spark;
@@ -57,5 +59,21 @@ public class IOFactory
                 throw new UnsupportedOperationException("Invalid motor type");
         }
         return new DebuggingMotorProxy(impl, name);
+    }
+
+    /**
+     * Creates an encoder
+     * 
+     * @param channelA
+     *            The a channel digital input channel.
+     * @param channelB
+     *            The b channel digital input channel.
+     * @param name
+     *            The name of the motor (for the log)
+     * @since 2017
+     */
+    public static Encoder encoder(int channelA, int channelB, String name)
+    {
+        return new DebuggingEncoderProxy(channelA, channelB, name);
     }
 }

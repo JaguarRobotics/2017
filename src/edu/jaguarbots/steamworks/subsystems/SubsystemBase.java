@@ -3,6 +3,7 @@ package edu.jaguarbots.steamworks.subsystems;
 import edu.jaguarbots.steamworks.IOFactory;
 import edu.jaguarbots.steamworks.MotorID;
 import edu.jaguarbots.steamworks.RobotMap;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -30,5 +31,21 @@ abstract class SubsystemBase extends Subsystem implements RobotMap
     protected static SpeedController motor(int channel, MotorID motor, String name)
     {
         return IOFactory.motor(channel, motor, name);
+    }
+
+    /**
+     * Creates an encoder
+     * 
+     * @param channelA
+     *            The a channel digital input channel.
+     * @param channelB
+     *            The b channel digital input channel.
+     * @param name
+     *            The name of the motor (for the log)
+     * @since 2017
+     */
+    protected static Encoder encoder(int channelA, int channelB, String name)
+    {
+        return IOFactory.encoder(channelA, channelB, name);
     }
 }
