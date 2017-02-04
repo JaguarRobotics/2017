@@ -68,8 +68,8 @@ void calculationLoop(void) {
     printk(KERN_INFO "Starting accelerometer calculations.\n");
     while (!kthread_should_stop()) {
         // TODO get the accelerometer values and constantly calculate the new x and y positions
-        addXVelocity(readAccelerometer(ACCEL_AXIS_X));
-        addYVelocity(readAccelerometer(ACCEL_AXIS_Y));
+        addXVelocity(readAccelerometer(MULTIPLICATIVE_CONSTANT * ACCEL_AXIS_X));
+        addYVelocity(readAccelerometer(MULTIPLICATIVE_CONSTANT * ACCEL_AXIS_Y));
         // Some calculations
         schedule();
     }
