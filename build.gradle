@@ -37,3 +37,17 @@ task copyRuntimeLibs(type: Copy) {
 build {
 	dependsOn copyRuntimeLibs
 }
+
+ant {
+	importBuild("build.xml") {
+		t -> "ant-" + t
+	}
+}
+
+"ant-compile" {
+	dependsOn copyRuntimeLibs
+}
+
+task deploy {
+	dependsOn "ant-deploy"
+}
