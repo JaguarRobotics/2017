@@ -8,3 +8,4 @@
 /dist/
 /.gradle/
 /libs/
+/sysProps.xml
