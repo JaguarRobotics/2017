@@ -7,6 +7,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include "calculations.h"
+#include "io.h"
 
 MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Zach Deibert, Nathan Gawith, Cody Moose");
@@ -63,6 +64,7 @@ static int __init accelerometer_init(void) {
         return ret;
     }
     sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
+    initAccelerometer();
     if (!(thread = kthread_run(&calculation_thread, NULL, "accelerometer"))) {
         printk(KERN_ALERT "Unable to start calculations thread.\n");
     }
@@ -74,6 +76,7 @@ static void __exit accelerometer_exit(void) {
     if (thread) {
         kthread_stop(thread);
     }
+    deinitAccelerometer();
     cdev_del(&c_dev);
     device_destroy(cl, first);
     class_destroy(cl);
