@@ -77,6 +77,7 @@ void *client_run(void *arg) {
     int n;
 
     pthread_cleanup_push(client_cleanup, arg);
+    client = (struct client_info *) arg;
     if ((fd = open("/dev/accelerometer", O_RDONLY)) < 0) {
         perror("open");
         fd = client->sockfd;
@@ -86,7 +87,6 @@ void *client_run(void *arg) {
             sleep((unsigned) -1);
         }
     }
-    client = (struct client_info *) arg;
     while (1) {
         if ((n = read(fd, buffer, OUTPUT_BUFFER_SIZE)) < 0) {
             perror("read");
