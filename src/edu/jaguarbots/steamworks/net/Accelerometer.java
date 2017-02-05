@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The class that pulls data from the accelerometer over the network
@@ -14,18 +16,25 @@ import java.util.concurrent.Semaphore;
  */
 public class Accelerometer extends Thread
 {
+    private static final Logger        LOG           = LogManager.getLogger();
     /**
      * The port to connect to
      * 
      * @since 2017
      */
-    private static final int           PORT     = 14740;
+    private static final int           PORT          = 14740;
+    /**
+     * How often (in milliseconds) to trace the new accelerometer values
+     * 
+     * @since 2017
+     */
+    private static final long          TRACE_TIMEOUT = 1000;
     /**
      * The instance of the accelerometer singleton
      * 
      * @since 2017
      */
-    private static final Accelerometer INSTANCE = new Accelerometer();
+    private static final Accelerometer INSTANCE      = new Accelerometer();
     /**
      * The semaphore to access the position data
      * 
@@ -130,6 +139,7 @@ public class Accelerometer extends Thread
                 try (Scanner scan = new Scanner(stream))
                 {
                     scan.useDelimiter(",");
+                    long nextTrace = 0;
                     while (scan.hasNext())
                     {
                         double x = scan.nextDouble();
@@ -140,13 +150,19 @@ public class Accelerometer extends Thread
                         this.y = y;
                         this.rotation = rotation;
                         lock.release();
+                        long now = System.currentTimeMillis();
+                        if (now >= nextTrace)
+                        {
+                            LOG.trace("Accelerometer: ({} ft, {} ft) @ {} rad", x, y, rotation);
+                            nextTrace = now + TRACE_TIMEOUT;
+                        }
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            ex.printStackTrace();
+            LOG.catching(ex);
         }
     }
 
