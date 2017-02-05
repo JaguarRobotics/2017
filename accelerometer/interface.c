@@ -7,6 +7,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include "calculations.h"
+#include "interface.h"
 #include "io.h"
 
 MODULE_LICENSE("Dual MIT/GPL");
@@ -14,7 +15,6 @@ MODULE_AUTHOR("Zach Deibert, Nathan Gawith, Cody Moose");
 MODULE_DESCRIPTION("An accelerometer driver");
 
 #define FORMAT_BUFFER_SIZE 64
-#define OUTPUT_BUFFER_SIZE 64
 
 struct file_read_data {
     char buffer[OUTPUT_BUFFER_SIZE];

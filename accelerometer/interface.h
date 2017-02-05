@@ -1,6 +1,6 @@
 #ifndef FRC1810_INTERFACE_H
 #define FRC1810_INTERFACE_H
 
-// Module interface related functions
+#define OUTPUT_BUFFER_SIZE 64
 
 #endif
