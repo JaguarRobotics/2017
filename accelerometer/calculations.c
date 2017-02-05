@@ -2,6 +2,7 @@
 #include <linux/kernel.h>
 #include <linux/kthread.h>
 #include <linux/sched.h>
+#include <linux/time.h>
 #include "calculations.h"
 #include "io.h"
 #include "taylor.h"
@@ -65,10 +66,22 @@ num_t getRotation(void) {
 }
 
 void calculationLoop(void) {
+    num_t last;
+    num_t now;
+    struct timespec time;
+
     printk(KERN_INFO "Starting accelerometer calculations.\n");
+    getnstimeofday(&time);
+    last = timespec_to_ns(&time);
     while (!kthread_should_stop()) {
-        addXVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_X) / 4096);
-        addYVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_Y) / 4096);
+        getnstimeofday(&time);
+        now = timespec_to_ns(&time);
+        timeSlice = (now - last) * MULTIPLICATIVE_CONSTANT / 1000000000;
+        if (timeSlice > 0) {
+            addXVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_X) / 4096);
+            addYVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_Y) / 4096);
+            last = now;
+        }
         schedule();
     }
     printk(KERN_INFO "Ending accelerometer calculations.\n");
