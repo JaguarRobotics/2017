@@ -108,6 +108,12 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
     num_t x;
     num_t y;
     num_t rot;
+    num_t xi;
+    num_t xf;
+    num_t yi;
+    num_t yf;
+    num_t roti;
+    num_t rotf;
     int bytes_read = 0;
 
     if (!filp->private_data) {
@@ -118,7 +124,25 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
         x = getXPosition();
         y = getYPosition();
         rot = getRotation();
-        sprintf(data->buffer, outputFormat, x / MULTIPLICATIVE_CONSTANT, x % MULTIPLICATIVE_CONSTANT, y / MULTIPLICATIVE_CONSTANT, y % MULTIPLICATIVE_CONSTANT, rot / MULTIPLICATIVE_CONSTANT, rot % MULTIPLICATIVE_CONSTANT);
+        xi = x / MULTIPLICATIVE_CONSTANT;
+        xf = x % MULTIPLICATIVE_CONSTANT;
+        yi = y / MULTIPLICATIVE_CONSTANT;
+        yf = y % MULTIPLICATIVE_CONSTANT;
+        roti = rot / MULTIPLICATIVE_CONSTANT;
+        rotf = rot % MULTIPLICATIVE_CONSTANT;
+        if (xf < 0) {
+            --xi;
+            xf = -xf;
+        }
+        if (yf < 0) {
+            --yi;
+            yf = -yf;
+        }
+        if (rotf < 0) {
+            --roti;
+            rotf = -rotf;
+        }
+        sprintf(data->buffer, outputFormat, xi, xf, yi, yf, roti, rotf);
         data->ptr = data->buffer;
     }
     while (--length && *data->ptr) {
