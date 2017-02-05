@@ -1,9 +1,9 @@
 obj-m += accelerometer-mock.o
 obj-m += accelerometer.o
-accelerometer-mock-objs := io-mock.o calculations.o interface.o
-accelerometer-objs := io-real.o calculations.o interface.o
+accelerometer-mock-objs := io-mock.o calculations.o interface.o taylor.o
+accelerometer-objs := io-real.o calculations.o interface.o taylor.o
 
-all: accelerometer-networkd
+all: accelerometer-networkd test
 	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
@@ -11,3 +11,6 @@ clean:
 
 accelerometer-networkd: network.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -pthread
+
+test: taylor.o test.o
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)

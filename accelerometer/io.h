@@ -15,5 +15,13 @@ typedef int accel_axis_t;
  * @return The voltage output on the accelerometer (in mV)
  */
 int readAccelerometer(accel_axis_t axis);
+/**
+ * Initializes the accelerometer
+ */
+void initAccelerometer(void);
+/**
+ * Frees the accelerometer resources
+ */
+void deinitAccelerometer(void);
 
 #endif
