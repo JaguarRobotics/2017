@@ -67,8 +67,8 @@ num_t getRotation(void) {
 void calculationLoop(void) {
     printk(KERN_INFO "Starting accelerometer calculations.\n");
     while (!kthread_should_stop()) {
-        addXVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_X));
-        addYVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_Y));
+        addXVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_X) / 4096);
+        addYVelocity(MULTIPLICATIVE_CONSTANT * readAccelerometer(ACCEL_AXIS_Y) / 4096);
         schedule();
     }
     printk(KERN_INFO "Ending accelerometer calculations.\n");
