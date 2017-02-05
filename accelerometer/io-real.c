@@ -3,6 +3,7 @@
 #include <linux/spi/spi.h>
 #include "calculations.h"
 #include "io.h"
+#include "spi-constants.h"
 
 static void init_spi_accelerometer(void);
 static int accelerometer_probe(struct spi_device *spi);
@@ -77,7 +78,21 @@ void init_spi_accelerometer(void) {
 }
 
 int accelerometer_probe(struct spi_device *spi) {
-    spi_dev = spi;
+    char buffer[4];
+    char command[] = {
+        SPI_READ, REGISTER_ID
+    };
+
+    spi_write(spi_dev, command, 2);
+    spi_read(spi_dev, buffer, 4);
+#define CONCAT(a, b) a ## b
+#define C(num) buffer[num] == CONCAT(REGISTER_ID_VALUE_, num)
+    if (C(0) && C(1) && C(2) && C(3)) {
+#undef C
+#undef CONCAT
+        spi_dev = spi;
+        init_spi_accelerometer();
+    }
     return 0;
 }
 
