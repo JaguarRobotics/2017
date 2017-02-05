@@ -9,7 +9,7 @@ num_t taylor_sin(num_t rad) {
     num_t product;
     num_t rad2;
     num_t sign = 1;
-    num_t factorial = 1;
+    num_t factorial = MULTIPLICATIVE_CONSTANT;
     int n;
 
     if (rad < 0) {
@@ -22,7 +22,8 @@ num_t taylor_sin(num_t rad) {
     for (n = 0; n < TAYLOR_POLYNOMIAL; ++n) {
         res += sign * product * MULTIPLICATIVE_CONSTANT / factorial;
         product = product * rad2 / MULTIPLICATIVE_CONSTANT;
-        factorial = factorial * (4 * n * n / MULTIPLICATIVE_CONSTANT + 9 * n + 6 * MULTIPLICATIVE_CONSTANT) / MULTIPLICATIVE_CONSTANT;
+        factorial = factorial * (4 * n * n + 9 * n + 6);
+        sign = -sign;
     }
     return res;
 }
@@ -32,11 +33,11 @@ num_t taylor_sin(num_t rad) {
 // cos(x) = lim 1 - ──── + ──── - ──── + ... + ───────────
 //          n→∞      2!     4!     6!             (2n)!
 num_t taylor_cos(num_t rad) {
-    num_t res = 1;
+    num_t res = MULTIPLICATIVE_CONSTANT;
     num_t product;
     num_t rad2;
     num_t sign = -1;
-    num_t factorial = 2;
+    num_t factorial = 2 * MULTIPLICATIVE_CONSTANT;
     int n;
 
     if (rad < 0) {
@@ -47,7 +48,8 @@ num_t taylor_cos(num_t rad) {
     for (n = 1; n < TAYLOR_POLYNOMIAL; ++n) {
         res += sign * product * MULTIPLICATIVE_CONSTANT / factorial;
         product = product * rad2 / MULTIPLICATIVE_CONSTANT;
-        factorial = factorial * (4 * n * n / MULTIPLICATIVE_CONSTANT + 5 * n + 3 * MULTIPLICATIVE_CONSTANT) / MULTIPLICATIVE_CONSTANT;
+        factorial = factorial * (4 * n * n + 6 * n + 2);
+        sign = -sign;
     }
     return res;
 }
