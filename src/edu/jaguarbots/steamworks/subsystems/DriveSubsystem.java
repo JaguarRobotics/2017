@@ -82,28 +82,42 @@ public class DriveSubsystem extends SubsystemBase
 
     /**
      * Calculates motor powers for adjusted driving
-     * 
+     * <html>you can view the math below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
      * @return returns an array of powers with left in slot 0 & right in slot 1
      */
     public double[] getMotorPowers()
     {
+//        double[] powers = new double[2];
+//        double lastLeftMotorSpeed = leftMotorSpeed;
+//        double lastRightMotorSpeed = rightMotorSpeed;
+//        double lastLeftEncoder = leftEncoderValue;
+//        double lastRightEncoder = rightEncoderValue;
+//        getEncoders();
+//        leftMotorSpeed = rightMotorSpeed = powers[0] = powers[1] = 1;
+//        double estimatedLeft = (leftEncoderValue - lastLeftEncoder) / lastLeftMotorSpeed;
+//        double estimatedRight = (rightEncoderValue - lastRightEncoder) / lastRightMotorSpeed;
+//        if (leftEncoderValue > rightEncoderValue)
+//        {
+//            powers[0] = leftMotorSpeed = rightEncoderValue / leftEncoderValue + estimatedRight / estimatedLeft - 1;
+//        }
+//        else if (leftEncoderValue < rightEncoderValue)
+//        {
+//            powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
+//        }
         double[] powers = new double[2];
-        double lastLeftMotorSpeed = leftMotorSpeed;
-        double lastRightMotorSpeed = rightMotorSpeed;
-        double lastLeftEncoder = leftEncoderValue;
-        double lastRightEncoder = rightEncoderValue;
-        getEncoders();
-        leftMotorSpeed = rightMotorSpeed = powers[0] = powers[1] = 1;
-        double estimatedLeft = (leftEncoderValue - lastLeftEncoder) / lastLeftMotorSpeed;
-        double estimatedRight = (rightEncoderValue - lastRightEncoder) / lastRightMotorSpeed;
-        if (leftEncoderValue > rightEncoderValue)
+        double sqrt = 1;
+        if(leftEncoderValue < rightEncoderValue)
         {
-            powers[0] = leftMotorSpeed = rightEncoderValue / leftEncoderValue + estimatedRight / estimatedLeft - 1;
+            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderValue * rightEncoderValue) + (2 * rightEncoderValue * leftEncoderValue) - (leftEncoderValue * leftEncoderValue);
         }
-        else if (leftEncoderValue < rightEncoderValue)
+        else
         {
-            powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
+            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderValue * leftEncoderValue) + (2 * leftEncoderValue * rightEncoderValue) - (rightEncoderValue * rightEncoderValue);
         }
+        double theta = 4 * Math.atan(Math.sqrt(sqrt));
+        powers[0] = Math.abs(Math.cos(theta));
+        powers[1] = 1;
+        System.out.println("(" + leftEncoderValue + ", " + rightEncoderValue + ")  powers[0] = " + powers[0] + " powers[1] = " + powers[1]);
         return powers;
     }
 

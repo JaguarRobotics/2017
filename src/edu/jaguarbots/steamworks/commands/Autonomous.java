@@ -14,9 +14,10 @@ public class Autonomous extends CommandGroup
      */
     public Autonomous()
     {
-        addSequential(new EncoderDrive(6 * 12));
+        addSequential(new GearShiftLow());
+        addSequential(new EncoderDrive(1600 * 12, 0.4));
 //        addSequential(new EncoderTurn(360));
-        addSequential(new EncoderDrive(-6 * 12));
+//        addSequential(new EncoderDrive(-6 * 12));
 //        addSequential(new EncoderTurn(-360));
     }
     

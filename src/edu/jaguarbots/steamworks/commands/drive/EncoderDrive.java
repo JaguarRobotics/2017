@@ -33,7 +33,7 @@ public class EncoderDrive extends CommandBase
      */
     public EncoderDrive(double distance)
     {
-        this(distance, 0.7);
+        this(distance, (distance < 0) ? -0.7 : 0.7);
     }
 
     /**
@@ -49,7 +49,7 @@ public class EncoderDrive extends CommandBase
     {
         requires(driveSubsystem);
         this.distance = distance;
-        this.speed = speed;
+        this.speed = (distance < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
     }
 
     @Override
@@ -69,7 +69,16 @@ public class EncoderDrive extends CommandBase
     @Override
     protected boolean isFinished()
     {
-        return driveSubsystem.getEncoderLeft() >= distance || driveSubsystem.getEncoderRight() >= distance;
+        boolean isFinished = false;
+        if(speed > 0)
+        {
+            isFinished = driveSubsystem.getEncoderLeft() >= distance || driveSubsystem.getEncoderRight() >= distance;
+        }
+        else
+        {
+            isFinished = driveSubsystem.getEncoderLeft() <= distance || driveSubsystem.getEncoderRight() <= distance;
+        }
+        return isFinished;
     }
 
     @Override
