@@ -1,6 +1,7 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
 import edu.jaguarbots.steamworks.commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Turns the robot using the values on the encoders
@@ -27,14 +28,16 @@ public class EncoderTurn extends CommandBase
     @Override
     protected void initialize()
     {
-        driveSubsystem.startEncoders();
         driveSubsystem.resetEncoders(true, true);
+    	driveSubsystem.startEncoders();
     }
 
     @Override
     protected void execute()
     {
-        if (angle > 0)
+    	SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
+    	if (angle > 0)
         {
             driveSubsystem.driveTank(0, speed);
         }

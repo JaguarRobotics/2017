@@ -1,10 +1,12 @@
 package edu.jaguarbots.steamworks.subsystems;
 
+import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -77,6 +79,9 @@ public class DriveSubsystem extends SubsystemBase
      * Current right motor speed.
      */
     private double                 rightMotorSpeed;
+    
+    private double				   leftEncoderTemp;
+    private double				   rightEncoderTemp;
 
     /**
      * Calculates motor powers for adjusted driving
@@ -102,20 +107,47 @@ public class DriveSubsystem extends SubsystemBase
 //        {
 //            powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
 //        }
-        double[] powers = new double[2];
+
+        double rightEncoderDelta = rightEncoderValue - rightEncoderTemp;
+        double leftEncoderDelta = leftEncoderValue - leftEncoderTemp;
+    	double[] powers = new double[2];
         double sqrt = 1;
-        if(leftEncoderValue < rightEncoderValue)
+        if(rightEncoderDelta < leftEncoderDelta)
         {
-            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderValue * rightEncoderValue) + (2 * rightEncoderValue * leftEncoderValue) - (leftEncoderValue * leftEncoderValue);
+            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderDelta * rightEncoderDelta) + (2 * rightEncoderDelta * leftEncoderDelta) - (leftEncoderDelta * leftEncoderDelta);
+
+            powers[0] = 1;
+            powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
+
+//            powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
+//            powers[1] = 1;
         }
         else
         {
-            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderValue * leftEncoderValue) + (2 * leftEncoderValue * rightEncoderValue) - (rightEncoderValue * rightEncoderValue);
+            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderDelta * leftEncoderDelta) + (2 * leftEncoderDelta * rightEncoderDelta) - (rightEncoderDelta * rightEncoderDelta);
+
+            powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
+            powers[1] = 1;
+            
+//            powers[0] = 1;
+//            powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
         }
-        double theta = 4 * Math.atan(Math.sqrt(sqrt));
-        powers[0] = Math.abs(Math.cos(theta));
-        powers[1] = 1;
-        System.out.println("(" + leftEncoderValue + ", " + rightEncoderValue + ")  powers[0] = " + powers[0] + " powers[1] = " + powers[1]);
+    	
+        //System.out.println("(" + leftEncoderValue + ", " + rightEncoderValue + ")  powers[0] = " + powers[0] + " powers[1] = " + powers[1]);
+        // 
+//    	double[] powers = new double[2];
+//        if(rightEncoderValue < leftEncoderValue)
+//        {
+//        	powers[0] = 1;
+//        	powers[1] = 1;
+//        }
+//        else
+//        {
+//        	powers[0] = 1;
+//        	powers[1] = 1;
+//        }
+        rightEncoderTemp = rightEncoderValue;
+        leftEncoderTemp = leftEncoderValue;
         return powers;
     }
 
@@ -185,6 +217,8 @@ public class DriveSubsystem extends SubsystemBase
         // System.out.println("left " + getEncoderLeft());
         // System.out.println("right " + getEncoderRight());
         robotDrive.tankDrive(left, right);
+//        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+//        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
     }
 
     // /**

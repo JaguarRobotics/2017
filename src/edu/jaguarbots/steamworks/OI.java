@@ -1,12 +1,13 @@
 package edu.jaguarbots.steamworks;
 
+import edu.jaguarbots.steamworks.commands.climber.Ascend;
+import edu.jaguarbots.steamworks.commands.climber.Descend;
+import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
+import edu.jaguarbots.steamworks.commands.drive.GearShiftHigh;
+import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.jaguarbots.steamworks.commands.climber.Ascend;
-import edu.jaguarbots.steamworks.commands.climber.Descend;
-import edu.jaguarbots.steamworks.commands.drive.*;
-import edu.jaguarbots.steamworks.RobotMap;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,15 +16,15 @@ import edu.jaguarbots.steamworks.RobotMap;
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
 	    Joystick0_Button1.whileHeld(new Ascend()); //climber
-	    Joystick1_Button1.whileHeld(new Ascend()); 
+	    Joystick1_Button1.whileHeld(new Ascend());
+		Joystick0_Button6.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
+		Joystick1_Button6.whileHeld(new Descend());
 	    Joystick0_Button2.whenPressed(new GearShiftLow()); //gear shifting
 	    Joystick0_Button3.whenPressed(new GearShiftHigh());
 		Joystick1_Button2.whenPressed(new GearShiftLow());
 		Joystick1_Button3.whenPressed(new GearShiftHigh());
-		Joystick0_Button6.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
-		Joystick1_Button6.whileHeld(new Descend());
-		Joystick0_Button10.whenPressed(new EncoderDrive(36));
-		Joystick1_Button10.whenPressed(new EncoderDrive(36));
+//		Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
+//		Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

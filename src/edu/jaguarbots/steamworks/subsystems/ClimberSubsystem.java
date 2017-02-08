@@ -20,17 +20,17 @@ public class ClimberSubsystem extends SubsystemBase
     /**
      * Solenoid for raising and lowering the arm for climbing
      */
-    private Solenoid        climberSol   = new Solenoid(SOLENOID_CLIMBER_PORT);
+//    private Solenoid        climberSol   = new Solenoid(SOLENOID_CLIMBER_PORT);
     /**
      * Limit switch to ensure robot does not climb too high
      */
-    private DigitalInput    climberLimit = new DigitalInput(CLIMBER_LIMIT_SWITCH_PORT);
+//    private DigitalInput    climberLimit = new DigitalInput(CLIMBER_LIMIT_SWITCH_PORT);
     // private double POV;
 
     // private boolean isShooterUp;
     public ClimberSubsystem()
     {
-        solDown();
+//        solDown();
     }
 
     public void initDefaultCommand()
@@ -44,10 +44,10 @@ public class ClimberSubsystem extends SubsystemBase
      * 
      * @return limit switch value
      */
-    public boolean getLimit()
-    {
-        return climberLimit.get();
-    }
+//    public boolean getLimit()
+//    {
+//        return climberLimit.get();
+//    }
 
     /**
      * Makes climber motor turn forward
@@ -80,19 +80,19 @@ public class ClimberSubsystem extends SubsystemBase
     /**
      * Extends climbing solenoid for reaching
      */
-    public void solUp()
-    {
-        climberSol.set(true);
-    }
+//    public void solUp()
+//    {
+//        climberSol.set(true);
+//    }
 
     /**
      * Retracts climbing solenoid
      */
-    public void solDown() // tentative, mechanical structure may not allow this
-                          // to occur
-    {
-        climberSol.set(false);
-    }
+//    public void solDown() // tentative, mechanical structure may not allow this
+//                          // to occur
+//    {
+//        climberSol.set(false);
+//    }
     //
     // public void ascendDescend(double c){
     // POV = c;

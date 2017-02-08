@@ -1,6 +1,7 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
 import edu.jaguarbots.steamworks.commands.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drives the robot based on a distance gotten from encoders.
@@ -64,6 +65,10 @@ public class EncoderDrive extends CommandBase
     {
         double[] powers = driveSubsystem.getMotorPowers();
         driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
+        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
+        System.out.print("Left " + CommandBase.driveSubsystem.getEncoderLeft());
+        System.out.println("	Right " + CommandBase.driveSubsystem.getEncoderRight());
     }
 
     @Override
@@ -72,13 +77,14 @@ public class EncoderDrive extends CommandBase
         boolean isFinished = false;
         if(speed > 0)
         {
-            isFinished = driveSubsystem.getEncoderLeft() >= distance || driveSubsystem.getEncoderRight() >= distance;
+            isFinished = driveSubsystem.getEncoderLeft() >= distance || (-1 * driveSubsystem.getEncoderRight()) >= distance;
         }
         else
         {
-            isFinished = driveSubsystem.getEncoderLeft() <= distance || driveSubsystem.getEncoderRight() <= distance;
+            isFinished = driveSubsystem.getEncoderLeft() <= distance || (-1 *driveSubsystem.getEncoderRight()) <= distance;
         }
         return isFinished;
+//    	return driveSubsystem.getEncoderLeft() <= distance || driveSubsystem.getEncoderRight() * -1 <= distance;
     }
 
     @Override

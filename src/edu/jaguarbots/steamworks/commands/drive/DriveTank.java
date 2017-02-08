@@ -34,9 +34,10 @@ public class DriveTank extends CommandBase
     {
         SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
         SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
-    	double powNum = 2;
-    	double j0 = oi.Joystick0.getY();
-    	double j1 = oi.Joystick1.getY();
+        double powNum = 2; 
+    	double pointNum = SmartDashboard.getNumber("Joystick Tolerance");
+    	double j0 = oi.Joystick0.getY() * pointNum;
+    	double j1 = oi.Joystick1.getY() * pointNum;
     	double aj0 = Math.abs(j0);
     	double aj1 = Math.abs(j1);
     	double pj0 = Math.pow(aj0, powNum);
@@ -45,8 +46,8 @@ public class DriveTank extends CommandBase
         	pj0 = aj0;
         if(Math.abs(pj1) > aj1)
         	pj1 = aj1;
-        left = pj0 * (aj0 / j0);
-        right = pj1 * (aj1 / j1);
+        left = (pj0 * (aj0 / j0)) / pointNum;
+        right = (pj1 * (aj1 / j1)) / pointNum;
         driveSubsystem.driveTank(-left, -right);
     }
 
