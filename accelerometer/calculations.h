@@ -15,15 +15,24 @@ typedef long long num_t;
     num_t b = denom; \
     do_div(a, b); \
 })
-#else
-#define DIVIDE_RAW(num, denom) (num / denom)
-#endif
-#else
-#define DIVIDE_RAW(num, denom) (num / denom)
-#endif
-#define DIVIDE(num, denom) DIVIDE_RAW(num * MULTIPLICATIVE_CONSTANT, denom)
-#define MODULUS_RAW(num, denom) (num % denom)
 #define MULTIPLY_RAW(a, b) (a * b)
+#define MODULUS_RAW(num, denom) (num - MULTIPLY_RAW(DIVIDE_RAW(num, denom), denom))
+#endif
+#endif
+
+#ifndef DIVIDE_RAW
+#define DIVIDE_RAW(num, denom) (num / denom)
+#endif
+
+#ifndef MULTIPLY_RAW
+#define MULTIPLY_RAW(a, b) (a * b)
+#endif
+
+#ifndef MODULUS_RAW
+#define MODULUS_RAW(num, denom) (num % denom)
+#endif
+
+#define DIVIDE(num, denom) DIVIDE_RAW(num * MULTIPLICATIVE_CONSTANT, denom)
 #define MULTIPLY(a, b) DIVIDE_RAW(a * b, MULTIPLICATIVE_CONSTANT)
 
 // Calculation related functions
