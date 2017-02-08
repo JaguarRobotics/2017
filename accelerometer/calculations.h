@@ -10,11 +10,11 @@ typedef long long num_t;
 #ifdef __ARM_EABI__
 #ifdef MODULE_INFO
 #include <asm/div64.h>
-#define DIVIDE_RAW(num, denom) { \
+#define DIVIDE_RAW(num, denom) ({ \
     num_t a = num; \
     num_t b = denom; \
     do_div(a, b); \
-}
+})
 #else
 #define DIVIDE_RAW(num, denom) (num / denom)
 #endif
