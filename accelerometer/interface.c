@@ -127,12 +127,12 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
         x = getXPosition();
         y = getYPosition();
         rot = getRotation();
-        xi = x / MULTIPLICATIVE_CONSTANT;
-        xf = x % MULTIPLICATIVE_CONSTANT;
-        yi = y / MULTIPLICATIVE_CONSTANT;
-        yf = y % MULTIPLICATIVE_CONSTANT;
-        roti = rot / MULTIPLICATIVE_CONSTANT;
-        rotf = rot % MULTIPLICATIVE_CONSTANT;
+        xi = DIVIDE_RAW(x, MULTIPLICATIVE_CONSTANT);
+        xf = MODULUS_RAW(x, MULTIPLICATIVE_CONSTANT);
+        yi = DIVIDE_RAW(y, MULTIPLICATIVE_CONSTANT);
+        yf = MODULUS_RAW(y, MULTIPLICATIVE_CONSTANT);
+        roti = DIVIDE_RAW(rot, MULTIPLICATIVE_CONSTANT);
+        rotf = MODULUS_RAW(rot, MULTIPLICATIVE_CONSTANT);
         if (xf < 0) {
             --xi;
             xf = -xf;

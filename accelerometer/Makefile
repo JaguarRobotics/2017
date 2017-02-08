@@ -12,5 +12,8 @@ clean:
 accelerometer-networkd: network.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -pthread
 
-test: taylor.o test.o
+%-us.o: %.c
+	$(CC) -c -o $@ $^ $(CFLAGS)
+
+test: taylor-us.o test.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
