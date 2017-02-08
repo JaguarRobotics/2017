@@ -7,7 +7,7 @@
 #include "io.h"
 #include "taylor.h"
 
-num_t timeSlice = ((num_t) (MULTIPLICATIVE_CONSTANT / 1600));
+num_t timeSlice;
 num_t xAcceleration = 0;
 num_t yAcceleration = 0;
 num_t xVelocity = 0;
