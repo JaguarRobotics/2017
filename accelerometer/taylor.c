@@ -16,7 +16,7 @@ num_t taylor_sin(num_t rad) {
         rad = -rad;
         sign = -1;
     }
-    rad %= TAU;
+    rad = MODULUS_RAW(rad, TAU);
     product = rad;
     rad2 = MULTIPLY(rad, rad);
     for (n = 0; n < TAYLOR_POLYNOMIAL; ++n) {
@@ -43,7 +43,7 @@ num_t taylor_cos(num_t rad) {
     if (rad < 0) {
         rad = -rad;
     }
-    rad %= TAU;
+    rad = MODULUS_RAW(rad, TAU);
     product = rad2 = MULTIPLY(rad, rad);
     for (n = 1; n < TAYLOR_POLYNOMIAL; ++n) {
         res += DIVIDE(MULTIPLY_RAW(sign, product), factorial);
