@@ -2,8 +2,12 @@
 #define FRC1810_CALCULATIONS_H
 
 #ifdef __ARM_EABI__
+#ifdef MODULE_INFO
 #include <asm/div64.h>
 #define DIVIDE_RAW(num, denom) do_div(num, denom)
+#else
+#define DIVIDE_RAW(num, denom) (num / denom)
+#endif
 #else
 #define DIVIDE_RAW(num, denom) (num / denom)
 #endif
