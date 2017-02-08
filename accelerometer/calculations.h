@@ -22,14 +22,30 @@ typedef long long num_t;
     do_div(a, b); \
 })
 #define MODULUS_RAW(num, denom) (((num_t) num) - MULTIPLY_RAW(DIVIDE_RAW(num, denom), denom))
-#elif __SIZE_OF_POINTER__ = 4
+#elif defined(__SIZE_OF_POINTER__) && __SIZE_OF_POINTER__ == 4
 #undef DIVIDE_RAW
-#define DIVIDE_RAW(num, denom) ({ \
+#undef MULTIPLY_RAW
+#define DIVIDE_RAW(num, _denom) ({ \
     num_t quot = num; \
+    num_t denom = _denom; \
     while (quot >= denom) { \
         quot -= denom; \
     } \
     quot; \
+})
+#define MULTIPLY_RAW(_a, _b) ({ \
+    num_t a = _a; \
+    num_t b = _b; \
+    num_t product = 0; \
+    num_t mask = 1; \
+    while (mask != 0) { \
+        if (b & mask) { \
+            product += a; \
+        } \
+        a <<= 1; \
+        mask <<= 1; \
+    } \
+    product; \
 })
 #endif
 #endif
