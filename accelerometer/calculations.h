@@ -8,7 +8,7 @@ typedef long long num_t;
 
 // Math operations
 #ifdef __ARM_EABI__
-#ifdef MODULE_INFO
+#ifdef __KERNEL__
 #include <asm/div64.h>
 #define DIVIDE_RAW(num, denom) ({ \
     num_t a = num; \
