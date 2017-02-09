@@ -16,13 +16,13 @@ num_t taylor_sin(num_t rad) {
         rad = -rad;
         sign = -1;
     }
-    rad %= TAU;
+    rad = MODULUS_RAW(rad, TAU);
     product = rad;
-    rad2 = rad * rad / MULTIPLICATIVE_CONSTANT;
+    rad2 = MULTIPLY(rad, rad);
     for (n = 0; n < TAYLOR_POLYNOMIAL; ++n) {
-        res += sign * product * MULTIPLICATIVE_CONSTANT / factorial;
-        product = product * rad2 / MULTIPLICATIVE_CONSTANT;
-        factorial = factorial * (4 * n * n + 9 * n + 6);
+        res += DIVIDE(MULTIPLY_RAW(sign, product), factorial);
+        product = MULTIPLY(product, rad2);
+        factorial = MULTIPLY_RAW(factorial, (MULTIPLY_RAW(4, MULTIPLY_RAW(n, n)) + MULTIPLY_RAW(9, n) + 6));
         sign = -sign;
     }
     return res;
@@ -43,12 +43,12 @@ num_t taylor_cos(num_t rad) {
     if (rad < 0) {
         rad = -rad;
     }
-    rad %= TAU;
-    product = rad2 = rad * rad / MULTIPLICATIVE_CONSTANT;
+    rad = MODULUS_RAW(rad, TAU);
+    product = rad2 = MULTIPLY(rad, rad);
     for (n = 1; n < TAYLOR_POLYNOMIAL; ++n) {
-        res += sign * product * MULTIPLICATIVE_CONSTANT / factorial;
-        product = product * rad2 / MULTIPLICATIVE_CONSTANT;
-        factorial = factorial * (4 * n * n + 6 * n + 2);
+        res += DIVIDE(MULTIPLY_RAW(sign, product), factorial);
+        product = MULTIPLY(product, rad2);
+        factorial = MULTIPLY_RAW(factorial, (MULTIPLY_RAW(4, MULTIPLY_RAW(n, n)) + MULTIPLY_RAW(6, n) + 2));
         sign = -sign;
     }
     return res;
