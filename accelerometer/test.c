@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "calculations.h"
-#include "taylor.h"
+#include "bignum.h"
+//#include "calculations.h"
+//#include "taylor.h"
 
-int main(void) {
+//#define TEST_TAYLOR
+#define TEST_BIGNUM
+
+int status;
+
+/*
+void testTaylor(void) {
     char *format;
     num_t res;
     num_t ipart;
@@ -29,4 +36,37 @@ int main(void) {
     TEST_TRIG(cos, 2)
     TEST_TRIG(cos, 4)
     printf("(Calculated with the %dth taylor polynomial and a multiplicative constant of %ld)\n", TAYLOR_POLYNOMIAL, (long) MULTIPLICATIVE_CONSTANT);
+}
+*/
+
+void num_print(num_t num) {
+    char buffer[64];
+
+    num_fmt(num, buffer);
+    printf(buffer);
+}
+
+void testBignum(void) {
+    num_t a = num_load(2);
+    num_t b = num_load(3);
+    num_t c = num_div(b, a);
+    num_t d;
+
+    d = num_add(a, b);
+    num_print(a); printf(" + "); num_print(b); printf(" = "); num_print(d); printf("\n");
+    d = num_add(a, c);
+    num_print(a); printf(" + "); num_print(c); printf(" = "); num_print(d); printf("\n");
+    d = num_mult(a, b);
+    num_print(a); printf(" x "); num_print(b); printf(" = "); num_print(d); printf("\n");
+}
+
+int main(void) {
+    status = EXIT_SUCCESS;
+#ifdef TEST_TAYLOR
+    testTaylor();
+#endif
+#ifdef TEST_BIGNUM
+    testBignum();
+#endif
+    return status;
 }
