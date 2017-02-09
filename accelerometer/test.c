@@ -39,25 +39,30 @@ void testTaylor(void) {
 }
 */
 
-void num_print(num_t num) {
-    char buffer[64];
+void num_print(num_t a, char op, num_t b, num_t res) {
+    char sa[64];
+    char sb[64];
+    char sc[64];
 
-    num_fmt(num, buffer);
-    printf(buffer);
+    num_fmt(a, sa, 63);
+    num_fmt(b, sb, 63);
+    num_fmt(res, sc, 63);
+    printf("%s %c %s = %s\n", sa, op, sb, sc);
 }
 
 void testBignum(void) {
-    num_t a = num_load(2);
-    num_t b = num_load(3);
-    num_t c = num_div(b, a);
-    num_t d;
+    num_t one = num_load(1, 0);
+    num_t two = num_load(2, 0);
+    num_t three = num_load(3, 0);
+    num_t seven = num_load(7, 0);
+    num_t one_five = num_div(three, two);
 
-    d = num_add(a, b);
-    num_print(a); printf(" + "); num_print(b); printf(" = "); num_print(d); printf("\n");
-    d = num_add(a, c);
-    num_print(a); printf(" + "); num_print(c); printf(" = "); num_print(d); printf("\n");
-    d = num_mult(a, b);
-    num_print(a); printf(" x "); num_print(b); printf(" = "); num_print(d); printf("\n");
+    num_print(two, '+', three, num_add(two, three));
+    num_print(two, '+', one_five, num_add(two, one_five));
+    num_print(two, 'x', three, num_mult(two, three));
+    num_print(two, 'x', one_five, num_mult(two, one_five));
+    num_print(one, '/', three, num_div(one, three));
+    num_print(one, '/', seven, num_div(one, seven));
 }
 
 int main(void) {
