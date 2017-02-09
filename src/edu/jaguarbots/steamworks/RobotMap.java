@@ -34,7 +34,7 @@ public interface RobotMap
      * 
      * @since 2017
      */
-    public static final double      ROBOT_WIDTH               = 32;
+    public static final double      ROBOT_WIDTH               = 16;
     // Temporary?
     public static final int         SOLENOID_CLIMBER_PORT     = 500;
     public static final int         CLIMBER_LIMIT_SWITCH_PORT = 5001;

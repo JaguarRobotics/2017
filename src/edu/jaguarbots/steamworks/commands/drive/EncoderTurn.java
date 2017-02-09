@@ -39,18 +39,19 @@ public class EncoderTurn extends CommandBase
         SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
     	if (angle > 0)
         {
-            driveSubsystem.driveTank(0, speed);
+            driveSubsystem.driveTank(-speed, speed);
         }
         else if (angle < 0)
         {
-            driveSubsystem.driveTank(-speed, 0);
+            driveSubsystem.driveTank(-speed, speed);
         }
     }
 
     @Override
     protected boolean isFinished()
     {
-        return Math.max(driveSubsystem.getEncoderLeft(), driveSubsystem.getEncoderRight()) > angle * ROBOT_WIDTH;
+        return Math.max(driveSubsystem.getDistanceInInches(Math.abs(driveSubsystem.getEncoderLeft())),
+        		driveSubsystem.getDistanceInInches(Math.abs(driveSubsystem.getEncoderRight()))) > angle * ROBOT_WIDTH;
     }
 
     @Override

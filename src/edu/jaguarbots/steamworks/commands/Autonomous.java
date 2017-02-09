@@ -14,11 +14,13 @@ public class Autonomous extends CommandGroup
      */
     public Autonomous()
     {
+    	double straightSpeed = 0.8;
+    	double turnSpeed = 0.55;
         addSequential(new GearShiftLow());
-        addSequential(new EncoderDrive(300, 0.4));
-//        addSequential(new EncoderTurn(360));
-//        addSequential(new EncoderDrive(-6 * 12));
-//        addSequential(new EncoderTurn(-360));
+        addSequential(new EncoderDrive(CommandBase.driveSubsystem.getEncoderTicksFromInches(36), straightSpeed));
+        addSequential(new EncoderTurn(4 * Math.PI, turnSpeed));
+        addSequential(new EncoderDrive(-200, straightSpeed));
+        addSequential(new EncoderTurn(- 4 * Math.PI, turnSpeed));
     }
     
     /**

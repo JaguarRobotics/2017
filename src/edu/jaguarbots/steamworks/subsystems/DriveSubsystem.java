@@ -58,11 +58,11 @@ public class DriveSubsystem extends SubsystemBase
      * Diameter of pulleys, used for encoder calculations. (in inches)
      */
     // TODO change to diameter of pulleys
-    private double                 diameter      = 6;
+    public double                 diameter      = 6;
     /**
      * pulses per rotation for the encoders.
      */
-    private int ppr = 400;
+    private int ppr = 56;
     /**
      * Gyroscope that measures angle of robot.
      */
@@ -83,6 +83,24 @@ public class DriveSubsystem extends SubsystemBase
     private double				   leftEncoderTemp;
     private double				   rightEncoderTemp;
 
+    /**
+     * 
+     */
+    public double getDistanceInInches(double encoderTicks) {
+    	double result = diameter * encoderTicks / ppr;
+    	return result;
+    }
+    /**
+     * 
+     * @param inches
+     * @return
+     */
+	public double getEncoderTicksFromInches(double inches) {
+		double result = 0;
+		result = ppr * inches / diameter;
+		return result;
+	}
+    
     /**
      * Calculates motor powers for adjusted driving
      * <html>you can view the math below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
@@ -107,9 +125,9 @@ public class DriveSubsystem extends SubsystemBase
 //        {
 //            powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
 //        }
-
-        double rightEncoderDelta = rightEncoderValue - rightEncoderTemp;
-        double leftEncoderDelta = leftEncoderValue - leftEncoderTemp;
+/*
+        double rightEncoderDelta = getEncoderRight() - rightEncoderTemp;
+        double leftEncoderDelta = getEncoderLeft() - leftEncoderTemp;
     	double[] powers = new double[2];
         double sqrt = 1;
         if(rightEncoderDelta < leftEncoderDelta)
@@ -146,10 +164,30 @@ public class DriveSubsystem extends SubsystemBase
 //        	powers[0] = 1;
 //        	powers[1] = 1;
 //        }
-        rightEncoderTemp = rightEncoderValue;
-        leftEncoderTemp = leftEncoderValue;
+        rightEncoderTemp = getEncoderRight();
+        leftEncoderTemp = getEncoderLeft();
         return powers;
+        */
+    	double left = Math.abs(getEncoderLeft());
+    	double right = Math.abs(getEncoderRight());
+    	double diff = Math.abs(right - left + 1);
+    	double addition = right + left + 1;
+    	double percentage = (diff * 3) / ((right > left) ? right + 1 : left + 1);
+    	percentage = Math.min(percentage, 1);
+    	double powers[] = new double[2];
+        if(right > left) {
+            powers[0] = 1;
+            powers[1] = 1 - percentage;
+        }
+        else {
+            powers[0] = 1 - percentage;
+            powers[1] = 1;
+        }
+        if(counter % 5 == 0) System.out.println(left + ", " + right + "	" + percentage);
+        counter++;
+        return (counter > 5) ? powers : new double[] {1, 1};
     }
+    int counter = 0;
 
     /**
      * resets the encoders.

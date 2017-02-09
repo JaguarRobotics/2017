@@ -10,92 +10,93 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @since 2016
  * @version 2017
  */
-public class EncoderDrive extends CommandBase
-{
-    /**
-     * The distance to travel
-     * 
-     * @since 2016
-     */
-    private double distance;
-    /**
-     * The speed to travel at (between 0 and 1)
-     * 
-     * @since 2016
-     */
-    private double speed;
+public class EncoderDrive extends CommandBase {
+	/**
+	 * The distance to travel
+	 * 
+	 * @since 2016
+	 */
+	private double distance;
+	/**
+	 * The speed to travel at (between 0 and 1)
+	 * 
+	 * @since 2016
+	 */
+	private double speed;
 
-    /**
-     * Drives a certain distance at a speed of .7
-     * 
-     * @param distance
-     *            to drive in inches.
-     * @since 2016
-     */
-    public EncoderDrive(double distance)
-    {
-        this(distance, (distance < 0) ? -0.7 : 0.7);
-    }
+	/**
+	 * Drives a certain distance at a speed of .7
+	 * 
+	 * @param distance
+	 *            to drive in inches.
+	 * @since 2016
+	 */
+	public EncoderDrive(double distance) {
+		this(distance, (distance < 0) ? -0.7 : 0.7);
+	}
 
-    /**
-     * Drives a certain distance at a certain speed.
-     * 
-     * @param distance
-     *            to travel in inches.
-     * @param speed
-     *            to run motors at.
-     * @since 2016
-     */
-    public EncoderDrive(double distance, double speed)
-    {
-        requires(driveSubsystem);
-        this.distance = distance;
-        this.speed = (distance < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
-    }
+	/**
+	 * Drives a certain distance at a certain speed.
+	 * 
+	 * @param distance
+	 *            to travel in inches.
+	 * @param speed
+	 *            to run motors at.
+	 * @since 2016
+	 */
+	public EncoderDrive(double distance, double speed) {
+		requires(driveSubsystem);
+		this.distance = distance;
+		this.speed = (distance < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
+	}
 
-    @Override
-    protected void initialize()
-    {
-        driveSubsystem.resetEncoders(true, true);
-        driveSubsystem.startEncoders();
-    }
+	@Override
+	protected void initialize() {
+		driveSubsystem.resetEncoders(true, true);
+		driveSubsystem.startEncoders();
+	}
 
-    @Override
-    protected void execute()
-    {
-        double[] powers = driveSubsystem.getMotorPowers();
-        driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
-        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
-        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
-        System.out.print("Left " + CommandBase.driveSubsystem.getEncoderLeft());
-        System.out.println("	Right " + CommandBase.driveSubsystem.getEncoderRight());
-    }
+	@Override
+	protected void execute() {
+		boolean correctIt = true;
+		double[] powers = driveSubsystem.getMotorPowers();
+		if (correctIt)
+			driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
+		else
+			driveSubsystem.driveTank(speed, speed);
+		SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+		SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
+		if (counter % 5 == 0)
+			System.out.print("Left " + CommandBase.driveSubsystem.getEncoderLeft());
+		if (counter % 5 == 0)
+			System.out.println("	Right " + CommandBase.driveSubsystem.getEncoderRight());
+		counter++;
+	}
 
-    @Override
-    protected boolean isFinished()
-    {
-        boolean isFinished = false;
-        if(speed > 0)
-        {
-            isFinished = driveSubsystem.getEncoderLeft() >= distance || (-1 * driveSubsystem.getEncoderRight()) >= distance;
-        }
-        else
-        {
-            isFinished = driveSubsystem.getEncoderLeft() <= distance || (-1 *driveSubsystem.getEncoderRight()) <= distance;
-        }
-        return isFinished;
-//    	return driveSubsystem.getEncoderLeft() <= distance || driveSubsystem.getEncoderRight() * -1 <= distance;
-    }
+	int counter = 0;
 
-    @Override
-    protected void end()
-    {
-        driveSubsystem.driveTank(0, 0);
-    }
+	@Override
+	protected boolean isFinished() {
+		boolean isFinished = false;
+		if (speed > 0) {
+			isFinished = driveSubsystem.getEncoderLeft() >= distance
+					|| (-1 * driveSubsystem.getEncoderRight()) >= distance;
+		} else {
+			isFinished = driveSubsystem.getEncoderLeft() <= distance
+					|| (-1 * driveSubsystem.getEncoderRight()) <= distance;
+		}
+		return isFinished;
+		// return driveSubsystem.getEncoderLeft() <= distance ||
+		// driveSubsystem.getEncoderRight() * -1 <= distance;
+	}
 
-    @Override
-    protected void interrupted()
-    {
-        end();
-    }
+	@Override
+	protected void end() {
+		driveSubsystem.driveTank(0, 0);
+	}
+
+	@Override
+	protected void interrupted() {
+		end();
+	}
 }
