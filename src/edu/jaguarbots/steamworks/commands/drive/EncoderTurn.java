@@ -37,14 +37,20 @@ public class EncoderTurn extends CommandBase
     {
     	SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
         SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
-    	if (angle > 0)
-        {
+        boolean correctIt = true;
+        double[] powers = driveSubsystem.getMotorPowers();
+        if (correctIt)
+            driveSubsystem.driveTank(-speed * powers[0], speed * powers[1]);
+        else
             driveSubsystem.driveTank(-speed, speed);
-        }
-        else if (angle < 0)
-        {
-            driveSubsystem.driveTank(-speed, speed);
-        }
+//    	if (angle > 0)
+//        {
+//            driveSubsystem.driveTank(-speed, speed);
+//        }
+//        else if (angle < 0)
+//        {
+//            driveSubsystem.driveTank(-speed, speed);
+//        }
     }
 
     @Override

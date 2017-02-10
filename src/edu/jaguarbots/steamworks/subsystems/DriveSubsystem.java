@@ -85,21 +85,37 @@ public class DriveSubsystem extends SubsystemBase
 
     /**
      * 
+     * @param encoderTicks encoder ticks to move
+     * @return encoder ticks converted to inches
      */
     public double getDistanceInInches(double encoderTicks) {
     	double result = diameter * encoderTicks / ppr;
     	return result;
     }
+
     /**
      * 
-     * @param inches
+     * @param inches number of inches to convert
+     * @return number of encoder ticks for the specified number of inches.
+     */
+    public double getEncoderTicksFromInches(double inches) {
+        double result = ppr * inches / diameter;
+        return result;
+    }
+    
+    /**
+     * 
+     * @param radians
      * @return
      */
-	public double getEncoderTicksFromInches(double inches) {
-		double result = 0;
-		result = ppr * inches / diameter;
-		return result;
-	}
+    public double getEncoderTicksFromRadians(double radians) {
+        double result = getEncoderTicksFromInches(radians * ROBOT_WIDTH / 2);
+        return result;
+    }
+    
+    public double getRadiansFromDegrees(double degrees) {
+        return (degrees / 360) * (Math.PI * 2);
+    }
     
     /**
      * Calculates motor powers for adjusted driving

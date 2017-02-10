@@ -2,7 +2,9 @@ package edu.jaguarbots.steamworks.commands;
 
 import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.*;
+import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -16,11 +18,12 @@ public class Autonomous extends CommandGroup
     {
     	double straightSpeed = 0.8;
     	double turnSpeed = 0.55;
+    	DriveSubsystem ds = CommandBase.driveSubsystem;
         addSequential(new GearShiftLow());
-        addSequential(new EncoderDrive(CommandBase.driveSubsystem.getEncoderTicksFromInches(36), straightSpeed));
-        addSequential(new EncoderTurn(4 * Math.PI, turnSpeed));
-        addSequential(new EncoderDrive(-200, straightSpeed));
-        addSequential(new EncoderTurn(- 4 * Math.PI, turnSpeed));
+        addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(36), straightSpeed));
+        addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(360)), turnSpeed));
+        addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(-36), straightSpeed));
+        addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(-360)), turnSpeed));
     }
     
     /**
