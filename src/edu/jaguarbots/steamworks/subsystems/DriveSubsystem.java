@@ -124,66 +124,6 @@ public class DriveSubsystem extends SubsystemBase
      */
     public double[] getMotorPowers()
     {
-//        double[] powers = new double[2];
-//        double lastLeftMotorSpeed = leftMotorSpeed;
-//        double lastRightMotorSpeed = rightMotorSpeed;
-//        double lastLeftEncoder = leftEncoderValue;
-//        double lastRightEncoder = rightEncoderValue;
-//        getEncoders();
-//        leftMotorSpeed = rightMotorSpeed = powers[0] = powers[1] = 1;
-//        double estimatedLeft = (leftEncoderValue - lastLeftEncoder) / lastLeftMotorSpeed;
-//        double estimatedRight = (rightEncoderValue - lastRightEncoder) / lastRightMotorSpeed;
-//        if (leftEncoderValue > rightEncoderValue)
-//        {
-//            powers[0] = leftMotorSpeed = rightEncoderValue / leftEncoderValue + estimatedRight / estimatedLeft - 1;
-//        }
-//        else if (leftEncoderValue < rightEncoderValue)
-//        {
-//            powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
-//        }
-/*
-        double rightEncoderDelta = getEncoderRight() - rightEncoderTemp;
-        double leftEncoderDelta = getEncoderLeft() - leftEncoderTemp;
-    	double[] powers = new double[2];
-        double sqrt = 1;
-        if(rightEncoderDelta < leftEncoderDelta)
-        {
-            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderDelta * rightEncoderDelta) + (2 * rightEncoderDelta * leftEncoderDelta) - (leftEncoderDelta * leftEncoderDelta);
-
-            powers[0] = 1;
-            powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-
-//            powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-//            powers[1] = 1;
-        }
-        else
-        {
-            sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderDelta * leftEncoderDelta) + (2 * leftEncoderDelta * rightEncoderDelta) - (rightEncoderDelta * rightEncoderDelta);
-
-            powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-            powers[1] = 1;
-            
-//            powers[0] = 1;
-//            powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-        }
-    	
-        //System.out.println("(" + leftEncoderValue + ", " + rightEncoderValue + ")  powers[0] = " + powers[0] + " powers[1] = " + powers[1]);
-        // 
-//    	double[] powers = new double[2];
-//        if(rightEncoderValue < leftEncoderValue)
-//        {
-//        	powers[0] = 1;
-//        	powers[1] = 1;
-//        }
-//        else
-//        {
-//        	powers[0] = 1;
-//        	powers[1] = 1;
-//        }
-        rightEncoderTemp = getEncoderRight();
-        leftEncoderTemp = getEncoderLeft();
-        return powers;
-        */
     	double left = Math.abs(getEncoderLeft());
     	double right = Math.abs(getEncoderRight());
     	double diff = Math.abs(right - left + 1);
@@ -204,6 +144,59 @@ public class DriveSubsystem extends SubsystemBase
         return (counter > 5) ? powers : new double[] {1, 1};
     }
     int counter = 0;
+    
+    /**
+     * these are our old algorighms that had faulty results.
+     * @return
+     */
+    public double[] getMotorPowersOld()
+    {
+      double[] powers = new double[2];
+      double lastLeftMotorSpeed = leftMotorSpeed;
+      double lastRightMotorSpeed = rightMotorSpeed;
+      double lastLeftEncoder = leftEncoderValue;
+      double lastRightEncoder = rightEncoderValue;
+      getEncoders();
+      leftMotorSpeed = rightMotorSpeed = powers[0] = powers[1] = 1;
+      double estimatedLeft = (leftEncoderValue - lastLeftEncoder) / lastLeftMotorSpeed;
+      double estimatedRight = (rightEncoderValue - lastRightEncoder) / lastRightMotorSpeed;
+      if (leftEncoderValue > rightEncoderValue)
+      {
+          powers[0] = leftMotorSpeed = rightEncoderValue / leftEncoderValue + estimatedRight / estimatedLeft - 1;
+      }
+      else if (leftEncoderValue < rightEncoderValue)
+      {
+          powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
+      }
+      return powers;
+    }
+    
+    /**
+     * these are our old algorighms that had faulty results.
+     * @return
+     */
+    public double[] getMotorPowersOld2()
+    {
+      double rightEncoderDelta = getEncoderRight() - rightEncoderTemp;
+      double leftEncoderDelta = getEncoderLeft() - leftEncoderTemp;
+      double[] powers = new double[2];
+      double sqrt = 1;
+      if(rightEncoderDelta < leftEncoderDelta)
+      {
+          sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderDelta * rightEncoderDelta) + (2 * rightEncoderDelta * leftEncoderDelta) - (leftEncoderDelta * leftEncoderDelta);
+          powers[0] = 1;
+          powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
+      }
+      else
+      {
+          sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderDelta * leftEncoderDelta) + (2 * leftEncoderDelta * rightEncoderDelta) - (rightEncoderDelta * rightEncoderDelta);
+          powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
+          powers[1] = 1;
+      }
+      rightEncoderTemp = getEncoderRight();
+      leftEncoderTemp = getEncoderLeft();
+      return powers;
+    }
 
     /**
      * resets the encoders.
