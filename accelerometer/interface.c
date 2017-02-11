@@ -6,6 +6,7 @@
 #include <linux/kthread.h>
 #include <linux/module.h>
 #include <linux/slab.h>
+#include "bignum.h"
 #include "calculations.h"
 #include "interface.h"
 #include "io.h"
@@ -13,8 +14,6 @@
 MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Zach Deibert, Nathan Gawith, Cody Moose");
 MODULE_DESCRIPTION("An accelerometer driver");
-
-#define FORMAT_BUFFER_SIZE 64
 
 struct file_read_data {
     char buffer[OUTPUT_BUFFER_SIZE];
@@ -38,12 +37,12 @@ static struct file_operations fops = {
     .open = device_open,
     .release = device_release
 };
-static char outputFormat[FORMAT_BUFFER_SIZE];
 static struct task_struct *thread;
 
 static int __init accelerometer_init(void) {
     int ret;
 
+    num_init();
     if ((ret = alloc_chrdev_region(&first, 0, 1, "accelerometer")) < 0) {
         return ret;
     }
@@ -63,7 +62,6 @@ static int __init accelerometer_init(void) {
         unregister_chrdev_region(first, 1);
         return ret;
     }
-    sprintf(outputFormat, "%%d.%%0%dd,%%d.%%0%dd,%%d.%%0%dd\n", MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10, MULTIPLICATIVE_CONSTANT_LOG10);
     initAccelerometer();
     if (!(thread = kthread_run(&calculation_thread, NULL, "accelerometer"))) {
         printk(KERN_ALERT "Unable to start calculations thread.\n");
@@ -111,13 +109,11 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
     num_t x;
     num_t y;
     num_t rot;
-    num_t xi;
-    num_t xf;
-    num_t yi;
-    num_t yf;
-    num_t roti;
-    num_t rotf;
+    char xStr[OUTPUT_MAX_LEN];
+    char yStr[OUTPUT_MAX_LEN];
+    char rotStr[OUTPUT_MAX_LEN];
     int bytes_read = 0;
+    
 
     if (!filp->private_data) {
         printk(KERN_ALERT "Private data was not allocated on open().\n");
@@ -127,25 +123,10 @@ static ssize_t device_read(struct file *filp, char *buffer, size_t length, loff_
         x = getXPosition();
         y = getYPosition();
         rot = getRotation();
-        xi = DIVIDE_RAW(x, MULTIPLICATIVE_CONSTANT);
-        xf = MODULUS_RAW(x, MULTIPLICATIVE_CONSTANT);
-        yi = DIVIDE_RAW(y, MULTIPLICATIVE_CONSTANT);
-        yf = MODULUS_RAW(y, MULTIPLICATIVE_CONSTANT);
-        roti = DIVIDE_RAW(rot, MULTIPLICATIVE_CONSTANT);
-        rotf = MODULUS_RAW(rot, MULTIPLICATIVE_CONSTANT);
-        if (xf < 0) {
-            --xi;
-            xf = -xf;
-        }
-        if (yf < 0) {
-            --yi;
-            yf = -yf;
-        }
-        if (rotf < 0) {
-            --roti;
-            rotf = -rotf;
-        }
-        sprintf(data->buffer, outputFormat, xi, xf, yi, yf, roti, rotf);
+        num_fmt(x, xStr, OUTPUT_MAX_LEN - 2);
+        num_fmt(y, yStr, OUTPUT_MAX_LEN - 2);
+        num_fmt(rot, rotStr, OUTPUT_MAX_LEN - 2);
+        sprintf(data->buffer, "%s,%s,%s\n", xStr, yStr, rotStr);
         data->ptr = data->buffer;
     }
     while (--length && *data->ptr) {

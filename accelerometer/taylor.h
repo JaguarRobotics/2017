@@ -1,6 +1,6 @@
 #ifndef FRC1810_TAYLOR_H
 #define FRC1810_TAYLOR_H
-#include "calculations.h"
+#include "bignum.h"
 
 #define TAYLOR_POLYNOMIAL 5
 

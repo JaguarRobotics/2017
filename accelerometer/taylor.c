@@ -1,3 +1,4 @@
+#include "bignum.h"
 #include "taylor.h"
 
 //                    3      5      7               n  2n+1
@@ -5,25 +6,25 @@
 // sin(x) = lim x - ──── + ──── - ──── + ... + ─────────────
 //          n→∞      3!     5!     7!             (2n+1)!
 num_t taylor_sin(num_t rad) {
-    num_t res = 0;
+    num_t res = num_zero;
     num_t product;
     num_t rad2;
-    num_t sign = 1;
-    num_t factorial = MULTIPLICATIVE_CONSTANT;
+    num_t sign = num_one;
+    num_t factorial = num_one;
     int n;
+    BIGNUM_TYPE tmp;
 
-    if (rad < 0) {
-        rad = -rad;
-        sign = -1;
+    if (num_sign(rad) < 0) {
+        rad = num_invert(rad);
+        sign = num_minus_one;
     }
-    rad = MODULUS_RAW(rad, TAU);
-    product = rad;
-    rad2 = MULTIPLY(rad, rad);
+    num_divmod(rad, num_tau, &tmp, &product);
+    rad2 = num_mult(product, product);
     for (n = 0; n < TAYLOR_POLYNOMIAL; ++n) {
-        res += DIVIDE(MULTIPLY_RAW(sign, product), factorial);
-        product = MULTIPLY(product, rad2);
-        factorial = MULTIPLY_RAW(factorial, (MULTIPLY_RAW(4, MULTIPLY_RAW(n, n)) + MULTIPLY_RAW(9, n) + 6));
-        sign = -sign;
+        res = num_add(res, num_div(num_mult(sign, product), factorial));
+        product = num_mult(product, rad2);
+        factorial = num_mult(factorial, num_load(4 * n * n + 10 * n + 6, 0));
+        sign = num_invert(sign);
     }
     return res;
 }
@@ -33,23 +34,24 @@ num_t taylor_sin(num_t rad) {
 // cos(x) = lim 1 - ──── + ──── - ──── + ... + ───────────
 //          n→∞      2!     4!     6!             (2n)!
 num_t taylor_cos(num_t rad) {
-    num_t res = MULTIPLICATIVE_CONSTANT;
+    num_t res = num_one;
     num_t product;
     num_t rad2;
-    num_t sign = -1;
-    num_t factorial = 2 * MULTIPLICATIVE_CONSTANT;
+    num_t sign = num_minus_one;
+    num_t factorial = num_two;
     int n;
+    BIGNUM_TYPE tmp;
 
-    if (rad < 0) {
-        rad = -rad;
+    if (num_sign(rad) < 0) {
+        rad = num_invert(rad);
     }
-    rad = MODULUS_RAW(rad, TAU);
-    product = rad2 = MULTIPLY(rad, rad);
+    num_divmod(rad, num_tau, &tmp, &rad);
+    product = rad2 = num_mult(rad, rad);
     for (n = 1; n < TAYLOR_POLYNOMIAL; ++n) {
-        res += DIVIDE(MULTIPLY_RAW(sign, product), factorial);
-        product = MULTIPLY(product, rad2);
-        factorial = MULTIPLY_RAW(factorial, (MULTIPLY_RAW(4, MULTIPLY_RAW(n, n)) + MULTIPLY_RAW(6, n) + 2));
-        sign = -sign;
+        res = num_add(res, num_div(num_mult(sign, product), factorial));
+        product = num_mult(product, rad2);
+        factorial = num_mult(factorial, num_load(4 * n * n + 6 * n + 2, 0));
+        sign = num_invert(sign);
     }
     return res;
 }

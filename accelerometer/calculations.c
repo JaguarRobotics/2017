@@ -3,18 +3,19 @@
 #include <linux/kthread.h>
 #include <linux/sched.h>
 #include <linux/time.h>
+#include "bignum.h"
 #include "calculations.h"
 #include "io.h"
 #include "taylor.h"
 
 num_t timeSlice;
-num_t xAcceleration = 0;
-num_t yAcceleration = 0;
-num_t xVelocity = 0;
-num_t yVelocity = 0;
-num_t angle = 0;
-num_t xPosition = 0;
-num_t yPosition = 0;
+num_t xAcceleration;
+num_t yAcceleration;
+num_t xVelocity;
+num_t yVelocity;
+num_t angle;
+num_t xPosition;
+num_t yPosition;
 
 void setAngle(void);
 void addXVelocity(num_t aOutput);
@@ -23,32 +24,32 @@ void setXPosition(num_t cLength);
 void setYPosition(num_t cLength);
 
 void setAngle(void) {
-    if (yVelocity != 0) {
-        num_t thisangle = DIVIDE(MULTIPLY_RAW(timeSlice, xAcceleration), yVelocity);
-        angle += thisangle;
+    if (num_sign(yVelocity) != 0) {
+        num_t thisangle = num_div(num_mult(timeSlice, xAcceleration), yVelocity);
+        angle = num_add(angle, thisangle);
     }
 }
 
 void addXVelocity(num_t aOutput) {
     xAcceleration = aOutput;
-    xVelocity += MULTIPLY(aOutput, timeSlice);
+    xVelocity = num_add(xVelocity, num_mult(aOutput, timeSlice));
     setAngle();
-    setXPosition(MULTIPLY(xVelocity, timeSlice));
+    setXPosition(num_mult(xVelocity, timeSlice));
 }
 
 void addYVelocity(num_t aOutput) {
     yAcceleration = aOutput;
-    yVelocity += MULTIPLY(aOutput, timeSlice);
+    yVelocity = num_add(yVelocity, num_mult(aOutput, timeSlice));
     setAngle();
-    setYPosition(MULTIPLY(yVelocity, timeSlice));
+    setYPosition(num_mult(yVelocity, timeSlice));
 }
 
 void setXPosition(num_t cLength) {
-    xPosition += MULTIPLY(cLength, taylor_cos(angle));
+    xPosition = num_add(xPosition, num_mult(cLength, taylor_cos(angle)));
 }
 
 void setYPosition(num_t cLength) {
-    yPosition += MULTIPLY(cLength, taylor_sin(angle));
+    yPosition = num_add(yPosition, num_mult(cLength, taylor_sin(angle)));
 }
 
 num_t getXPosition(void) {
@@ -64,20 +65,29 @@ num_t getRotation(void) {
 }
 
 void calculationLoop(void) {
-    num_t last;
-    num_t now;
+    BIGNUM_TYPE last;
+    BIGNUM_TYPE now;
     struct timespec time;
+    num_t conv;
 
     printk(KERN_INFO "Starting accelerometer calculations.\n");
     getnstimeofday(&time);
     last = timespec_to_ns(&time);
+    conv = num_load(4096, 0);
+    xAcceleration = num_zero;
+    yAcceleration = num_zero;
+    xVelocity = num_zero;
+    yVelocity = num_zero;
+    angle = num_zero;
+    xPosition = num_zero;
+    yPosition = num_zero;
     while (!kthread_should_stop()) {
         getnstimeofday(&time);
         now = timespec_to_ns(&time);
-        timeSlice = DIVIDE_RAW(MULTIPLY_RAW((now - last), MULTIPLICATIVE_CONSTANT), 1000000000);
-        if (timeSlice > 0) {
-            addXVelocity(DIVIDE_RAW(MULTIPLY_RAW(MULTIPLICATIVE_CONSTANT, readAccelerometer(ACCEL_AXIS_X)), 4096));
-            addYVelocity(DIVIDE_RAW(MULTIPLY_RAW(MULTIPLICATIVE_CONSTANT, readAccelerometer(ACCEL_AXIS_Y)), 4096));
+        timeSlice = num_div(num_load(now - last, 0), num_billion);
+        if (num_sign(timeSlice) > 0) {
+            addXVelocity(num_div(num_load(readAccelerometer(ACCEL_AXIS_X), 0), conv));
+            addYVelocity(num_div(num_load(readAccelerometer(ACCEL_AXIS_Y), 0), conv));
             last = now;
         }
         schedule();
