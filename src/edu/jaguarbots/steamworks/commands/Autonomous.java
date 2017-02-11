@@ -16,16 +16,16 @@ public class Autonomous extends CommandGroup
      */
     public Autonomous()
     {
-    	double straightSpeed = 0.8;
+    	double straightSpeed = 0.55;
     	double turnSpeed = 0.55;
         DriveSubsystem ds = CommandBase.driveSubsystem;
     	boolean testing = true;
     	if(testing) {
             addSequential(new GearShiftLow());
-            addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(36), straightSpeed));
-            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(360)), turnSpeed));
-            addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(-36), straightSpeed));
-            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(-360)), turnSpeed));
+//            addSequential(new EncoderDrive(88, straightSpeed));
+            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(1)), turnSpeed));
+//            addSequential(new EncoderDrive(, straightSpeed));
+//            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(-360)), turnSpeed));
     	}
     	else {
     	    new Autonomous(Robot.Position.Left, Robot.Gears.One, Robot.CrossLine.Yes);

@@ -62,7 +62,7 @@ public class DriveSubsystem extends SubsystemBase
     /**
      * pulses per rotation for the encoders.
      */
-    private int ppr = 56;
+    private int ppr = (int) (400 * 3 * (36 / 39.5));
     /**
      * Gyroscope that measures angle of robot.
      */
@@ -82,6 +82,11 @@ public class DriveSubsystem extends SubsystemBase
     
     private double				   leftEncoderTemp;
     private double				   rightEncoderTemp;
+	
+	/**
+	 * Gear ratio from encoder to output shaft
+	 */
+	private double gearRatio = 1./3.;
 
     /**
      * 
@@ -89,7 +94,7 @@ public class DriveSubsystem extends SubsystemBase
      * @return encoder ticks converted to inches
      */
     public double getDistanceInInches(double encoderTicks) {
-    	double result = diameter * encoderTicks / ppr;
+    	double result = (diameter * Math.PI) * (encoderTicks / ppr);
     	return result;
     }
 
@@ -99,7 +104,8 @@ public class DriveSubsystem extends SubsystemBase
      * @return number of encoder ticks for the specified number of inches.
      */
     public double getEncoderTicksFromInches(double inches) {
-        double result = ppr * inches / diameter;
+        double result = inches * (ppr / (Math.PI * diameter));
+        result = 317;
         return result;
     }
     
