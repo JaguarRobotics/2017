@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Drives the robot based on a distance gotten from encoders.
  * 
- * @author Jack, Zach Deibert
- * @since 2016
+ * @author Nathan Gawith
+ * @since 2017
  * @version 2017
  */
 public class AccelerometerDrive extends CommandBase {
