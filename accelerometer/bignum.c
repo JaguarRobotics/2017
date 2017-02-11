@@ -10,6 +10,8 @@
 
 num_t num_minus_one;
 num_t num_zero;
+num_t num_tenth_down;
+num_t num_tenth_up;
 num_t num_one;
 num_t num_two;
 num_t num_tau;
@@ -19,6 +21,8 @@ num_t num_billion;
 void num_init(void) {
     num_minus_one = num_load(-1, 0);
     num_zero = num_load(0, 0);
+    num_tenth_up = num_load(1, -3);
+    num_tenth_down = num_load(1, -4);
     num_one = num_load(1, 0);
     num_two = num_load(2, 0);
     num_tau = num_load(BIGNUM_TAU, BIGNUM_TAU_OFFSET);
@@ -113,9 +117,6 @@ int num_fmt(num_t val, char *buffer, int max) {
     num_t tmp;
     num_t rem;
     num_t place;
-    num_t ten;
-    num_t tenth_up;
-    num_t tenth_down;
     int i;
     
     if (val.number == 0) {
@@ -130,25 +131,22 @@ int num_fmt(num_t val, char *buffer, int max) {
     for (i = num_ceil_log10(num_abs(val)); i > 0; --i) {
         place = num_mult(place, num_ten);
     }
-    ten = num_load(10, 0);
-    tenth_up = num_load(1, -3);
-    tenth_down = num_load(1, -4);
     if (rem.number < 0) {
         *++buffer = '-';
         rem.number *= -1;
     }
     while (rem.number != 0 && buffer != end) {
-        if (num_compare(place, tenth_up) < 0 && num_compare(place, tenth_down) > 0) {
+        if (num_compare(place, num_tenth_up) < 0 && num_compare(place, num_tenth_down) > 0) {
             *++buffer = '.';
         }
         tmp = rem;
         num_divmod(tmp, place, &quot, &rem);
-        place = num_div(place, ten);
+        place = num_div(place, num_ten);
         *++buffer = '0' + quot;
     }
     while (num_compare(place, num_one) >= 0 && buffer != end) {
         *++buffer = '0';
-        place = num_div(place, ten);
+        place = num_div(place, num_ten);
     }
     *++buffer = 0;
     return buffer - start;

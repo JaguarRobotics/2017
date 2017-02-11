@@ -22,6 +22,8 @@ typedef struct {
 
 extern num_t num_minus_one;
 extern num_t num_zero;
+extern num_t num_tenth_down;
+extern num_t num_tenth_up;
 extern num_t num_one;
 extern num_t num_two;
 extern num_t num_tau;

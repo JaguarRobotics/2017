@@ -60,27 +60,23 @@ num_t num_mod(num_t num, num_t denom) {
 }
 
 void test_bignum(void) {
-    num_t minus_one = num_load(-1, 0);
-    num_t zero = num_load(0, 0);
-    num_t one = num_load(1, 0);
-    num_t two = num_load(2, 0);
     num_t three = num_load(3, 0);
     num_t seven = num_load(7, 0);
     num_t eight = num_load(8, 0);
-    num_t one_five = num_div(three, two);
+    num_t one_five = num_div(three, num_two);
 
-    num_print(two, '+', three, num_add(two, three));
-    num_print(two, '+', one_five, num_add(two, one_five));
-    num_print(two, 'x', three, num_mult(two, three));
-    num_print(two, 'x', one_five, num_mult(two, one_five));
-    num_print(one, '/', three, num_div(one, three));
-    num_print(one, '/', seven, num_div(one, seven));
-    num_print(minus_one, 'x', one, num_mult(minus_one, one));
+    num_print(num_two, '+', three, num_add(num_two, three));
+    num_print(num_two, '+', one_five, num_add(num_two, one_five));
+    num_print(num_two, 'x', three, num_mult(num_two, three));
+    num_print(num_two, 'x', one_five, num_mult(num_two, one_five));
+    num_print(num_one, '/', three, num_div(num_one, three));
+    num_print(num_one, '/', seven, num_div(num_one, seven));
+    num_print(num_minus_one, 'x', num_one, num_mult(num_minus_one, num_one));
     num_print(seven, '%', three, num_mod(seven, three));
     num_print(three, '%', seven, num_mod(three, seven));
-    num_print(minus_one, '/', one, num_div(minus_one, one));
-    num_print(zero, '+', minus_one, num_add(zero, minus_one));
-    num_print(num_tau, '+', zero, num_add(num_tau, zero));
+    num_print(num_minus_one, '/', num_one, num_div(num_minus_one, num_one));
+    num_print(num_zero, '+', num_minus_one, num_add(num_zero, num_minus_one));
+    num_print(num_tau, '+', num_zero, num_add(num_tau, num_zero));
     num_print_un(seven, "log2", num_floor_log2(seven));
     num_print_un(eight, "log2", num_floor_log2(eight));
     num_print_un(num_billion, "log10", num_ceil_log10(num_billion));
