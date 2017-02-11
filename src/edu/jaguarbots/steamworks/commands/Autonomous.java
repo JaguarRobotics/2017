@@ -11,24 +11,38 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Autonomous extends CommandGroup
 {
+	
+	private void safePause(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     /**
      * Default, does nothing as of yet
      */
     public Autonomous()
     {
     	double straightSpeed = 0.55;
-    	double turnSpeed = 0.55;
+    	double turnSpeed = 0.63;
         DriveSubsystem ds = CommandBase.driveSubsystem;
-    	boolean testing = true;
+    	boolean testing = false;
     	if(testing) {
             addSequential(new GearShiftLow());
-//            addSequential(new EncoderDrive(88, straightSpeed));
-            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(1)), turnSpeed));
+            safePause(250);
+            addSequential(new EncoderDrive(93, straightSpeed));
+            safePause(500);
+            addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60), turnSpeed));
+            safePause(500);
+            addSequential(new EncoderDrive(30, straightSpeed));
+//            addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-180), turnSpeed));
 //            addSequential(new EncoderDrive(, straightSpeed));
 //            addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(ds.getRadiansFromDegrees(-360)), turnSpeed));
     	}
     	else {
-    	    new Autonomous(Robot.Position.Left, Robot.Gears.One, Robot.CrossLine.Yes);
+    	    new Autonomous(Robot.Position.Middle, Robot.Gears.One, Robot.CrossLine.Yes);
     	}
     }
     
@@ -47,9 +61,11 @@ public class Autonomous extends CommandGroup
     public Autonomous(final Robot.Position position,
             final Robot.Gears gears, final Robot.CrossLine cross)
     {
+    	double straightSpeed = 0.7;
+    	double turnSpeed = 0.7;
         DriveSubsystem ds = CommandBase.driveSubsystem;
-        addSequential(new GearShiftLow());
-        addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(93.3 - 31 + 15.25), 0.8));
+//        addSequential(new GearShiftLow());
+//        addSequential(new EncoderDrive(93.3 - 31 + 15.25, straightSpeed));
         switch(position)
         {
             case Left:
@@ -60,8 +76,18 @@ public class Autonomous extends CommandGroup
                         {
                             case Yes:
                                 /*Code goes here*/
-                                addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(-Math.PI / 3), 0.55));
-                                addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(20.35 * Math.pow(3, 1/2))));
+                            	/*
+                                addSequential(new EncoderTurn(-Math.PI / 3, turnSpeed));
+                                addSequential(new EncoderDrive(20.35 * Math.pow(3, 1/2), straightSpeed));
+                                */
+//                                addSequential(new GearShiftLow());
+                                addSequential(new EncoderDrive(93.3, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-65), turnSpeed));
+                                addSequential(new EncoderDrive(27, straightSpeed));
+                                addSequential(new DrivePause(5000));
+                                addSequential(new EncoderDrive(-39, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(120), turnSpeed));
+                                addSequential(new EncoderDrive(108, straightSpeed));
                                 /*Code goes here*/
                                 break;
                         }
@@ -75,7 +101,18 @@ public class Autonomous extends CommandGroup
                         switch(cross)
                         {
                             case Yes:
+                            	boolean takeRightPath = false;
                                 /*Code goes here*/
+//                                addSequential(new GearShiftLow());
+                                addSequential(new EncoderDrive(takeRightPath ? 93.3 - 31 + 15.25 : 93.3 - 31 + 12, straightSpeed));
+                                addSequential(new DrivePause(2000));
+                                addSequential(new EncoderDrive(-36, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath ? -97 : 130), turnSpeed));
+                                addSequential(new EncoderDrive(72, straightSpeed));
+                                addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath ? 160 : -280), turnSpeed));
+                                addSequential(new EncoderDrive(takeRightPath ? 36 : 12, straightSpeed));
+                                addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath ? 150 : -180), turnSpeed));
+                                addSequential(new EncoderDrive(takeRightPath ? 60 : 120, straightSpeed));
                                 /*Code goes here*/
                                 break;
                         }
@@ -89,8 +126,18 @@ public class Autonomous extends CommandGroup
                         {
                             case Yes:
                                 /*Code goes here*/
-                                addSequential(new EncoderTurn(ds.getEncoderTicksFromRadians(Math.PI / 3), 0.55));
-                                addSequential(new EncoderDrive(ds.getEncoderTicksFromInches(20.35 * Math.pow(3, 1/2))));
+                            	/*
+                                addSequential(new EncoderTurn(Math.PI / 3, turnSpeed));
+                                addSequential(new EncoderDrive(20.35 * Math.pow(3, 1/2), straightSpeed));
+                            	*/
+//                                addSequential(new GearShiftLow());
+                                addSequential(new EncoderDrive(87, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(80), turnSpeed));
+                                addSequential(new EncoderDrive(33, straightSpeed));
+                                addSequential(new DrivePause(5000));
+                                addSequential(new EncoderDrive(-39, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-80), turnSpeed));
+                                addSequential(new EncoderDrive(108, straightSpeed));
                                 /*Code goes here*/
                                 break;
                         }

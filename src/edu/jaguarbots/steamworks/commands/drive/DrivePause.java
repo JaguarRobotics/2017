@@ -12,12 +12,12 @@ public class DrivePause extends CommandBase {
 	public DrivePause(long waitTime) {
 		requires(driveSubsystem);
 		this.waitTime = waitTime;
-		startTime = System.currentTimeMillis();
 
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		startTime = System.currentTimeMillis();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -27,11 +27,12 @@ public class DrivePause extends CommandBase {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		long now = System.currentTimeMillis();
-		if (now - startTime > waitTime) {
-			return true;
-		} else {
-			return false;
-		}
+//		if (now - startTime > waitTime) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+		return (now - startTime) > waitTime;
 	}
 
 	// Called once after isFinished returns true

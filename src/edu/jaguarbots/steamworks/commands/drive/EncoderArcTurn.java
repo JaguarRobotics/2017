@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @since 2017
  * @version 2017
  */
-public class EncoderTurn extends CommandBase
+public class EncoderArcTurn extends CommandBase
 {
     /**
      * The angle to turn in radians (positive is to the left, negative is to the right)
@@ -45,12 +45,20 @@ public class EncoderTurn extends CommandBase
     {
     	SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
         SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
-        boolean correctIt = true;
+        boolean correctIt = false;
         double[] powers = driveSubsystem.getMotorPowers();
+        double left, right;
         if (correctIt)
-            driveSubsystem.driveTank(-speed * powers[0], speed * powers[1]);
+        {
+            left = -speed * powers[0];
+            right = speed * powers[1];
+        }
         else
-            driveSubsystem.driveTank(-speed, speed);
+        {
+        	left = -speed;
+        	right = speed;
+        }
+        driveSubsystem.driveTank(left < 0 ? 0 : left, right < 0 ? 0 : right);
 //    	if (angle > 0)
 //        {
 //            driveSubsystem.driveTank(-speed, speed);
@@ -94,7 +102,7 @@ public class EncoderTurn extends CommandBase
      *            The speed at which to turn
      * @since 2017
      */
-    public EncoderTurn(double angle, double speed)
+    public EncoderArcTurn(double angle, double speed)
     {
         requires(driveSubsystem);
         this.angle = angle;
@@ -111,7 +119,7 @@ public class EncoderTurn extends CommandBase
      *            The angle to turn in radians (positive is to the left, negative is to the right)
      * @since 2017
      */
-    public EncoderTurn(double angle)
+    public EncoderArcTurn(double angle)
     {
         this(angle, 0.7);
     }
