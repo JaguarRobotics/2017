@@ -57,7 +57,7 @@ public class EncoderTurn extends CommandBase
     protected boolean isFinished()
     {
         return Math.max(driveSubsystem.getDistanceInInches(Math.abs(driveSubsystem.getEncoderLeft())),
-        		driveSubsystem.getDistanceInInches(Math.abs(driveSubsystem.getEncoderRight()))) > angle * ROBOT_WIDTH;
+        		driveSubsystem.getDistanceInInches(Math.abs(driveSubsystem.getEncoderRight()))) > angle * ROBOT_WIDTH / 2;
     }
 
     @Override
