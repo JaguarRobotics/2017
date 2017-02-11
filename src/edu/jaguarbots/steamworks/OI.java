@@ -23,6 +23,11 @@ public class OI implements RobotMap {
 	    Joystick0_Button3.whenPressed(new GearShiftHigh());
 		Joystick1_Button2.whenPressed(new GearShiftLow());
 		Joystick1_Button3.whenPressed(new GearShiftHigh());
+		//manipulator controls
+		ManipulatorXbox_A.whileHeld(new Ascend());
+		ManipulatorXbox_Y.whileHeld(new Descend());
+		ManipulatorXbox_LB.whileHeld(new GearShiftLow());
+		ManipulatorXbox_RB.whileHeld(new GearShiftHigh());
 //		Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
 //		Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}
@@ -79,8 +84,8 @@ public class OI implements RobotMap {
 	public final Button Joystick1_Button10 = new JoystickButton(Joystick1, 10);
 	public final Button Joystick1_Button11 = new JoystickButton(Joystick1, 11);
 
-	//No manipulator for 2017 game. Robot doesn't do enough to warrant one. Here for future use.
-/*	public final Button ManipulatorXbox_A = new JoystickButton(Manipulator, 1);
+	//Xbox Controls
+	public final Button ManipulatorXbox_A = new JoystickButton(Manipulator, 1);
 	public final Button ManipulatorXbox_B = new JoystickButton(Manipulator, 2);
 	public final Button ManipulatorXbox_X = new JoystickButton(Manipulator, 3);
 	public final Button ManipulatorXbox_Y = new JoystickButton(Manipulator, 4);
@@ -89,7 +94,7 @@ public class OI implements RobotMap {
 	public final Button ManipulatorXbox_Back = new JoystickButton(Manipulator, 7);
 	public final Button ManipulatorXbox_Start = new JoystickButton(Manipulator, 8);
 	public final Button ManipulatorXbox_LStick = new JoystickButton(Manipulator, 9);
-	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);*/
+	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);
 	
 	//Dualshock/Playstation controller buttons if needed. currently unlikely to be used.
 /*	public final Button Manipulator_Select = new JoystickButton(Manipulator, 1);
