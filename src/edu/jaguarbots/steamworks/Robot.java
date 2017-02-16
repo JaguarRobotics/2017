@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot
      */
     public void autonomousInit()
     {
-        autonomousCommand = new Autonomous(Robot.Position.Middle, Robot.Gears.One, Robot.CrossLine.Yes);
+        autonomousCommand = new Autonomous(Robot.Position.Right, Robot.Gears.One, Robot.CrossLine.Yes);
         autonomousCommand.start();
 //        final Position position = (Position) positionChooser.getSelected();
 //        final Gears gears = (Gears) gearsChooser.getSelected();

@@ -81,13 +81,13 @@ public class Autonomous extends CommandGroup
                                 addSequential(new EncoderDrive(20.35 * Math.pow(3, 1/2), straightSpeed));
                                 */
 //                                addSequential(new GearShiftLow());
-                                addSequential(new EncoderDrive(93.3, straightSpeed));
+                                addSequential(new EncoderDrive(92, straightSpeed));
                                 addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-65), turnSpeed));
                                 addSequential(new EncoderDrive(27, straightSpeed));
                                 addSequential(new DrivePause(5000));
                                 addSequential(new EncoderDrive(-39, straightSpeed));
                                 addSequential(new EncoderTurn(ds.getRadiansFromDegrees(120), turnSpeed));
-                                addSequential(new EncoderDrive(108, straightSpeed));
+                                addSequential(new EncoderDrive(140, straightSpeed));
                                 /*Code goes here*/
                                 break;
                         }
@@ -111,7 +111,7 @@ public class Autonomous extends CommandGroup
                                 addSequential(new EncoderDrive(72, straightSpeed));
                                 addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath ? 160 : -280), turnSpeed));
                                 addSequential(new EncoderDrive(takeRightPath ? 36 : 12, straightSpeed));
-                                addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath ? 150 : -180), turnSpeed));
+                                addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath ? 150 : -150), turnSpeed));
                                 addSequential(new EncoderDrive(takeRightPath ? 60 : 120, straightSpeed));
                                 /*Code goes here*/
                                 break;
@@ -136,14 +136,16 @@ public class Autonomous extends CommandGroup
                                 addSequential(new EncoderDrive(33, straightSpeed));
                                 addSequential(new DrivePause(5000));
                                 addSequential(new EncoderDrive(-39, straightSpeed));
-                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-80), turnSpeed));
-                                addSequential(new EncoderDrive(108, straightSpeed));
+                                addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-130), turnSpeed));
+                                addSequential(new EncoderDrive(120, straightSpeed));
                                 /*Code goes here*/
                                 break;
                         }
                 }
                 break;
         }
+        addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));  //Delicousness
+        addSequential(new GearShiftLow());
     }
     
     /**
