@@ -2,7 +2,6 @@ package edu.jaguarbots.steamworks;
 
 import edu.jaguarbots.steamworks.commands.climber.Ascend;
 import edu.jaguarbots.steamworks.commands.climber.Descend;
-import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftHigh;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
 import edu.wpi.first.wpilibj.Joystick;
