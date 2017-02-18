@@ -19,7 +19,7 @@ public class Robot extends IterativeRobot
     private Command               autonomousCommand;
     // vars for auto
     private final SendableChooser positionChooser  = new SendableChooser();
-    private final SendableChooser middlePosition   = new SendableChooser();
+    private final SendableChooser middlePositionChooser   = new SendableChooser();
     private final SendableChooser doughnutsChooser = new SendableChooser();
 
     // Compressor compresser = new Compressor(RobotMap.pwmCompresser);
@@ -55,10 +55,10 @@ public class Robot extends IterativeRobot
         positionChooser.addObject("Middle", Position.Middle);
         positionChooser.addObject("Right", Position.Right);
         SmartDashboard.putData("Position", positionChooser);
-        middlePosition.addDefault("Left", MiddlePosition.Left);
-        middlePosition.addObject("Right", MiddlePosition.Right);
+        middlePositionChooser.addDefault("Left", MiddlePosition.Left);
+        middlePositionChooser.addObject("Right", MiddlePosition.Right);
         // middlePosition.addObject("null", null);
-        SmartDashboard.putData("MiddlePosition", middlePosition);
+        SmartDashboard.putData("MiddlePosition", middlePositionChooser);
         doughnutsChooser.addDefault("No", Doughnuts.No);
         doughnutsChooser.addObject("Yes", Doughnuts.Yes);
         // doughnutsChooser.addObject("null", null);
@@ -95,9 +95,9 @@ public class Robot extends IterativeRobot
     public void autonomousInit()
     {
         Position position = (Position) positionChooser.getSelected();
-        MiddlePosition middlePosition = (MiddlePosition) positionChooser
+        MiddlePosition middlePosition = (MiddlePosition) middlePositionChooser
                         .getSelected();
-        Doughnuts doughnuts = (Doughnuts) positionChooser.getSelected();
+        Doughnuts doughnuts = (Doughnuts) doughnutsChooser.getSelected();
         autonomousCommand = new Autonomous(position, middlePosition, doughnuts);
         autonomousCommand.start();
         // final Position position = (Position) positionChooser.getSelected();
