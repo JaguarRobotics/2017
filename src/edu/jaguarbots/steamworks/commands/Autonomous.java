@@ -102,25 +102,19 @@ public class Autonomous extends CommandGroup {
 			/* Code goes here */
 			break;
 		case Right:
-			/* Code goes here */
-			/*
-			 * addSequential(new EncoderTurn(Math.PI / 3, turnSpeed));
-			 * addSequential(new EncoderDrive(20.35 * Math.pow(3, 1/2),
-			 * straightSpeed));
-			 */
-			// addSequential(new GearShiftLow());
-			addSequential(new EncoderDrive(70, straightSpeed)); // 87
-			addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(200), turnSpeed)); // 75
-			addSequential(new EncoderDrive(20, straightSpeed)); // 33
-			addSequential(new DrivePause(5000));
+			addSequential(new EncoderDrive(125, straightSpeed));
+			
+//			addSequential(new EncoderDrive(70, straightSpeed)); // 87
+//			addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(200), turnSpeed)); // 75
+//			addSequential(new EncoderDrive(20, straightSpeed)); // 33
+//			addSequential(new DrivePause(5000));
+			
+			
 			// addSequential(new EncoderDrive(-39, straightSpeed));
 			// addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-130),
 			// turnSpeed));
 			// addSequential(new EncoderDrive(120, straightSpeed));
 			/* Code goes here */
-			break;
-		case testLength:
-			addSequential(new EncoderDrive(100, straightSpeed));
 			break;
 		}
 		if (doughnuts == Robot.Doughnuts.Yes)
