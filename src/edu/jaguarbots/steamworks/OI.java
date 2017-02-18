@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-	    Joystick0_Button1.whileHeld(new Ascend()); //climber
-	    Joystick1_Button1.whileHeld(new Ascend());
-		Joystick0_Button6.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
-		Joystick1_Button6.whileHeld(new Descend());
+	    Joystick0_Button6.whileHeld(new Ascend()); //climber
+	    Joystick1_Button6.whileHeld(new Ascend());
+		Joystick0_Button1.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
+		Joystick1_Button1.whileHeld(new Descend());
 	    Joystick0_Button3.whenPressed(new GearShiftLow()); //gear shifting
 	    Joystick0_Button2.whenPressed(new GearShiftHigh());
 		Joystick1_Button3.whenPressed(new GearShiftLow());
