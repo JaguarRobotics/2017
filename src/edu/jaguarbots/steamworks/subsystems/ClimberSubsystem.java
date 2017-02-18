@@ -11,101 +11,98 @@ import edu.wpi.first.wpilibj.SpeedController;
  * @since 2016
  * @version 2016
  */
-public class ClimberSubsystem extends SubsystemBase
-{
-    /**
-     * Motor for ascending and descending
-     */
-    private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE);
-    /**
-     * Solenoid for raising and lowering the arm for climbing
-     */
-//    private Solenoid        climberSol   = new Solenoid(SOLENOID_CLIMBER_PORT);
-    /**
-     * Limit switch to ensure robot does not climb too high
-     */
-//    private DigitalInput    climberLimit = new DigitalInput(CLIMBER_LIMIT_SWITCH_PORT);
-    // private double POV;
+public class ClimberSubsystem extends SubsystemBase {
+	/**
+	 * Motor for ascending and descending
+	 */
+	private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE);
 
-    // private boolean isShooterUp;
-    public ClimberSubsystem()
-    {
-//        solDown();
-    }
+	/**
+	 * Solenoid for raising and lowering the arm for climbing
+	 */
+	// private Solenoid climberSol = new Solenoid(SOLENOID_CLIMBER_PORT);
+	/**
+	 * Limit switch to ensure robot does not climb too high
+	 */
+	// private DigitalInput climberLimit = new
+	// DigitalInput(CLIMBER_LIMIT_SWITCH_PORT);
+	// private double POV;
 
-    public void initDefaultCommand()
-    {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
-    }
+	// private boolean isShooterUp;
+	public ClimberSubsystem() {
+		// solDown();
+	}
 
-    /**
-     * Gets the value of the limit switch for the climbing mechanism
-     * 
-     * @return limit switch value
-     */
-//    public boolean getLimit()
-//    {
-//        return climberLimit.get();
-//    }
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
 
-    /**
-     * Makes climber motor turn forward
-     */
-    public void motorForward()
-    {
-        // climberMotor.set(Value.kOn);
-        climberMotor.set(1.0);
-        // TODO find out which direction is forward and which is backward
-    }
+	/**
+	 * Gets the value of the limit switch for the climbing mechanism
+	 * 
+	 * @return limit switch value
+	 */
+	// public boolean getLimit()
+	// {
+	// return climberLimit.get();
+	// }
 
-    /**
-     * Makes motor stop running and stop accepting input
-     */
-    public void stopMotor()
-    {
-        climberMotor.stopMotor();
-    }
+	/**
+	 * Makes climber motor turn forward
+	 */
+	public void motorForward() {
+		// climberMotor.set(Value.kOn);
+		climberMotor.set(1.0);
+		// TODO find out which direction is forward and which is backward
+	}
 
-    /**
-     * Makes climber motor turn backward
-     */
-    public void motorBackward()
-    {
-        // climberMotor.set(Value.kOn);
-        climberMotor.set(-1.0);
-        // TODO find out which direction is forward and which is backward
-    }
+	/**
+	 * Makes motor stop running and stop accepting input
+	 */
+	public void stopMotor() {
+		climberMotor.stopMotor();
+	}
 
-    /**
-     * Extends climbing solenoid for reaching
-     */
-//    public void solUp()
-//    {
-//        climberSol.set(true);
-//    }
+	/**
+	 * Makes climber motor turn backward
+	 */
+	public void motorBackward() {
+		// climberMotor.set(Value.kOn);
+		climberMotor.set(-1.0);
+		// TODO find out which direction is forward and which is backward
+	}
 
-    /**
-     * Retracts climbing solenoid
-     */
-//    public void solDown() // tentative, mechanical structure may not allow this
-//                          // to occur
-//    {
-//        climberSol.set(false);
-//    }
-    //
-    // public void ascendDescend(double c){
-    // POV = c;
-    // if(POV <= 45 && POV >= -1){
-    // isShooterUp = true;
-    // }else if(POV >= 45 && POV <= 135){
-    // //UNUSED
-    // }else if(POV >= 135 && POV <= 225){
-    // isShooterUp = false;
-    // }else if(POV >= 225 && POV <= 315){
-    // //UNUSED
-    // }
-    // }
-    // public Boolean getShooterPosition = isShooterUp;
+	/**
+	 * Extends climbing solenoid for reaching
+	 */
+	// public void solUp()
+	// {
+	// climberSol.set(true);
+	// }
+
+	/**
+	 * Retracts climbing solenoid
+	 */
+	// public void solDown() // tentative, mechanical structure may not allow
+	// this
+	// // to occur
+	// {
+	// climberSol.set(false);
+	// }
+	//
+	// public void ascendDescend(double c){
+	// POV = c;
+	// if(POV <= 45 && POV >= -1){
+	// isShooterUp = true;
+	// }else if(POV >= 45 && POV <= 135){
+	// //UNUSED
+	// }else if(POV >= 135 && POV <= 225){
+	// isShooterUp = false;
+	// }else if(POV >= 225 && POV <= 315){
+	// //UNUSED
+	// }
+	// }
+	// public Boolean getShooterPosition = isShooterUp;
 }
 //

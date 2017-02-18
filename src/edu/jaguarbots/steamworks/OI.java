@@ -14,21 +14,23 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-	    Joystick0_Button6.whileHeld(new Ascend()); //climber
-	    Joystick1_Button6.whileHeld(new Ascend());
-		Joystick0_Button1.whileHeld(new Descend()); //reverse the climber (just in case, may be needed to remove rope)
+		Joystick0_Button6.whileHeld(new Ascend()); // climber
+		Joystick1_Button6.whileHeld(new Ascend());
+		Joystick0_Button1.whileHeld(new Descend()); // reverse the climber (just
+													// in case, may be needed to
+													// remove rope)
 		Joystick1_Button1.whileHeld(new Descend());
-	    Joystick0_Button3.whenPressed(new GearShiftLow()); //gear shifting
-	    Joystick0_Button2.whenPressed(new GearShiftHigh());
+		Joystick0_Button3.whenPressed(new GearShiftLow()); // gear shifting
+		Joystick0_Button2.whenPressed(new GearShiftHigh());
 		Joystick1_Button3.whenPressed(new GearShiftLow());
 		Joystick1_Button2.whenPressed(new GearShiftHigh());
-		//manipulator controls
+		// manipulator controls
 		ManipulatorXbox_A.whileHeld(new Ascend());
 		ManipulatorXbox_Y.whileHeld(new Descend());
 		ManipulatorXbox_LB.whileHeld(new GearShiftHigh());
 		ManipulatorXbox_RB.whileHeld(new GearShiftLow());
-//		Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
-//		Joystick1_Button10.whenPressed(new EncoderDrive(36));
+		// Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
+		// Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
@@ -58,7 +60,7 @@ public class OI implements RobotMap {
 	public final Joystick Joystick1 = new Joystick(RIGHT_JOYSTICK_PORT);
 	public final Joystick Manipulator = new Joystick(MANIPULATOR_JOYSTICK_PORT);
 
-	//Buttons here are as labelled on the controllers.
+	// Buttons here are as labelled on the controllers.
 	public final Button Joystick0_Button1 = new JoystickButton(Joystick0, 1);
 	public final Button Joystick0_Button2 = new JoystickButton(Joystick0, 2);
 	public final Button Joystick0_Button3 = new JoystickButton(Joystick0, 3);
@@ -83,7 +85,7 @@ public class OI implements RobotMap {
 	public final Button Joystick1_Button10 = new JoystickButton(Joystick1, 10);
 	public final Button Joystick1_Button11 = new JoystickButton(Joystick1, 11);
 
-	//Xbox Controls
+	// Xbox Controls
 	public final Button ManipulatorXbox_A = new JoystickButton(Manipulator, 1);
 	public final Button ManipulatorXbox_B = new JoystickButton(Manipulator, 2);
 	public final Button ManipulatorXbox_X = new JoystickButton(Manipulator, 3);
@@ -94,24 +96,29 @@ public class OI implements RobotMap {
 	public final Button ManipulatorXbox_Start = new JoystickButton(Manipulator, 8);
 	public final Button ManipulatorXbox_LStick = new JoystickButton(Manipulator, 9);
 	public final Button ManipulatorXbox_RStick = new JoystickButton(Manipulator, 10);
-	
-	//Dualshock/Playstation controller buttons if needed. currently unlikely to be used.
-/*	public final Button Manipulator_Select = new JoystickButton(Manipulator, 1);
-	public final Button Manipulator_L3 = new JoystickButton(Manipulator, 2);
-	public final Button Manipulator_R3 = new JoystickButton(Manipulator, 3);
-	public final Button Manipulator_Start = new JoystickButton(Manipulator, 4);
-	public final Button Manipulator_DpadUp = new JoystickButton(Manipulator, 5);
-	public final Button Manipulator_DpadRight = new JoystickButton(Manipulator, 6);
-	public final Button Manipulator_DpadDown = new JoystickButton(Manipulator, 7);
-	public final Button Manipulator_DpadLeft = new JoystickButton(Manipulator, 8);
-	public final Button Manipulator_L2 = new JoystickButton(Manipulator, 9);
-	public final Button Manipulator_R2 = new JoystickButton(Manipulator, 10);
-	public final Button Manipulator_L1 = new JoystickButton(Manipulator, 11);
-	public final Button Manipulator_R1 = new JoystickButton(Manipulator, 12);
-	public final Button Manipulator_Triangle = new JoystickButton(Manipulator, 13);
-	public final Button Manipulator_Circle = new JoystickButton(Manipulator, 14);
-	public final Button Manipulator_X = new JoystickButton(Manipulator, 15);
-	public final Button Manipulator_Square = new JoystickButton(Manipulator, 16);*/
+
+	// Dualshock/Playstation controller buttons if needed. currently unlikely to
+	// be used.
+	/*
+	 * public final Button Manipulator_Select = new JoystickButton(Manipulator,
+	 * 1); public final Button Manipulator_L3 = new JoystickButton(Manipulator,
+	 * 2); public final Button Manipulator_R3 = new JoystickButton(Manipulator,
+	 * 3); public final Button Manipulator_Start = new
+	 * JoystickButton(Manipulator, 4); public final Button Manipulator_DpadUp =
+	 * new JoystickButton(Manipulator, 5); public final Button
+	 * Manipulator_DpadRight = new JoystickButton(Manipulator, 6); public final
+	 * Button Manipulator_DpadDown = new JoystickButton(Manipulator, 7); public
+	 * final Button Manipulator_DpadLeft = new JoystickButton(Manipulator, 8);
+	 * public final Button Manipulator_L2 = new JoystickButton(Manipulator, 9);
+	 * public final Button Manipulator_R2 = new JoystickButton(Manipulator, 10);
+	 * public final Button Manipulator_L1 = new JoystickButton(Manipulator, 11);
+	 * public final Button Manipulator_R1 = new JoystickButton(Manipulator, 12);
+	 * public final Button Manipulator_Triangle = new
+	 * JoystickButton(Manipulator, 13); public final Button Manipulator_Circle =
+	 * new JoystickButton(Manipulator, 14); public final Button Manipulator_X =
+	 * new JoystickButton(Manipulator, 15); public final Button
+	 * Manipulator_Square = new JoystickButton(Manipulator, 16);
+	 */
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

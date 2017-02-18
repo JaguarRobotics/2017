@@ -1,41 +1,41 @@
-//package edu.jaguarbots.steamworks.commands.climber;
+// package edu.jaguarbots.steamworks.commands.climber;
 //
-//import edu.jaguarbots.steamworks.commands.CommandBase;
-//import edu.wpi.first.wpilibj.Timer;
+// import edu.jaguarbots.steamworks.commands.CommandBase;
+// import edu.wpi.first.wpilibj.Timer;
 //
-///**
+/// **
 // *
 // */
-//public class ClimberControl extends CommandBase {
+// public class ClimberControl extends CommandBase {
 //
-//    double direction;
-//    boolean on = false;
-//    double state;
-//    Timer timer = new Timer();
-//    
-//    public ClimberControl() {
-//        requires(climberSubsystem);
-//    }
+// double direction;
+// boolean on = false;
+// double state;
+// Timer timer = new Timer();
 //
-//    protected void initialize() {
-//    }
+// public ClimberControl() {
+// requires(climberSubsystem);
+// }
 //
-//    protected void execute() {
-//        direction = oi.Manipulator.getPOV(0);
-//        if(direction < 22.5 || direction >= 337.5){
-//            new Ascend();
-//        } else if(direction >= 157.5 && direction < 202.5){
-//            new Descend();
-//        }
-//    }
+// protected void initialize() {
+// }
 //
-//    protected boolean isFinished() {
-//        return false;
-//    }
+// protected void execute() {
+// direction = oi.Manipulator.getPOV(0);
+// if(direction < 22.5 || direction >= 337.5){
+// new Ascend();
+// } else if(direction >= 157.5 && direction < 202.5){
+// new Descend();
+// }
+// }
 //
-//    protected void end() {
-//    }
+// protected boolean isFinished() {
+// return false;
+// }
 //
-//    protected void interrupted() {
-//    }
-//}
+// protected void end() {
+// }
+//
+// protected void interrupted() {
+// }
+// }
