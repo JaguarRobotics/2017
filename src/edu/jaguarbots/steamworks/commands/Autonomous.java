@@ -55,6 +55,7 @@ public class Autonomous extends CommandGroup {
 	 */
 	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts) {
+		new GearShiftLow();
 		double straightSpeed = 0.7;
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
@@ -62,25 +63,26 @@ public class Autonomous extends CommandGroup {
 		// addSequential(new EncoderDrive(93.3 - 31 + 15.25, straightSpeed));
 		switch (position) {
 		case Left:
-		    addSequential(new EncoderDrive(106.86, straightSpeed));
+		    addSequential(new EncoderDrive(106.86-24.5, straightSpeed));
             addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-60)));
             addSequential(new EncoderDrive(9.44, straightSpeed));
 			break;
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(71.54, straightSpeed));
-			addSequential(new DrivePause(2000));
-			addSequential(new EncoderDrive(-22.55, straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?90 : -90), turnSpeed));
-			addSequential(new EncoderDrive(14.71,straightSpeed));
-			addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath?-120:120), turnSpeed));
-			addSequential(new EncoderDrive(63.73, straightSpeed));
+			addSequential(new EncoderDrive(100,straightSpeed));
+//			addSequential(new EncoderDrive(71.54, straightSpeed));
+//			addSequential(new DrivePause(2000));
+//			addSequential(new EncoderDrive(-22.55, straightSpeed));
+//			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-90 : 90), turnSpeed));
+//			addSequential(new EncoderDrive(14.71,straightSpeed));
+//			addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath?120:-120), turnSpeed));
+//			addSequential(new EncoderDrive(63.73, straightSpeed));
 			
 			break;
 		case Right:
-            addSequential(new EncoderDrive(106.86, straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60)));
-			addSequential(new EncoderDrive(9.44, straightSpeed));
+            addSequential(new EncoderDrive(106.86-13.5, straightSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(66)));
+			addSequential(new EncoderDrive(25, straightSpeed));
 			break;
 		}
 		if (doughnuts == Robot.Doughnuts.Yes)

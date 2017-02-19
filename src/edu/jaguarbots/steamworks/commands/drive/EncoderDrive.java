@@ -74,13 +74,13 @@ public class EncoderDrive extends CommandBase
         double[] powers = driveSubsystem.getMotorPowers();
         if (correctIt)
         {
-            if( driveSubsystem.getEncoderLeft() >= Math.abs(distance)*.8 || (-1 * driveSubsystem.getEncoderRight()) >= Math.abs(distance)*.8){
-                driveSubsystem.driveTank(adjustedSpeed * powers[0], adjustedSpeed * powers[1]);
-            }
-            else
-            {
+//            if( driveSubsystem.getEncoderLeft() >= Math.abs(distance)*.8 || (-1 * driveSubsystem.getEncoderRight()) >= Math.abs(distance)*.8){
+//                driveSubsystem.driveTank(adjustedSpeed * powers[0], adjustedSpeed * powers[1]);
+//            }
+//            else
+//            {
                 driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
-            }
+//            }
         }
         else
         {
