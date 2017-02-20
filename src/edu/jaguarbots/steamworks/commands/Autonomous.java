@@ -63,13 +63,19 @@ public class Autonomous extends CommandGroup {
 		// addSequential(new EncoderDrive(93.3 - 31 + 15.25, straightSpeed));
 		switch (position) {
 		case Left:
-		    addSequential(new EncoderDrive(106.86-24.5, straightSpeed));
-            addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-60)));
-            addSequential(new EncoderDrive(9.44, straightSpeed));
+            addSequential(new EncoderDrive(ds.getAdjustedLength(73), straightSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-75)));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));
 			break;
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(100,straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(65.638),straightSpeed));
+			addSequential(new DrivePause(2000));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(-34.95), straightSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-115 : 115),turnSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(47.817),straightSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?115:-115), turnSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(102.63),straightSpeed));
 //			addSequential(new EncoderDrive(71.54, straightSpeed));
 //			addSequential(new DrivePause(2000));
 //			addSequential(new EncoderDrive(-22.55, straightSpeed));
@@ -80,9 +86,9 @@ public class Autonomous extends CommandGroup {
 			
 			break;
 		case Right:
-            addSequential(new EncoderDrive(106.86-13.5, straightSpeed));
+            addSequential(new EncoderDrive(ds.getAdjustedLength(74.776), straightSpeed));
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(66)));
-			addSequential(new EncoderDrive(25, straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));
 			break;
 		}
 		if (doughnuts == Robot.Doughnuts.Yes)
