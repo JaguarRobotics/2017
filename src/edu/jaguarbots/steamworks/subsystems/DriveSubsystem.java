@@ -9,71 +9,71 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ *  Created by: Nathan G.
  */
 public class DriveSubsystem extends SubsystemBase {
+
 	/**
 	 * left drive motor
 	 */
 	private static SpeedController leftDrive = motor(LEFT_DRIVE_MOTOR_PORT, LEFT_DRIVE_MOTOR_TYPE);
+
 	/**
 	 * right drive motor
 	 */
 	private static SpeedController rightDrive = motor(RIGHT_DRIVE_MOTOR_PORT, RIGHT_DRIVE_MOTOR_TYPE);
+
 	/**
 	 * Class that controls both drive motors
 	 */
 	private static RobotDrive robotDrive = new RobotDrive(leftDrive, rightDrive);
+
 	/**
 	 * Encoder on left side of drive
 	 */
 	private Encoder leftEncoder = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
+	
 	/**
 	 * Encoder on right side of drive
 	 */
 	private Encoder rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
+	
 	/**
 	 * distance left encoder has traveled.
 	 */
 	private double leftEncoderValue;
+	
 	/**
 	 * distance right encoder has traveled.
 	 */
 	private double rightEncoderValue;
+	
 	/**
 	 * array of encoder values with left occupying 0, and right occupying 1.
 	 */
 	private double[] encoderValues = { leftEncoderValue, rightEncoderValue };
-	/**
-	 * bias to multiply side for drive adjusted.
-	 */
-	// private double bias = 1;
-	//
-	// /**
-	// * Whether or not we are driving adjusted.
-	// */
-	// private boolean inAdjustedDrive = false;
+	
 	/**
 	 * Diameter of pulleys, used for encoder calculations. (in inches)
 	 */
 	// TODO change to diameter of pulleys
 	public double diameter = 6;
+
 	/**
 	 * pulses per rotation for the encoders.
 	 */
 	private int ppr = (int) (400 * 3 * (36 / 39.5));
-	/**
-	 * Gyroscope that measures angle of robot.
-	 */
-	// private AnalogGyro gyro = new AnalogGyro(GYRO_PORT);
+
 	/**
 	 * Solenoid to shift gears.
 	 */
 	private static Solenoid gearSol = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
+
 	/**
 	 * Current left motor speed.
 	 */
 	private double leftMotorSpeed;
+
 	/**
 	 * Current right motor speed.
 	 */
@@ -162,6 +162,11 @@ public class DriveSubsystem extends SubsystemBase {
 		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6
 				+ 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2
 				+ 1.31593 * x;
+		/*  Copy and Paste into Desmos
+		    The y value is the actual value.
+		    The x value is the inputted value.
+		y = 0.000000000000013994666666667x^8 - 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6
+		+ 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 - 0.0000303244x^3 - 0.00191811x^2 + 1.31593x */
 	}
 
 	int counter = 0;
@@ -261,54 +266,9 @@ public class DriveSubsystem extends SubsystemBase {
 	 *            speed
 	 */
 	public void driveTank(double left, double right) {
-		// if (Math.abs(left) == 1 && Math.abs(right) == 1 && left == right)
-		// {
-		// if (!inAdjustedDrive)
-		// {
-		// inAdjustedDrive = true;
-		// 0 resetEncoders(true, true);
-		// // reset encoders
-		// }
-		// //driveAdjusted(left, right);
-		// double[] powers = new double[2];
-		// powers = getMotorPowers();
-		// driveTank(left*powers[0], right*powers[1]);
-		// }
-		// else
-		// {
-		// inAdjustedDrive = false;
-		// }
-		// System.out.println("left " + getEncoderLeft());
-		// System.out.println("right " + getEncoderRight());
 		robotDrive.tankDrive(left, right);
-		// SmartDashboard.putNumber("EncoderLeft",
-		// CommandBase.driveSubsystem.getEncoderLeft());
-		// SmartDashboard.putNumber("EncoderRight",
-		// CommandBase.driveSubsystem.getEncoderRight());
 	}
 
-	// /**
-	// * Old, outdated adjusted drive algorithm
-	// * @param left speed
-	// * @param right speed
-	// */
-	// public void driveAdjusted(double left, double right)
-	// {
-	// double leftEnc = leftEncoder.getRaw();
-	// double rightEnc = rightEncoder.getRaw();
-	// double delta = leftEnc - rightEnc;
-	// if (delta > 0) // if left is faster than right
-	// {
-	// bias = Math.abs((rightEnc / (leftEnc + delta))); // adjust bias
-	// left = left * bias; // reduce left power
-	// }
-	// else if (delta < 0) // if right is faster than left
-	// {
-	// bias = Math.abs((leftEnc / (rightEnc - delta))); // adjust bias
-	// right = right * bias; // if left is faster than right
-	// }
-	// robotDrive.tankDrive(-left, -right);
-	// }
 	/**
 	 * Turns robot counter-clockwise at a specific speed.
 	 * 
