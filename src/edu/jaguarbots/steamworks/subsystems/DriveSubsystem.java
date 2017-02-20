@@ -151,6 +151,19 @@ public class DriveSubsystem extends SubsystemBase {
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}
 
+	public double getAdjustedLength(double x) {
+		double x2 = x * x;
+		double x3 = x2 * x;
+		double x4 = x3 * x;
+		double x5 = x4 * x;
+		double x6 = x5 * x;
+		double x7 = x6 * x;
+		double x8 = x7 * x;
+		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6
+				+ 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2
+				+ 1.31593 * x;
+	}
+
 	int counter = 0;
 
 	/**
