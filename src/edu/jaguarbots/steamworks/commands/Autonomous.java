@@ -63,18 +63,18 @@ public class Autonomous extends CommandGroup {
 		// addSequential(new EncoderDrive(93.3 - 31 + 15.25, straightSpeed));
 		switch (position) {
 		case Left:
-            addSequential(new EncoderDrive(ds.getAdjustedLength(73), straightSpeed));
+            addSequential(new EncoderDrive(ds.getAdjustedLength(73), straightSpeed));//110.25 from tall to turn
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-75)));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
 			break;
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(ds.getAdjustedLength(65.638),straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(65.638),straightSpeed)); // from wall to airship 111 1/2 inches
 			addSequential(new DrivePause(2000));
 			addSequential(new EncoderDrive(ds.getAdjustedLength(-34.95), straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-115 : 115),turnSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-115 : 115),turnSpeed));//90 degrees
 			addSequential(new EncoderDrive(ds.getAdjustedLength(47.817),straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?115:-115), turnSpeed));
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?115:-115), turnSpeed));//90 degrees
 			addSequential(new EncoderDrive(ds.getAdjustedLength(102.63),straightSpeed));
 //			addSequential(new EncoderDrive(71.54, straightSpeed));
 //			addSequential(new DrivePause(2000));
@@ -86,9 +86,9 @@ public class Autonomous extends CommandGroup {
 			
 			break;
 		case Right:
-            addSequential(new EncoderDrive(ds.getAdjustedLength(74.776), straightSpeed));
+            addSequential(new EncoderDrive(ds.getAdjustedLength(74.776), straightSpeed));//110.25 from wall to turn
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(66)));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
 			break;
 		}
 		if (doughnuts == Robot.Doughnuts.Yes)
