@@ -12,13 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class EncoderTurn extends CommandBase {
 	/**
-	 * The angle to turn in radians (positive is to the left, negative is to the
-	 * right)
-	 * 
-	 * @since 2017
-	 */
-	private final double angle;
-	/**
 	 * The speed at which to turn
 	 * 
 	 * @since 2017
@@ -93,7 +86,6 @@ public class EncoderTurn extends CommandBase {
 	 */
 	public EncoderTurn(double angle, double speed) {
 		requires(driveSubsystem);
-		this.angle = angle;
 		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
 		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);

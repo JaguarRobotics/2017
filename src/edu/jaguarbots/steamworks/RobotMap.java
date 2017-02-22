@@ -30,7 +30,7 @@ public interface RobotMap {
 	public static final int MANIPULATOR_JOYSTICK_PORT = 3;
 	// Robot Design
 	/**
-	 * The width of the robot (between the center of masses of both wheels) in
+	 * The width of the robot (between the center of both wheels) in
 	 * inches
 	 * 
 	 * @since 2017
