@@ -4,20 +4,13 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Turns the robot using the values on the encoders
+ * Turns the robot using the values on the encoders in an Arc shape rather than in place
  * 
- * @author Zach Deibert
+ * @author Nathan Gawith
  * @since 2017
  * @version 2017
  */
 public class EncoderArcTurn extends CommandBase {
-	/**
-	 * The angle to turn in radians (positive is to the left, negative is to the
-	 * right)
-	 * 
-	 * @since 2017
-	 */
-	private final double angle;
 	/**
 	 * The speed at which to turn
 	 * 
@@ -31,6 +24,9 @@ public class EncoderArcTurn extends CommandBase {
 	 */
 	private double arclength;
 
+	/**
+	 * Just used for System.outs
+	 */
 	private int counter = 0;
 
 	@Override
@@ -98,7 +94,6 @@ public class EncoderArcTurn extends CommandBase {
 	 */
 	public EncoderArcTurn(double angle, double speed) {
 		requires(driveSubsystem);
-		this.angle = angle;
 		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
 		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);

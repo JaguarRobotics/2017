@@ -24,12 +24,6 @@ public class EncoderDrive extends CommandBase
      * @since 2016
      */
     private double speed;
-    /**
-     * The speed the robot will travel at after it its 80% of the route
-     * 
-     * @since 2016
-     */
-    private double adjustedSpeed;
 
     /**
      * Drives a certain distance at a speed of .7
@@ -38,9 +32,9 @@ public class EncoderDrive extends CommandBase
      *            to drive in inches.
      * @since 2016
      */
-    public EncoderDrive(double distance, double adjustedSpeed)
+    public EncoderDrive(double distance)
     {
-        this(distance, (distance < 0) ? -0.7 : 0.7, .5);
+        this(distance, (distance < 0) ? -0.7 : 0.7);
     }
 
     /**
@@ -52,12 +46,11 @@ public class EncoderDrive extends CommandBase
      *            to run motors at.
      * @since 2016
      */
-    public EncoderDrive(double distance, double speed, double adjustedSpeed)
+    public EncoderDrive(double distance, double speed)
     {
         requires(driveSubsystem);
         this.distance = distance;
         this.speed = (distance < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
-        this.adjustedSpeed = .5;
     }
 
     @Override

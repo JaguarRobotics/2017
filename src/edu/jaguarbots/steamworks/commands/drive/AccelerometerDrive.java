@@ -2,7 +2,6 @@ package edu.jaguarbots.steamworks.commands.drive;
 
 import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.net.Accelerometer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drives the robot based on a distance gotten from encoders.
