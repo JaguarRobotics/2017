@@ -2,7 +2,6 @@ package edu.jaguarbots.steamworks.commands;
 
 import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.DrivePause;
-import edu.jaguarbots.steamworks.commands.drive.EncoderArcTurn;
 import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
 import edu.jaguarbots.steamworks.commands.drive.EncoderTurn;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
@@ -10,34 +9,22 @@ import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * The Code to run during the autonomous section of a match.
+ *	@author Brian, Nathan, Cody
  */
 public class Autonomous extends CommandGroup {
-	private void safePause(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
-	 * Default, does nothing as of yet
+	 * This is the default autonomous, anything you put in here will end up running as auto in testing
 	 */
+	@SuppressWarnings("unused")
 	public Autonomous() {
 		double straightSpeed = 0.7;
-		double turnSpeed = 0.63;
+		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
 		boolean testing = false;
 		if (testing) {
-			addSequential(new GearShiftLow());
-			safePause(250);
-			addSequential(new EncoderDrive(93, straightSpeed));
-			safePause(500);
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60), turnSpeed));
-			safePause(500);
-			addSequential(new EncoderDrive(30, straightSpeed));
+//			Put anything you want to test in here and it will run.
 		}
 	}
 
@@ -53,20 +40,21 @@ public class Autonomous extends CommandGroup {
 	 * @param doughnuts
 	 *            enum: Yes, No
 	 */
+	@SuppressWarnings("incomplete-switch")
 	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts) {
 		new GearShiftLow();
 		double straightSpeed = 0.7;
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
-		// addSequential(new GearShiftLow());
-		// addSequential(new EncoderDrive(93.3 - 31 + 15.25, straightSpeed));
 		switch (position) {
+//		  Run this autonomous if we place the robot on the left side of the robot
 		case Left:
             addSequential(new EncoderDrive(ds.getAdjustedLength(73), straightSpeed));//110.25 from tall to turn
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-75)));
 			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
 			break;
+//			 Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
 			addSequential(new EncoderDrive(ds.getAdjustedLength(65.638),straightSpeed)); // from wall to airship 111 1/2 inches
@@ -76,23 +64,17 @@ public class Autonomous extends CommandGroup {
 			addSequential(new EncoderDrive(ds.getAdjustedLength(47.817),straightSpeed));
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?115:-115), turnSpeed));//90 degrees
 			addSequential(new EncoderDrive(ds.getAdjustedLength(102.63),straightSpeed));
-//			addSequential(new EncoderDrive(71.54, straightSpeed));
-//			addSequential(new DrivePause(2000));
-//			addSequential(new EncoderDrive(-22.55, straightSpeed));
-//			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-90 : 90), turnSpeed));
-//			addSequential(new EncoderDrive(14.71,straightSpeed));
-//			addSequential(new EncoderArcTurn(ds.getRadiansFromDegrees(takeRightPath?120:-120), turnSpeed));
-//			addSequential(new EncoderDrive(63.73, straightSpeed));
-			
 			break;
+//			 Run this autonomous if we place the robot on the left side of the robot
 		case Right:
             addSequential(new EncoderDrive(ds.getAdjustedLength(74.776), straightSpeed));//110.25 from wall to turn
 			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(66)));
 			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
 			break;
 		}
+//		Go and do doughnuts during autonomous
 		if (doughnuts == Robot.Doughnuts.Yes)
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1)); // Delicousness
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
 		addSequential(new GearShiftLow());
 	}
 }

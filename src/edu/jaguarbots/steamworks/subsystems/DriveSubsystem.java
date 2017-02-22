@@ -1,15 +1,15 @@
 package edu.jaguarbots.steamworks.subsystems;
 
-import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *  Created by: Nathan G.
+ *  @author Brian, Nathan G, Zach D.
+ *  Drive subsystem holds all of methods used in the commands for drive
+ *  @since 2017
  */
 public class DriveSubsystem extends SubsystemBase {
 
@@ -68,25 +68,10 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Solenoid to shift gears.
 	 */
 	private static Solenoid gearSol = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
-
 	/**
-	 * Current left motor speed.
+	 * Counter used to count in get motor powers
 	 */
-	private double leftMotorSpeed;
-
-	/**
-	 * Current right motor speed.
-	 */
-	private double rightMotorSpeed;
-
-	private double leftEncoderTemp;
-	private double rightEncoderTemp;
-
-	/**
-	 * Gear ratio from encoder to output shaft
-	 */
-	private double gearRatio = 1. / 3.;
-
+	int counter = 0;
 	/**
 	 * 
 	 * @param encoderTicks
@@ -113,13 +98,19 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * 
 	 * @param radians
-	 * @return
+	 * 			The amount of radians the robot is going to go
+	 * @returns the amount of encoder ticks from from radians.
 	 */
 	public double getEncoderTicksFromRadians(double radians) {
 		double result = getEncoderTicksFromInches(radians * ROBOT_WIDTH / 2);
 		return result;
 	}
-
+	/**
+	 * Calculates the amount of radians that is equivilant to a passed in number of degrees
+	 * @param degrees
+	 * 			The degrees that the robot should turn
+	 * @return The amount of radians per the amount of degrees passed in
+	 */
 	public double getRadiansFromDegrees(double degrees) {
 		return (degrees / 360) * (Math.PI * 2);
 	}
@@ -134,7 +125,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double left = Math.abs(getEncoderLeft());
 		double right = Math.abs(getEncoderRight());
 		double diff = Math.abs(right - left + 1);
-		double addition = right + left + 1;
+//		double addition = right + left + 1;
 		double percentage = (diff * 3) / ((right > left) ? right + 1 : left + 1);
 		percentage = Math.min(percentage, 1);
 		double powers[] = new double[2];
@@ -150,7 +141,13 @@ public class DriveSubsystem extends SubsystemBase {
 		counter++;
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}
-
+	
+	/**
+	 * Corrects the number that is passed in from DriveTurn and converts it into a distance that will not cause the robot to not go way over the amount that it is supposed to.
+	 * Put the amount you want to go into Desmos with the equation and the intersect is the number you want to pass into EncoderDrive
+	 * @param x
+	 * @return 
+	 */
 	public double getAdjustedLength(double x) {
 		double x2 = x * x;
 		double x3 = x2 * x;
@@ -164,60 +161,9 @@ public class DriveSubsystem extends SubsystemBase {
 				+ 1.31593 * x;
 		/*  Copy and Paste into Desmos
 		    The y value is the actual value.
-		    The x value is the inputted value.
+		    The x value is the inputed value.
 		y = 0.000000000000013994666666667x^8 - 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6
 		+ 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 - 0.0000303244x^3 - 0.00191811x^2 + 1.31593x */
-	}
-
-	int counter = 0;
-
-	/**
-	 * these are our old algorighms that had faulty results.
-	 * 
-	 * @return
-	 */
-	public double[] getMotorPowersOld() {
-		double[] powers = new double[2];
-		double lastLeftMotorSpeed = leftMotorSpeed;
-		double lastRightMotorSpeed = rightMotorSpeed;
-		double lastLeftEncoder = leftEncoderValue;
-		double lastRightEncoder = rightEncoderValue;
-		getEncoders();
-		leftMotorSpeed = rightMotorSpeed = powers[0] = powers[1] = 1;
-		double estimatedLeft = (leftEncoderValue - lastLeftEncoder) / lastLeftMotorSpeed;
-		double estimatedRight = (rightEncoderValue - lastRightEncoder) / lastRightMotorSpeed;
-		if (leftEncoderValue > rightEncoderValue) {
-			powers[0] = leftMotorSpeed = rightEncoderValue / leftEncoderValue + estimatedRight / estimatedLeft - 1;
-		} else if (leftEncoderValue < rightEncoderValue) {
-			powers[1] = rightMotorSpeed = leftEncoderValue / rightEncoderValue + estimatedLeft / estimatedRight - 1;
-		}
-		return powers;
-	}
-
-	/**
-	 * these are our old algorighms that had faulty results.
-	 * 
-	 * @return
-	 */
-	public double[] getMotorPowersOld2() {
-		double rightEncoderDelta = getEncoderRight() - rightEncoderTemp;
-		double leftEncoderDelta = getEncoderLeft() - leftEncoderTemp;
-		double[] powers = new double[2];
-		double sqrt = 1;
-		if (rightEncoderDelta < leftEncoderDelta) {
-			sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (rightEncoderDelta * rightEncoderDelta)
-					+ (2 * rightEncoderDelta * leftEncoderDelta) - (leftEncoderDelta * leftEncoderDelta);
-			powers[0] = 1;
-			powers[1] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-		} else {
-			sqrt = (4 * ROBOT_WIDTH * ROBOT_WIDTH) - (leftEncoderDelta * leftEncoderDelta)
-					+ (2 * leftEncoderDelta * rightEncoderDelta) - (rightEncoderDelta * rightEncoderDelta);
-			powers[0] = Math.abs(Math.cos(4 * Math.atan(Math.sqrt(sqrt))));
-			powers[1] = 1;
-		}
-		rightEncoderTemp = getEncoderRight();
-		leftEncoderTemp = getEncoderLeft();
-		return powers;
 	}
 
 	/**
@@ -287,27 +233,6 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Turns robot to an angle based on gyroscope.
-	 * 
-	 * @param angle
-	 *            counter-clockwise angle to turn to. Pass in negative to turn
-	 *            clockwise.
-	 * @param speed
-	 *            at which to turn.
-	 *//*
-		 * public void gyroTurnToAngle(double angle, double speed) { if (angle <
-		 * 0) { if (gyro.getAngle() > angle) { robotTurn(-speed); } } else if
-		 * (angle > 0) { if (gyro.getAngle() < angle) { robotTurn(speed); } }
-		 * robotStop(); }
-		 */
-
-	/**
-	 * @return current gyroscope angle.
-	 *//*
-		 * public double getGyro() { return gyro.getAngle(); }
-		 */
-
-	/**
 	 * @return left encoder distance
 	 */
 	public double getEncoderLeft() {
@@ -325,7 +250,6 @@ public class DriveSubsystem extends SubsystemBase {
 	 * @return whether extended. If true, extended.
 	 */
 	public static boolean getGearShift() {
-		// return true;
 		return gearSol.get();
 	}
 
@@ -349,8 +273,4 @@ public class DriveSubsystem extends SubsystemBase {
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveTank());
 	}
-
-	/**
-	 * Toggle between high and low gear
-	 */
 }
