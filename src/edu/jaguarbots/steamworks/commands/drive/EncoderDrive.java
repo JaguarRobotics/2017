@@ -83,10 +83,10 @@ public class EncoderDrive extends CommandBase
             SmartDashboard.putNumber("EncoderRight",
                             CommandBase.driveSubsystem.getEncoderRight());
         }
-        if (counter % 5 == 0) System.out.print(
-                        "Left " + CommandBase.driveSubsystem.getEncoderLeft());
-        if (counter % 5 == 0) System.out.println("	Right "
-                        + CommandBase.driveSubsystem.getEncoderRight());
+//        if (counter % 5 == 0) System.out.print(
+//                        "Left " + CommandBase.driveSubsystem.getEncoderLeft());
+//        if (counter % 5 == 0) System.out.println("	Right "
+//                        + CommandBase.driveSubsystem.getEncoderRight());
         counter++;
     }
 

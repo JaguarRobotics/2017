@@ -44,37 +44,39 @@ public class Autonomous extends CommandGroup {
 	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts) {
 		new GearShiftLow();
-		double straightSpeed = 0.7;
+		double straightSpeed = 0.6;
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
 		switch (position) {
 //		  Run this autonomous if we place the robot on the left side of the robot
 		case Left:
-            addSequential(new EncoderDrive(ds.getAdjustedLength(73), straightSpeed));//110.25 from tall to turn
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-75)));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
+            addSequential(new EncoderDrive(ds.getAdjustedLength(55), straightSpeed));//110.25 from tall to turn //47.817 KC regional for 60 inches (Length minus robot length)
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-100)));//turn 60 degrees for KC regional
+			addSequential(new EncoderDrive(ds.getAdjustedLength(53), straightSpeed));//31 from turn to airship //53 KC regional for 64 inches
+			System.out.println("Left Ran");
 			break;
 //			 Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(ds.getAdjustedLength(65.638),straightSpeed)); // from wall to airship 111 1/2 inches
+			addSequential(new EncoderDrive(ds.getAdjustedLength(57.678),straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
 			addSequential(new DrivePause(2000));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(-34.95), straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?-115 : 115),turnSpeed));//90 degrees
-			addSequential(new EncoderDrive(ds.getAdjustedLength(47.817),straightSpeed));
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath?115:-115), turnSpeed));//90 degrees
-			addSequential(new EncoderDrive(ds.getAdjustedLength(102.63),straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(-38.172), straightSpeed)); // 38.172 KC regional for 48 inches
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? -90 : 90),turnSpeed));//90 degrees
+			addSequential(new EncoderDrive(ds.getAdjustedLength(52.689),straightSpeed));//52.689 KC regional for 66 inches
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? 90:-90), turnSpeed));//90 degrees
+			addSequential(new EncoderDrive(ds.getAdjustedLength(109),straightSpeed));//109 KC regional for 140 inches
 			break;
 //			 Run this autonomous if we place the robot on the left side of the robot
 		case Right:
-            addSequential(new EncoderDrive(ds.getAdjustedLength(74.776), straightSpeed));//110.25 from wall to turn
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(66)));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(23.22), straightSpeed));//31 from turn to airship
+            addSequential(new EncoderDrive(ds.getAdjustedLength(47.817), straightSpeed));//110.25 from wall to turn //47.817 KC regional for 60 inches (Length minus robot length)
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60))); //turn 60 degrees left
+			addSequential(new EncoderDrive(ds.getAdjustedLength(53), straightSpeed));//31 from turn to airship //53 KC regional for 64 inches
+			System.out.println("Right Ran");
 			break;
 		}
 //		Go and do doughnuts during autonomous
-		if (doughnuts == Robot.Doughnuts.Yes)
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
+//		if (doughnuts == Robot.Doughnuts.Yes)
+//			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
 		addSequential(new GearShiftLow());
 	}
 }

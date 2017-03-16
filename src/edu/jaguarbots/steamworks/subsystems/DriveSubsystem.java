@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.SpeedController;
  */
 public class DriveSubsystem extends SubsystemBase {
 
+	static { 
+		System.out.println("inside sybsustem");
+	}
 	/**
 	 * left drive motor
 	 */
@@ -95,6 +98,14 @@ public class DriveSubsystem extends SubsystemBase {
 		return result;
 	}
 
+	public void initEncoders()
+	{
+		leftEncoder.free();
+		rightEncoder.free();
+		leftEncoder = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
+		rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
+	}
+	
 	/**
 	 * 
 	 * @param radians
@@ -137,7 +148,7 @@ public class DriveSubsystem extends SubsystemBase {
 			powers[1] = 1;
 		}
 		if (counter % 5 == 0)
-			System.out.println(left + ", " + right + "	" + percentage);
+//			System.out.println(left + ", " + right + "	" + percentage);
 		counter++;
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}

@@ -25,6 +25,8 @@ public class EncoderTurn extends CommandBase {
 	private double arclength;
 
 	private int counter = 0;
+	
+	private final double WHEELBASE_WIDTH = 18.0;
 
 	@Override
 	protected void initialize() {
@@ -56,8 +58,8 @@ public class EncoderTurn extends CommandBase {
 	protected boolean isFinished() {
 		double left = Math.abs(driveSubsystem.getEncoderLeft());
 		double right = Math.abs(driveSubsystem.getEncoderRight());
-		if (counter % 5 == 0)
-			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
+//		if (counter % 5 == 0)
+//			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
 		return Math.max(left, right) > arclength;
 		// return Math.max(driveSubsystem.getDistanceInInches(left),
 		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
@@ -89,7 +91,8 @@ public class EncoderTurn extends CommandBase {
 		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
 		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);
-		this.arclength = Math.abs(angle * 13.25);
+		// this.arclength = Math.abs(angle * 13.25);
+		this.arclength = Math.abs(angle * WHEELBASE_WIDTH / 2);
 	}
 
 	/**

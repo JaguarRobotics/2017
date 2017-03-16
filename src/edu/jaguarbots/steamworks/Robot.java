@@ -126,11 +126,14 @@ public class Robot extends IterativeRobot
      */
     public void autonomousInit()
     {
+    	//CommandBase.driveSubsystem.initEncoders();
+    	
         Position position = (Position) positionChooser.getSelected();
         MiddlePosition middlePosition = (MiddlePosition) middlePositionChooser
                         .getSelected();
         Doughnuts doughnuts = (Doughnuts) doughnutsChooser.getSelected();
         autonomousCommand = new Autonomous(position, middlePosition, doughnuts);
+        System.out.println("Created Auto");
         autonomousCommand.start();
         // final Position position = (Position) positionChooser.getSelected();
         // final Gears gears = (Gears) gearsChooser.getSelected();
