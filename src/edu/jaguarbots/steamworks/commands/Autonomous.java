@@ -58,18 +58,18 @@ public class Autonomous extends CommandGroup {
 //			 Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(ds.getAdjustedLength(57.678),straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
+			addSequential(new EncoderDrive(ds.getAdjustedLength(62),straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
 			addSequential(new DrivePause(2000));
 			addSequential(new EncoderDrive(ds.getAdjustedLength(-38.172), straightSpeed)); // 38.172 KC regional for 48 inches
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? -90 : 90),turnSpeed));//90 degrees
-			addSequential(new EncoderDrive(ds.getAdjustedLength(52.689),straightSpeed));//52.689 KC regional for 66 inches
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? 90:-90), turnSpeed));//90 degrees
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? -200 : 200),turnSpeed));//90 degrees
+			addSequential(new EncoderDrive(ds.getAdjustedLength(70),straightSpeed));//52.689 KC regional for 66 inches
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(takeRightPath? 125:-125), turnSpeed));//90 degrees
 			addSequential(new EncoderDrive(ds.getAdjustedLength(109),straightSpeed));//109 KC regional for 140 inches
 			break;
 //			 Run this autonomous if we place the robot on the left side of the robot
 		case Right:
-            addSequential(new EncoderDrive(ds.getAdjustedLength(47.817), straightSpeed));//110.25 from wall to turn //47.817 KC regional for 60 inches (Length minus robot length)
-			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60))); //turn 60 degrees left
+			addSequential(new EncoderDrive(ds.getAdjustedLength(57), straightSpeed));//110.25 from tall to turn //47.817 KC regional for 60 inches (Length minus robot length)
+			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(95)));//turn 60 degrees for KC regional
 			addSequential(new EncoderDrive(ds.getAdjustedLength(53), straightSpeed));//31 from turn to airship //53 KC regional for 64 inches
 			System.out.println("Right Ran");
 			break;
