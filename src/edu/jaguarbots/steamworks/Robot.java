@@ -25,6 +25,12 @@ public class Robot extends IterativeRobot
      */
     private final SendableChooser positionChooser       = new SendableChooser();
     /**
+     * Chooser used in SmartDashboard to choose which alliance we are on
+     * 
+     * @since 2017
+     */
+    private final SendableChooser allianceChooser = new SendableChooser();
+    /**
      * chooser used on the SmartDashboard to choose the starting position
      * 
      * @since 2017
@@ -44,7 +50,7 @@ public class Robot extends IterativeRobot
      */
     public enum Position
     {
-        Left, Middle, Right, testLength
+        Left, Middle, Right, testLength, None, Forward
     }
 
     /**
@@ -54,9 +60,17 @@ public class Robot extends IterativeRobot
      */
     public enum MiddlePosition
     {
-        Left, Right
+        Left, Right, Stay
     }
-
+    /**
+     * enum constants to choose which alliance we are on
+     * 
+     * @since 2017
+     */
+    public enum Alliance
+    {
+    	Blue,Red
+    }
     /**
      * enum constants used with the doughnutsChooser.
      * 
@@ -81,23 +95,29 @@ public class Robot extends IterativeRobot
         {
             e.printStackTrace();
         }
+        allianceChooser.addDefault("Blue", Alliance.Blue);
+        allianceChooser.addObject("Red", Alliance.Red);
+        SmartDashboard.putData("Alliance",allianceChooser);
         positionChooser.addDefault("Left", Position.Left);
         positionChooser.addObject("Middle", Position.Middle);
         positionChooser.addObject("Right", Position.Right);
+        positionChooser.addObject("No Auto", Position.None);
+        positionChooser.addObject("Just Forward", Position.Forward);
         SmartDashboard.putData("Position", positionChooser);
         middlePositionChooser.addDefault("Left", MiddlePosition.Left);
         middlePositionChooser.addObject("Right", MiddlePosition.Right);
+        middlePositionChooser.addObject("No Break", MiddlePosition.Stay);
         // middlePosition.addObject("null", null);
         SmartDashboard.putData("MiddlePosition", middlePositionChooser);
-        doughnutsChooser.addDefault("No", Doughnuts.No);
-        doughnutsChooser.addObject("Yes", Doughnuts.Yes);
+//        doughnutsChooser.addDefault("No", Doughnuts.No);
+//        doughnutsChooser.addObject("Yes", Doughnuts.Yes);
         // doughnutsChooser.addObject("null", null);
         SmartDashboard.putData("Doughnuts?", doughnutsChooser);
-        SmartDashboard.putNumber("EncoderLeft",
-                        CommandBase.driveSubsystem.getEncoderLeft());
-        SmartDashboard.putNumber("EncoderRight",
-                        CommandBase.driveSubsystem.getEncoderRight());
-        SmartDashboard.putNumber("Joystick Tolerance", 1);
+//        SmartDashboard.putNumber("EncoderLeft",
+//                        CommandBase.driveSubsystem.getEncoderLeft());
+//        SmartDashboard.putNumber("EncoderRight",
+//                        CommandBase.driveSubsystem.getEncoderRight());
+//        SmartDashboard.putNumber("Joystick Tolerance", 1);
         // compresser.setClosedLoopControl(true); //should turn on the
         // compresser
     }
@@ -132,7 +152,8 @@ public class Robot extends IterativeRobot
         MiddlePosition middlePosition = (MiddlePosition) middlePositionChooser
                         .getSelected();
         Doughnuts doughnuts = (Doughnuts) doughnutsChooser.getSelected();
-        autonomousCommand = new Autonomous(position, middlePosition, doughnuts);
+        Alliance alliance = (Alliance) allianceChooser.getSelected();
+        autonomousCommand = new Autonomous(position, middlePosition, doughnuts, alliance);
         System.out.println("Created Auto");
         autonomousCommand.start();
         // final Position position = (Position) positionChooser.getSelected();
