@@ -117,7 +117,7 @@ public class Robot extends IterativeRobot
 //                        CommandBase.driveSubsystem.getEncoderLeft());
 //        SmartDashboard.putNumber("EncoderRight",
 //                        CommandBase.driveSubsystem.getEncoderRight());
-//        SmartDashboard.putNumber("Joystick Tolerance", 1);
+        SmartDashboard.putNumber("Joystick Tolerance", 1);
         // compresser.setClosedLoopControl(true); //should turn on the
         // compresser
     }
