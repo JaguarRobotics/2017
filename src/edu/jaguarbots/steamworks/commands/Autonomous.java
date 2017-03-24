@@ -54,7 +54,7 @@ public class Autonomous extends CommandGroup {
 			{
 			case Blue:
 				addSequential(new EncoderDrive(ds.getAdjustedLength(60), .55));//110.25 from tall to turn //47.817 KC regional for 60 inches (Length minus robot length)
-				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-91)));//turn 60 degrees for KC regional
+				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-100)));//turn 60 degrees for KC regional
 				addSequential(new EncoderDrive(ds.getAdjustedLength(49), .5));//31 from turn to airship //53 KC regional for 64 inches
 				addSequential(new DrivePause(1000));
 				addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
