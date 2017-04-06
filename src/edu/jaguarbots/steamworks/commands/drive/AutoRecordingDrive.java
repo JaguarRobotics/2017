@@ -1,5 +1,13 @@
 package edu.jaguarbots.steamworks.commands.drive;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
@@ -100,6 +108,20 @@ public class AutoRecordingDrive extends CommandBase
     @Override
     protected void end()
     {
+        String output = "";
+        for(int i = 0; i < commands.size(); i++) {
+            output += commands.get(i) + " " + encoderTicks.get(i);
+        }
+        try {
+            File file = new File(System.currentTimeMillis() + ".txt");
+            PrintWriter pw;
+            pw = new PrintWriter(file);
+            pw.print(output);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //TODO: need to do the file thing
         for (int i = 0; i < commands.size(); i++)
         {
@@ -116,5 +138,25 @@ public class AutoRecordingDrive extends CommandBase
     @Override
     protected void interrupted()
     {
+    }
+    public static void writeFile(String fileName, String content) {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(fileName);
+            bw = new BufferedWriter(fw);
+            bw.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

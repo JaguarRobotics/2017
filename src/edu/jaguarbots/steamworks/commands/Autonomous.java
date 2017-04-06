@@ -1,5 +1,7 @@
 package edu.jaguarbots.steamworks.commands;
 
+import java.io.File;
+import java.util.ArrayList;
 import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.DrivePause;
 import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
@@ -41,12 +43,28 @@ public class Autonomous extends CommandGroup {
 	 *            enum: Yes, No
 	 */
 	@SuppressWarnings("incomplete-switch")
-	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
+	public Autonomous(final Robot.Recording recording, final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts, final Robot.Alliance alliance) {
 		new GearShiftLow();
 		double straightSpeed = 0.6;
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
+		switch(recording) {
+		    case UseIt:
+		        File[] files = new File(".").listFiles();
+		        String[] fileNames = new String[files.length];
+		        for(int i = 0; i < fileNames.length; i++) {
+		            fileNames[i] = files[i].getName();
+		        }
+		        double number = 0;
+		        for(int i = 0; i < files.length; i++) {
+		            if(fileNames[i].contains(".txt")) {
+		                double temp = Double.parseDouble(fileNames[i].substring(0, fileNames[i].length() - 4));
+		                number = (number > temp) ? number : temp;
+		            }
+		        }
+		        break;
+		    case LooseIt:
 		switch (position) {
 //		  Run this autonomous if we place the robot on the left side of the robot
 		case Left:
@@ -121,6 +139,8 @@ public class Autonomous extends CommandGroup {
 		break;
 		case Forward:
 			addSequential(new EncoderDrive(ds.getAdjustedLength(74.7), straightSpeed));
+		break;
+		}
 		break;
 		}
 //		Go and do doughnuts during autonomous

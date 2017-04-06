@@ -19,29 +19,35 @@ public class Robot extends IterativeRobot
     private Command               autonomousCommand;
     // vars for auto
     /**
+     * chooser used on the SmartDashboard to choose whether or not to record for auto
+     * 
+     * @since 2017
+     */
+    public SendableChooser recordingChooser       = new SendableChooser();
+    /**
      * chooser used on the SmartDashboard to choose the starting position
      * 
      * @since 2017
      */
-    private final SendableChooser positionChooser       = new SendableChooser();
+    public final SendableChooser positionChooser       = new SendableChooser();
     /**
      * Chooser used in SmartDashboard to choose which alliance we are on
      * 
      * @since 2017
      */
-    private final SendableChooser allianceChooser = new SendableChooser();
+    public final SendableChooser allianceChooser = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the starting position
      * 
      * @since 2017
      */
-    private final SendableChooser middlePositionChooser = new SendableChooser();
+    public final SendableChooser middlePositionChooser = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the whether or not to do doughnuts at the end of Autonomous.
      * 
      * @since 2017
      */
-    private final SendableChooser doughnutsChooser      = new SendableChooser();
+    public final SendableChooser doughnutsChooser      = new SendableChooser();
 
     /**
      * enum constants used with the positionChooser.
@@ -51,6 +57,16 @@ public class Robot extends IterativeRobot
     public enum Position
     {
         Left, Middle, Right, testLength, None, Forward
+    }
+
+    /**
+     * enum constants to choose to use recording or not
+     * 
+     * @since 2017
+     */
+    public enum Recording
+    {
+        UseIt, LooseIt
     }
 
     /**
@@ -95,6 +111,9 @@ public class Robot extends IterativeRobot
         {
             e.printStackTrace();
         }
+        recordingChooser.addDefault("UseIt", Recording.UseIt);
+        recordingChooser.addObject("LooseIt", Recording.LooseIt);
+        SmartDashboard.putData("Recording?",recordingChooser);
         allianceChooser.addDefault("Blue", Alliance.Blue);
         allianceChooser.addObject("Red", Alliance.Red);
         SmartDashboard.putData("Alliance",allianceChooser);
@@ -147,13 +166,13 @@ public class Robot extends IterativeRobot
     public void autonomousInit()
     {
     	//CommandBase.driveSubsystem.initEncoders();
-    	
+    	Recording recording = (Recording) recordingChooser.getSelected();
         Position position = (Position) positionChooser.getSelected();
         MiddlePosition middlePosition = (MiddlePosition) middlePositionChooser
                         .getSelected();
         Doughnuts doughnuts = (Doughnuts) doughnutsChooser.getSelected();
         Alliance alliance = (Alliance) allianceChooser.getSelected();
-        autonomousCommand = new Autonomous(position, middlePosition, doughnuts, alliance);
+        autonomousCommand = new Autonomous(recording, position, middlePosition, doughnuts, alliance);
         System.out.println("Created Auto");
         autonomousCommand.start();
         // final Position position = (Position) positionChooser.getSelected();
