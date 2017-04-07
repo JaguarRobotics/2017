@@ -112,8 +112,16 @@ public class AutoRecordingDrive extends CommandBase
         for(int i = 0; i < commands.size(); i++) {
             output += commands.get(i) + " " + encoderTicks.get(i);
         }
+        output += "done";
         try {
-            File file = new File(System.currentTimeMillis() + ".txt");
+            String fileName = "";
+            if(Robot.positionChooser.getSelected() == Robot.Position.Middle) {
+                fileName = Robot.positionChooser.getSelected().toString() + Robot.middlePositionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
+            }
+            else {
+                fileName = Robot.positionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
+            }
+            File file = new File(fileName + ".txt");
             PrintWriter pw;
             pw = new PrintWriter(file);
             pw.print(output);

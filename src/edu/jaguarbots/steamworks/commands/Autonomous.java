@@ -1,7 +1,9 @@
 package edu.jaguarbots.steamworks.commands;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.DrivePause;
 import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
@@ -56,14 +58,40 @@ public class Autonomous extends CommandGroup {
 		        for(int i = 0; i < fileNames.length; i++) {
 		            fileNames[i] = files[i].getName();
 		        }
-		        double number = 0;
-		        for(int i = 0; i < files.length; i++) {
-		            if(fileNames[i].contains(".txt")) {
-		                double temp = Double.parseDouble(fileNames[i].substring(0, fileNames[i].length() - 4));
-		                number = (number > temp) ? number : temp;
-		            }
+//		        ArrayList<String> autos = new ArrayList<String>();
+//		        for(int i = 0; i < files.length; i++) {
+//		            if(fileNames[i].contains(".txt")) {
+//		                autos.add(fileNames[i]);
+//		            }
+//		        }
+		        String fileName = Robot.positionChooser.getSelected().toString() +
+		                        ((Robot.positionChooser.getSelected() == Robot.Position.Middle) ? Robot.middlePositionChooser.getSelected().toString() : "")
+		                        + Robot.allianceChooser.getSelected().toString();
+		        if(new File(fileName + ".txt").exists()) {
+		            File file = new File(fileName + ".txt");
+		            try
+                    {
+                        ArrayList<String> commands = new ArrayList<String>();
+                        ArrayList<Double> encoderTicks = new ArrayList<Double>();
+                        Scanner scan = new Scanner(file);
+                        String line = "";
+                        do {
+                            line = scan.nextLine();
+                            commands.add(line.split(" ")[0]);
+                            encoderTicks.add(Double.parseDouble(line.split(" ")[0]));
+                        }
+                        while(line != "done");
+                        for(int i = 0; i < commands.size(); i++) {
+                            if(commands.get(i) == "straight") addSequential(new EncoderDrive(encoderTicks.get(i)));
+                            if(commands.get(i) == "turn") addSequential(new EncoderTurn(encoderTicks.get(i)));
+                        }
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 		        }
-		        break;
 		    case LooseIt:
 		switch (position) {
 //		  Run this autonomous if we place the robot on the left side of the robot

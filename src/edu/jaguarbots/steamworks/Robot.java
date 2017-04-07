@@ -23,31 +23,31 @@ public class Robot extends IterativeRobot
      * 
      * @since 2017
      */
-    public SendableChooser recordingChooser       = new SendableChooser();
+    public static final SendableChooser recordingChooser       = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the starting position
      * 
      * @since 2017
      */
-    public final SendableChooser positionChooser       = new SendableChooser();
+    public static final SendableChooser positionChooser       = new SendableChooser();
     /**
      * Chooser used in SmartDashboard to choose which alliance we are on
      * 
      * @since 2017
      */
-    public final SendableChooser allianceChooser = new SendableChooser();
+    public static final SendableChooser allianceChooser = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the starting position
      * 
      * @since 2017
      */
-    public final SendableChooser middlePositionChooser = new SendableChooser();
+    public static final SendableChooser middlePositionChooser = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the whether or not to do doughnuts at the end of Autonomous.
      * 
      * @since 2017
      */
-    public final SendableChooser doughnutsChooser      = new SendableChooser();
+    public static final SendableChooser doughnutsChooser      = new SendableChooser();
 
     /**
      * enum constants used with the positionChooser.
