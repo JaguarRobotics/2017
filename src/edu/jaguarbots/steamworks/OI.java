@@ -13,23 +13,18 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
-		Joystick0_Button6.whileHeld(new Ascend()); // climber
+		Joystick0_Button6.whileHeld(new Ascend());
 		Joystick1_Button6.whileHeld(new Ascend());
-		Joystick0_Button1.whileHeld(new Descend()); // reverse the climber (just
-													// in case, may be needed to
-													// remove rope)
+		Joystick0_Button1.whileHeld(new Descend());
 		Joystick1_Button1.whileHeld(new Descend());
-		Joystick0_Button3.whenPressed(new GearShiftLow()); // gear shifting
+		Joystick0_Button3.whenPressed(new GearShiftLow());
 		Joystick0_Button2.whenPressed(new GearShiftHigh());
 		Joystick1_Button3.whenPressed(new GearShiftLow());
 		Joystick1_Button2.whenPressed(new GearShiftHigh());
-		// manipulator controls
 		ManipulatorXbox_A.whileHeld(new Ascend());
 		ManipulatorXbox_Y.whileHeld(new Descend());
 		ManipulatorXbox_LB.whileHeld(new GearShiftHigh());
 		ManipulatorXbox_RB.whileHeld(new GearShiftLow());
-		// Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
-		// Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -60,7 +60,6 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * Diameter of pulleys, used for encoder calculations. (in inches)
 	 */
-	// TODO change to diameter of pulleys
 	public double diameter = 6;
 
 	/**
@@ -138,7 +137,6 @@ public class DriveSubsystem extends SubsystemBase {
 		double left = Math.abs(getEncoderLeft());
 		double right = Math.abs(getEncoderRight());
 		double diff = Math.abs(right - left + 1);
-		// double addition = right + left + 1;
 		double percentage = (diff * 3) / ((right > left) ? right + 1 : left + 1);
 		percentage = Math.min(percentage, 1);
 		double powers[] = new double[2];
@@ -150,7 +148,6 @@ public class DriveSubsystem extends SubsystemBase {
 			powers[1] = 1;
 		}
 		if (counter % 5 == 0)
-			// System.out.println(left + ", " + right + " " + percentage);
 			counter++;
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}

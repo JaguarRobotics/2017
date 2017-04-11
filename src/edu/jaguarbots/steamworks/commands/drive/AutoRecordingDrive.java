@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Drives the robot in teleop based on left and right joystick inputs.
  */
 public class AutoRecordingDrive extends CommandBase {
-	/**
-	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
-	 */
 	public AutoRecordingDrive() {
 		requires(driveSubsystem);
 	}
@@ -30,28 +27,19 @@ public class AutoRecordingDrive extends CommandBase {
 	private ArrayList<Double> encoderTicks = new ArrayList<Double>();
 	private boolean isTurning = false;
 
-	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		driveSubsystem.resetEncoders(true, true);
 		driveSubsystem.startEncoders();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
-	/**
-	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
-	 */
-	@Override
 	@SuppressWarnings("deprecation")
+	@Override
 	protected void execute() {
 		SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
 		SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
 		double powNum = 2;
 		double pointNum = SmartDashboard.getNumber("Joystick Tolerance");
-		/*
-		 * // code for Y axis double j0 = oi.Joystick0.getY() * pointNum; double j1 = oi.Joystick1.getY() * pointNum; double ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1; double aju = Math.abs(ju); double pju = Math.pow(aju, powNum); if (Math.abs(pju) > aju) pju = aju; if (Math.abs(pju) > aju) pju = aju; double straight = (pju * (aju / ju)) / pointNum; // code for X axis j0 = oi.Joystick0.getX() * pointNum; j1 = oi.Joystick1.getX() * pointNum; ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1; aju = Math.abs(ju); pju = Math.pow(aju, powNum); if (Math.abs(pju) > aju) pju = aju; if (Math.abs(pju) > aju) pju = aju; double turn = (pju * (aju / ju)) / pointNum; if (Math.abs(straight) > Math.abs(turn)) driveSubsystem.driveTank(-straight, -straight); else { if (turn > 0) driveSubsystem.driveTank(turn, -turn); else driveSubsystem.driveTank(-turn, turn); }
-		 */
-		// rewrite
 		double j0 = oi.Joystick0.getY() * pointNum;
 		double j1 = oi.Joystick1.getY() * pointNum;
 		double ju1 = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1;
@@ -99,14 +87,6 @@ public class AutoRecordingDrive extends CommandBase {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		// Gets what the auto is going to be
-		String output = "";
-		for (int i = 0; i < commands.size(); i++) {
-			output += commands.get(i) + " " + encoderTicks.get(i);
-		}
-		output += "done";
-
-		// Figures out what to call the File
 		String fileName = "";
 		try {
 			if (Robot.positionChooser.getSelected() == Robot.Position.Middle) {
@@ -117,8 +97,6 @@ public class AutoRecordingDrive extends CommandBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Creates the File and the output Stream
-
 		File file = new File(fileName + ".txt");
 		FileOutputStream fs = null;
 		try {
@@ -128,8 +106,6 @@ public class AutoRecordingDrive extends CommandBase {
 		}
 		OutputStreamWriter ow = new OutputStreamWriter(fs);
 		BufferedWriter writer = new BufferedWriter(ow);
-
-		// Prints out the commands and the encoder Values into the File
 		for (int i = 0; i < commands.size(); i++) {
 			try {
 				if (commands.get(i) == "straight")
@@ -139,8 +115,6 @@ public class AutoRecordingDrive extends CommandBase {
 			} catch (IOException e) {
 			}
 		}
-
-		// Flushes out the data and closes the stream
 		try {
 			writer.flush();
 			fs.close();
@@ -154,26 +128,5 @@ public class AutoRecordingDrive extends CommandBase {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-	}
-
-	public static void writeFile(String fileName, String content) {
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(fileName);
-			bw = new BufferedWriter(fw);
-			bw.write(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (bw != null)
-					bw.close();
-				if (fw != null)
-					fw.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
 	}
 }

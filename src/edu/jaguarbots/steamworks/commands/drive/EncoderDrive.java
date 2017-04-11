@@ -61,22 +61,12 @@ public class EncoderDrive extends CommandBase {
 		boolean correctIt = true;
 		double[] powers = driveSubsystem.getMotorPowers();
 		if (correctIt) {
-			// if( driveSubsystem.getEncoderLeft() >= Math.abs(distance)*.8 || (-1 * driveSubsystem.getEncoderRight()) >= Math.abs(distance)*.8){
-			// driveSubsystem.driveTank(adjustedSpeed * powers[0], adjustedSpeed * powers[1]);
-			// }
-			// else
-			// {
 			driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
-			// }
 		} else {
 			driveSubsystem.driveTank(speed, speed);
 			SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
 			SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
 		}
-		// if (counter % 5 == 0) System.out.print(
-		// "Left " + CommandBase.driveSubsystem.getEncoderLeft());
-		// if (counter % 5 == 0) System.out.println(" Right "
-		// + CommandBase.driveSubsystem.getEncoderRight());
 		counter++;
 	}
 

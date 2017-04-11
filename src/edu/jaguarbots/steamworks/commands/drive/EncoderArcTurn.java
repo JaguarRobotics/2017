@@ -50,14 +50,6 @@ public class EncoderArcTurn extends CommandBase {
 			right = speed;
 		}
 		driveSubsystem.driveTank(left < 0 ? 0 : left, right < 0 ? 0 : right);
-		// if (angle > 0)
-		// {
-		// driveSubsystem.driveTank(-speed, speed);
-		// }
-		// else if (angle < 0)
-		// {
-		// driveSubsystem.driveTank(-speed, speed);
-		// }
 	}
 
 	@Override
@@ -67,9 +59,6 @@ public class EncoderArcTurn extends CommandBase {
 		if (counter % 5 == 0)
 			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
 		return Math.max(left, right) > arclength;
-		// return Math.max(driveSubsystem.getDistanceInInches(left),
-		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
-		// ROBOT_WIDTH / 2;
 	}
 
 	@Override
@@ -93,9 +82,7 @@ public class EncoderArcTurn extends CommandBase {
 	 */
 	public EncoderArcTurn(double angle, double speed) {
 		requires(driveSubsystem);
-		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
-		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);
 		this.arclength = Math.abs(angle * 13.25);
 	}
 

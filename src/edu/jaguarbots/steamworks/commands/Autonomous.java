@@ -29,22 +29,24 @@ public class Autonomous extends CommandGroup {
 		DriveSubsystem ds = CommandBase.driveSubsystem;
 		boolean testing = false;
 		if (testing) {
-			// Put anything you want to test in here and it will run.
+			// This will run if boolean testing (See Above) is set as true
 		}
 	}
 
 	/**
 	 * Selects autonomous route based on defense to cross, position in, and what goal to shoot in. See a picture below <html><img src="https://puu.sh/tWete/63e013aebf.png"></img></html>
 	 * 
+	 * @param recoding
+	 *            enum RecordNew Auto, UseExistingAuto
 	 * @param position
-	 *            enum: Left, Middle, or Right
+	 *            enum: Left, Middle, Right, testLength, None, Forward
 	 * @param middlePosition
-	 *            enum: Left, Right
-	 * @param doughnuts
-	 *            enum: Yes, No
+	 *            enum: Left, Right, Stay
+	 * @param alliance
+	 *            enum: Blue, Red
 	 */
 	@SuppressWarnings("incomplete-switch")
-	public Autonomous(final Robot.Recording recording, final Robot.Position position, final Robot.MiddlePosition middlePosition, final Robot.Doughnuts doughnuts, final Robot.Alliance alliance) {
+	public Autonomous(final Robot.Recording recording, final Robot.Position position, final Robot.MiddlePosition middlePosition, final Robot.Alliance alliance) {
 		new GearShiftLow();
 		double straightSpeed = 0.6;
 		double turnSpeed = 0.7;
@@ -81,7 +83,6 @@ public class Autonomous extends CommandGroup {
 				}
 			case UseExistingAuto:
 				switch (position) {
-					// Run this autonomous if we place the robot on the left side of the robot
 					case Left:
 						switch (alliance) {
 							case Blue:
@@ -101,7 +102,6 @@ public class Autonomous extends CommandGroup {
 								break;
 						}
 						break;
-					// Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 					case Middle:
 						boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
 						addSequential(new EncoderDrive(ds.getAdjustedLength(64), straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
@@ -118,7 +118,6 @@ public class Autonomous extends CommandGroup {
 							addSequential(new EncoderDrive(ds.getAdjustedLength(109), straightSpeed));// 109 KC regional for 140 inches
 						}
 						break;
-					// Run this autonomous if we place the robot on the left side of the robot
 					case Right:
 						switch (alliance) {
 							case Blue:
@@ -134,13 +133,6 @@ public class Autonomous extends CommandGroup {
 								addSequential(new EncoderDrive(ds.getAdjustedLength(56), .5));// 31 from turn to airship //53 KC regional for 64 inches
 								addSequential(new DrivePause(1000));
 								addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
-
-								// addSequential(new EncoderDrive(ds.getAdjustedLength(55), straightSpeed));//110.25 from tall to turn //47.817 KC regional for 60 inches (Length minus robot length)
-								// addSequential(new EncoderTurn(ds.getRadiansFromDegrees(100)));//turn 60 degrees for KC regional
-								// addSequential(new EncoderDrive(ds.getAdjustedLength(53), straightSpeed));//31 from turn to airship //53 KC regional for 64 inches
-								// addSequential(new DrivePause(1000));
-								// addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
-
 								break;
 						}
 						System.out.println("Right Ran");
@@ -153,9 +145,6 @@ public class Autonomous extends CommandGroup {
 				}
 				break;
 		}
-		// Go and do doughnuts during autonomous
-		// if (doughnuts == Robot.Doughnuts.Yes)
-		// addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
 		addSequential(new GearShiftLow());
 	}
 }
