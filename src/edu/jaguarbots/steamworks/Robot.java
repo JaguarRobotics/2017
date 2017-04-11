@@ -41,7 +41,8 @@ public class Robot extends IterativeRobot
      * 
      * @since 2017
      */
-    public static final SendableChooser middlePositionChooser = new SendableChooser();
+    @SuppressWarnings("rawtypes")
+	public static final SendableChooser middlePositionChooser = new SendableChooser();
     /**
      * chooser used on the SmartDashboard to choose the whether or not to do doughnuts at the end of Autonomous.
      * 
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot
      */
     public enum Recording
     {
-        UseIt, LooseIt
+        RecordNewAuto, UseExistingAuto
     }
 
     /**
@@ -101,7 +102,8 @@ public class Robot extends IterativeRobot
      * This function is run when the robot is first started up and should be used for any initialization code.
      * We are using this to initialize CommandBase and to populate the SmartDashboard.
      */
-    public void robotInit()
+    @SuppressWarnings("unchecked")
+	public void robotInit()
     {
         try
         {
@@ -111,8 +113,8 @@ public class Robot extends IterativeRobot
         {
             e.printStackTrace();
         }
-        recordingChooser.addDefault("UseIt", Recording.UseIt);
-        recordingChooser.addObject("LooseIt", Recording.LooseIt);
+        recordingChooser.addDefault("Record New Auto", Recording.RecordNewAuto);
+        recordingChooser.addObject("Run Existing Auto", Recording.UseExistingAuto);
         SmartDashboard.putData("Recording?",recordingChooser);
         allianceChooser.addDefault("Blue", Alliance.Blue);
         allianceChooser.addObject("Red", Alliance.Red);
@@ -125,7 +127,7 @@ public class Robot extends IterativeRobot
         SmartDashboard.putData("Position", positionChooser);
         middlePositionChooser.addDefault("Left", MiddlePosition.Left);
         middlePositionChooser.addObject("Right", MiddlePosition.Right);
-        middlePositionChooser.addObject("No Break", MiddlePosition.Stay);
+        middlePositionChooser.addObject("No-Break", MiddlePosition.Stay);
         // middlePosition.addObject("null", null);
         SmartDashboard.putData("MiddlePosition", middlePositionChooser);
 //        doughnutsChooser.addDefault("No", Doughnuts.No);

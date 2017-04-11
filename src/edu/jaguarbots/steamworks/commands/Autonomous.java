@@ -52,19 +52,13 @@ public class Autonomous extends CommandGroup {
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
 		switch(recording) {
-		    case UseIt:
+		    case RecordNewAuto:
 		        File[] files = new File(".").listFiles();
 		        String[] fileNames = new String[files.length];
 		        for(int i = 0; i < fileNames.length; i++) {
 		            fileNames[i] = files[i].getName();
 		        }
-//		        ArrayList<String> autos = new ArrayList<String>();
-//		        for(int i = 0; i < files.length; i++) {
-//		            if(fileNames[i].contains(".txt")) {
-//		                autos.add(fileNames[i]);
-//		            }
-//		        }
-		        String fileName = Robot.positionChooser.getSelected().toString() +
+		        String fileName = "/home/lvuser/"+Robot.positionChooser.getSelected().toString() +
 		                        ((Robot.positionChooser.getSelected() == Robot.Position.Middle) ? Robot.middlePositionChooser.getSelected().toString() : "")
 		                        + Robot.allianceChooser.getSelected().toString();
 		        if(new File(fileName + ".txt").exists()) {
@@ -88,11 +82,10 @@ public class Autonomous extends CommandGroup {
                     }
                     catch (FileNotFoundException e)
                     {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 		        }
-		    case LooseIt:
+		    case UseExistingAuto:
 		switch (position) {
 //		  Run this autonomous if we place the robot on the left side of the robot
 		case Left:
