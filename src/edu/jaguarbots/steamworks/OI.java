@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * This class is the glue that binds the controls on the physical operator interface to the commands and command groups that allow control of the robot.
  */
 public class OI implements RobotMap {
 	public OI() throws InterruptedException {
@@ -100,24 +99,7 @@ public class OI implements RobotMap {
 	// Dualshock/Playstation controller buttons if needed. currently unlikely to
 	// be used.
 	/*
-	 * public final Button Manipulator_Select = new JoystickButton(Manipulator,
-	 * 1); public final Button Manipulator_L3 = new JoystickButton(Manipulator,
-	 * 2); public final Button Manipulator_R3 = new JoystickButton(Manipulator,
-	 * 3); public final Button Manipulator_Start = new
-	 * JoystickButton(Manipulator, 4); public final Button Manipulator_DpadUp =
-	 * new JoystickButton(Manipulator, 5); public final Button
-	 * Manipulator_DpadRight = new JoystickButton(Manipulator, 6); public final
-	 * Button Manipulator_DpadDown = new JoystickButton(Manipulator, 7); public
-	 * final Button Manipulator_DpadLeft = new JoystickButton(Manipulator, 8);
-	 * public final Button Manipulator_L2 = new JoystickButton(Manipulator, 9);
-	 * public final Button Manipulator_R2 = new JoystickButton(Manipulator, 10);
-	 * public final Button Manipulator_L1 = new JoystickButton(Manipulator, 11);
-	 * public final Button Manipulator_R1 = new JoystickButton(Manipulator, 12);
-	 * public final Button Manipulator_Triangle = new
-	 * JoystickButton(Manipulator, 13); public final Button Manipulator_Circle =
-	 * new JoystickButton(Manipulator, 14); public final Button Manipulator_X =
-	 * new JoystickButton(Manipulator, 15); public final Button
-	 * Manipulator_Square = new JoystickButton(Manipulator, 16);
+	 * public final Button Manipulator_Select = new JoystickButton(Manipulator, 1); public final Button Manipulator_L3 = new JoystickButton(Manipulator, 2); public final Button Manipulator_R3 = new JoystickButton(Manipulator, 3); public final Button Manipulator_Start = new JoystickButton(Manipulator, 4); public final Button Manipulator_DpadUp = new JoystickButton(Manipulator, 5); public final Button Manipulator_DpadRight = new JoystickButton(Manipulator, 6); public final Button Manipulator_DpadDown = new JoystickButton(Manipulator, 7); public final Button Manipulator_DpadLeft = new JoystickButton(Manipulator, 8); public final Button Manipulator_L2 = new JoystickButton(Manipulator, 9); public final Button Manipulator_R2 = new JoystickButton(Manipulator, 10); public final Button Manipulator_L1 = new JoystickButton(Manipulator, 11); public final Button Manipulator_R1 = new JoystickButton(Manipulator, 12); public final Button Manipulator_Triangle = new JoystickButton(Manipulator, 13); public final Button Manipulator_Circle = new JoystickButton(Manipulator, 14); public final Button Manipulator_X = new JoystickButton(Manipulator, 15); public final Button Manipulator_Square = new JoystickButton(Manipulator, 16);
 	 */
 
 	// There are a few additional built in buttons you can use. Additionally,

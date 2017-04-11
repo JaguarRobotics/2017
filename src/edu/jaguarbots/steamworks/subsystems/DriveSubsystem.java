@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- * @author Brian, Nathan G, Zach D. Drive subsystem holds all of methods used in
- *         the commands for drive
+ * @author Brian, Nathan G, Zach D. Drive subsystem holds all of methods used in the commands for drive
  * @since 2017
  */
 public class DriveSubsystem extends SubsystemBase {
@@ -120,8 +119,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Calculates the amount of radians that is equivilant to a passed in number
-	 * of degrees
+	 * Calculates the amount of radians that is equivilant to a passed in number of degrees
 	 * 
 	 * @param degrees
 	 *            The degrees that the robot should turn
@@ -132,8 +130,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Calculates motor powers for adjusted driving <html>you can view the math
-	 * below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
+	 * Calculates motor powers for adjusted driving <html>you can view the math below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
 	 * 
 	 * @return returns an array of powers with left in slot 0 & right in slot 1
 	 */
@@ -159,11 +156,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Corrects the number that is passed in from DriveTurn and converts it into
-	 * a distance that will not cause the robot to not go way over the amount
-	 * that it is supposed to. Put the amount you want to go into Desmos with
-	 * the equation and the intersect is the number you want to pass into
-	 * EncoderDrive
+	 * Corrects the number that is passed in from DriveTurn and converts it into a distance that will not cause the robot to not go way over the amount that it is supposed to. Put the amount you want to go into Desmos with the equation and the intersect is the number you want to pass into EncoderDrive
 	 * 
 	 * @param x
 	 * @return
@@ -176,15 +169,9 @@ public class DriveSubsystem extends SubsystemBase {
 		double x6 = x5 * x;
 		double x7 = x6 * x;
 		double x8 = x7 * x;
-		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6
-				+ 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2
-				+ 1.31593 * x;
+		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6 + 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2 + 1.31593 * x;
 		/*
-		 * Copy and Paste into Desmos The y value is the actual value. The x
-		 * value is the inputed value. y = 0.000000000000013994666666667x^8 -
-		 * 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6 +
-		 * 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 -
-		 * 0.0000303244x^3 - 0.00191811x^2 + 1.31593x
+		 * Copy and Paste into Desmos The y value is the actual value. The x value is the inputed value. y = 0.000000000000013994666666667x^8 - 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6 + 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 - 0.0000303244x^3 - 0.00191811x^2 + 1.31593x
 		 */
 	}
 
@@ -214,8 +201,7 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * gets encoder values
 	 * 
-	 * @return array of encoder values with left occupying slot 0, and right
-	 *         occupying slot 1
+	 * @return array of encoder values with left occupying slot 0, and right occupying slot 1
 	 */
 	public double[] getEncoders() {
 		leftEncoderValue = leftEncoder.getDistance();
@@ -225,8 +211,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Drives the robot based on left and right speeds. Calls adjusted driving
-	 * when 1 or -1
+	 * Drives the robot based on left and right speeds. Calls adjusted driving when 1 or -1
 	 * 
 	 * @param left
 	 *            speed

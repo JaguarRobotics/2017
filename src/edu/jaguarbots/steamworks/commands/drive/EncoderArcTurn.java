@@ -86,8 +86,7 @@ public class EncoderArcTurn extends CommandBase {
 	 * Default constructor
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left,
-	 *            negative is to the right)
+	 *            The angle to turn in radians (positive is to the left, negative is to the right)
 	 * @param speed
 	 *            The speed at which to turn
 	 * @since 2017
@@ -104,8 +103,7 @@ public class EncoderArcTurn extends CommandBase {
 	 * Turns the robot at a speed of 0.7
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left,
-	 *            negative is to the right)
+	 *            The angle to turn in radians (positive is to the left, negative is to the right)
 	 * @since 2017
 	 */
 	public EncoderArcTurn(double angle) {

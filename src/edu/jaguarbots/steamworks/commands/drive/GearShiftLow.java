@@ -4,18 +4,19 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 
 /**
- *	Shifts the robot into low gear.
+ * Shifts the robot into low gear.
  *
- *	@author Max K
- *	@since 2017
+ * @author Max K
+ * @since 2017
  */
 public class GearShiftLow extends CommandBase {
 	/**
-	 *	Shifts the robot into low gear.
+	 * Shifts the robot into low gear.
 	 */
 	public GearShiftLow() {
 		requires(driveSubsystem);
 	}
+
 	@Override
 	protected void initialize() {
 		DriveSubsystem.gearShiftHigh();

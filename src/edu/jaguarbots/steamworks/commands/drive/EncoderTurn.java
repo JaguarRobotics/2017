@@ -25,7 +25,7 @@ public class EncoderTurn extends CommandBase {
 	private double arclength;
 
 	private int counter = 0;
-	
+
 	private final double WHEELBASE_WIDTH = 18.0;
 
 	@Override
@@ -58,8 +58,8 @@ public class EncoderTurn extends CommandBase {
 	protected boolean isFinished() {
 		double left = Math.abs(driveSubsystem.getEncoderLeft());
 		double right = Math.abs(driveSubsystem.getEncoderRight());
-//		if (counter % 5 == 0)
-//			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
+		// if (counter % 5 == 0)
+		// System.out.println("left: " + left + " right: " + right + " angle: " + arclength);
 		return Math.max(left, right) > arclength;
 		// return Math.max(driveSubsystem.getDistanceInInches(left),
 		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
@@ -80,8 +80,7 @@ public class EncoderTurn extends CommandBase {
 	 * Default constructor
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left,
-	 *            negative is to the right)
+	 *            The angle to turn in radians (positive is to the left, negative is to the right)
 	 * @param speed
 	 *            The speed at which to turn
 	 * @since 2017
@@ -99,8 +98,7 @@ public class EncoderTurn extends CommandBase {
 	 * Turns the robot at a speed of 0.7
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left,
-	 *            negative is to the right)
+	 *            The angle to turn in radians (positive is to the left, negative is to the right)
 	 * @since 2017
 	 */
 	public EncoderTurn(double angle) {

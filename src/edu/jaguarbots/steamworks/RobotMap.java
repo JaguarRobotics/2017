@@ -4,10 +4,7 @@ import static edu.jaguarbots.steamworks.MotorID.Talon;
 import static edu.jaguarbots.steamworks.MotorID.Spark;
 
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into to a variable name. This provides flexibility changing wiring, makes checking the wiring easier and significantly reduces the number of magic numbers floating around.
  * 
  * @since 2017
  */
@@ -30,8 +27,7 @@ public interface RobotMap {
 	public static final int MANIPULATOR_JOYSTICK_PORT = 3;
 	// Robot Design
 	/**
-	 * The width of the robot (between the center of both wheels) in
-	 * inches
+	 * The width of the robot (between the center of both wheels) in inches
 	 * 
 	 * @since 2017
 	 */

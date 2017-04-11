@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoRecordingDrive extends CommandBase {
 	/**
-	 * Below is an image of the idea we are using for joystick vs motor power.
-	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
 	 */
 	public AutoRecordingDrive() {
 		requires(driveSubsystem);
@@ -40,8 +39,7 @@ public class AutoRecordingDrive extends CommandBase {
 
 	// Called repeatedly when this Command is scheduled to run
 	/**
-	 * Below is an image of the idea we are using for joystick vs motor power.
-	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
 	 */
 	@Override
 	@SuppressWarnings("deprecation")
@@ -51,20 +49,7 @@ public class AutoRecordingDrive extends CommandBase {
 		double powNum = 2;
 		double pointNum = SmartDashboard.getNumber("Joystick Tolerance");
 		/*
-		 * // code for Y axis double j0 = oi.Joystick0.getY() * pointNum; double
-		 * j1 = oi.Joystick1.getY() * pointNum; double ju = (Math.abs(j0) >
-		 * Math.abs(j1)) ? j0 : j1; double aju = Math.abs(ju); double pju =
-		 * Math.pow(aju, powNum); if (Math.abs(pju) > aju) pju = aju; if
-		 * (Math.abs(pju) > aju) pju = aju; double straight = (pju * (aju / ju))
-		 * / pointNum; // code for X axis j0 = oi.Joystick0.getX() * pointNum;
-		 * j1 = oi.Joystick1.getX() * pointNum; ju = (Math.abs(j0) >
-		 * Math.abs(j1)) ? j0 : j1; aju = Math.abs(ju); pju = Math.pow(aju,
-		 * powNum); if (Math.abs(pju) > aju) pju = aju; if (Math.abs(pju) > aju)
-		 * pju = aju; double turn = (pju * (aju / ju)) / pointNum; if
-		 * (Math.abs(straight) > Math.abs(turn))
-		 * driveSubsystem.driveTank(-straight, -straight); else { if (turn > 0)
-		 * driveSubsystem.driveTank(turn, -turn); else
-		 * driveSubsystem.driveTank(-turn, turn); }
+		 * // code for Y axis double j0 = oi.Joystick0.getY() * pointNum; double j1 = oi.Joystick1.getY() * pointNum; double ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1; double aju = Math.abs(ju); double pju = Math.pow(aju, powNum); if (Math.abs(pju) > aju) pju = aju; if (Math.abs(pju) > aju) pju = aju; double straight = (pju * (aju / ju)) / pointNum; // code for X axis j0 = oi.Joystick0.getX() * pointNum; j1 = oi.Joystick1.getX() * pointNum; ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1; aju = Math.abs(ju); pju = Math.pow(aju, powNum); if (Math.abs(pju) > aju) pju = aju; if (Math.abs(pju) > aju) pju = aju; double turn = (pju * (aju / ju)) / pointNum; if (Math.abs(straight) > Math.abs(turn)) driveSubsystem.driveTank(-straight, -straight); else { if (turn > 0) driveSubsystem.driveTank(turn, -turn); else driveSubsystem.driveTank(-turn, turn); }
 		 */
 		// rewrite
 		double j0 = oi.Joystick0.getY() * pointNum;
@@ -97,8 +82,7 @@ public class AutoRecordingDrive extends CommandBase {
 			else
 				commands.add("straight");
 			double jrsgn = driveSubsystem.getEncoderRight() / Math.abs(driveSubsystem.getEncoderRight());
-			double average = (Math.abs(driveSubsystem.getEncoderLeft()) + Math.abs(driveSubsystem.getEncoderRight()))
-					/ 2;
+			double average = (Math.abs(driveSubsystem.getEncoderLeft()) + Math.abs(driveSubsystem.getEncoderRight())) / 2;
 			encoderTicks.add(jrsgn * average);
 			driveSubsystem.resetEncoders(true, true);
 			driveSubsystem.startEncoders();
@@ -126,12 +110,9 @@ public class AutoRecordingDrive extends CommandBase {
 		String fileName = "";
 		try {
 			if (Robot.positionChooser.getSelected() == Robot.Position.Middle) {
-				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString()
-						+ Robot.middlePositionChooser.getSelected().toString()
-						+ Robot.allianceChooser.getSelected().toString();
+				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString() + Robot.middlePositionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
 			} else {
-				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString()
-						+ Robot.allianceChooser.getSelected().toString();
+				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -158,7 +139,7 @@ public class AutoRecordingDrive extends CommandBase {
 			} catch (IOException e) {
 			}
 		}
-		
+
 		// Flushes out the data and closes the stream
 		try {
 			writer.flush();

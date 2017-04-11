@@ -7,8 +7,7 @@ import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This is a class that establishes hierarchy and the ridiculous need to javadoc
- * everything
+ * This is a class that establishes hierarchy and the ridiculous need to javadoc everything
  * 
  * @author Nathan Gawith
  */

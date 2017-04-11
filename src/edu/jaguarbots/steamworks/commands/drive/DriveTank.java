@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTank extends CommandBase {
 	/**
-	 * Below is an image of the idea we are using for joystick vs motor power.
-	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
 	 */
 	public DriveTank() {
 		requires(driveSubsystem);
@@ -19,18 +18,17 @@ public class DriveTank extends CommandBase {
 	double right;
 
 	// Called just before this Command runs the first time
-    @Override
+	@Override
 	protected void initialize() {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	/**
-	 * Below is an image of the idea we are using for joystick vs motor power.
-	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 * Below is an image of the idea we are using for joystick vs motor power. <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
 	 */
 	@Override
 	@SuppressWarnings("deprecation")
-    protected void execute() {
+	protected void execute() {
 		SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
 		SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
 		double powNum = 2;
@@ -51,19 +49,19 @@ public class DriveTank extends CommandBase {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-    @Override
+	@Override
 	protected boolean isFinished() {
 		return false;
 	}
 
 	// Called once after isFinished returns true
-    @Override
+	@Override
 	protected void end() {
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-    @Override
+	@Override
 	protected void interrupted() {
 	}
 }
