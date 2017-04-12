@@ -275,10 +275,10 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Sets the default command of the subsystem.
 	 */
 	public void initDefaultCommand() {
-		if (Robot.recordingChooser.getSelected() == Robot.Recording.RecordNewAuto) {
+//		if (Robot.recordingChooser.getSelected() == Robot.Recording.RecordNewAuto) {
 			setDefaultCommand(new AutoRecordingDrive());
-		} else {
-			setDefaultCommand(new DriveTank());
-		}
+//		} else {
+//			setDefaultCommand(new DriveTank());
+//		}
 	}
 }

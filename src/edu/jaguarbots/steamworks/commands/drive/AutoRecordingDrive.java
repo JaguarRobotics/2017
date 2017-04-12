@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -36,6 +35,12 @@ public class AutoRecordingDrive extends CommandBase {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void execute() {
+		try {
+			File temp = File.createTempFile("instruct", ".txt");
+			temp.createNewFile();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 		SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
 		SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
 		double powNum = 2;
@@ -64,7 +69,7 @@ public class AutoRecordingDrive extends CommandBase {
 		}
 		left = driveSubsystem.getEncoderLeft();
 		right = driveSubsystem.getEncoderRight();
-		if (isTurning == isTurn) {
+		if (isTurning != isTurn) {
 			if (isTurn)
 				commands.add("turn");
 			else
@@ -76,6 +81,7 @@ public class AutoRecordingDrive extends CommandBase {
 			driveSubsystem.startEncoders();
 		}
 		isTurning = isTurn;
+		end();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -87,17 +93,23 @@ public class AutoRecordingDrive extends CommandBase {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		String fileName = "";
+		// String fileName = "";
+		// try {
+		// if (Robot.positionChooser.getSelected() == Robot.Position.Middle) {
+		// fileName = Robot.positionChooser.getSelected().toString() + Robot.middlePositionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
+		// } else {
+		// fileName = Robot.positionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		File file = new File("/home/lvuser/Test" + ".txt");
+		System.out.println(file.getAbsolutePath());
 		try {
-			if (Robot.positionChooser.getSelected() == Robot.Position.Middle) {
-				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString() + Robot.middlePositionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
-			} else {
-				fileName = "/home/lvuser/" + Robot.positionChooser.getSelected().toString() + Robot.allianceChooser.getSelected().toString();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			file.createNewFile();
+		} catch (IOException e3) {
+			e3.printStackTrace();
 		}
-		File file = new File(fileName + ".txt");
 		FileOutputStream fs = null;
 		try {
 			fs = new FileOutputStream(file);
@@ -106,17 +118,18 @@ public class AutoRecordingDrive extends CommandBase {
 		}
 		OutputStreamWriter ow = new OutputStreamWriter(fs);
 		BufferedWriter writer = new BufferedWriter(ow);
+		String output = "";
 		for (int i = 0; i < commands.size(); i++) {
-			try {
-				if (commands.get(i) == "straight")
-					writer.write("addSequential(new EncoderDrive(" + encoderTicks.get(i) + ", straightSpeed));");
-				else if (commands.get(i) == "straight")
-					writer.write("addSequential(new EncoderTurn(" + encoderTicks.get(i) + "));");
-			} catch (IOException e) {
-			}
+			output += commands.get(i) + " " + encoderTicks.get(i) + "\n";
 		}
+		output += "done";
 		try {
+			ow.write(output);
+			ow.flush();
+			ow.flush();
 			writer.flush();
+			ow.close();
+			writer.close();
 			fs.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
 		middlePositionChooser.addDefault("Left", MiddlePosition.Left);
 		middlePositionChooser.addObject("Right", MiddlePosition.Right);
 		middlePositionChooser.addObject("No-Break", MiddlePosition.Stay);
-		SmartDashboard.putData("Recording?", recordingChooser);
+		SmartDashboard.putData("Recording", recordingChooser);
 		SmartDashboard.putData("Alliance", allianceChooser);
 		SmartDashboard.putData("Position", positionChooser);
 		SmartDashboard.putData("MiddlePosition", middlePositionChooser);

@@ -45,7 +45,7 @@ public class Autonomous extends CommandGroup {
 	 * @param alliance
 	 *            enum: Blue, Red
 	 */
-	@SuppressWarnings("incomplete-switch")
+	@SuppressWarnings({ "incomplete-switch", "resource" })
 	public Autonomous(final Robot.Recording recording, final Robot.Position position, final Robot.MiddlePosition middlePosition, final Robot.Alliance alliance) {
 		new GearShiftLow();
 		double straightSpeed = 0.6;
