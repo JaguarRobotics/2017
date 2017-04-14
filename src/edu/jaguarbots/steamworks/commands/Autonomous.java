@@ -98,7 +98,6 @@ public class Autonomous extends CommandGroup {
 								addSequential(new EncoderDrive(ds.getAdjustedLength(53), .5));// 31 from turn to airship //53 KC regional for 64 inches
 								addSequential(new DrivePause(1000));
 								addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
-
 								break;
 						}
 						break;
@@ -135,7 +134,6 @@ public class Autonomous extends CommandGroup {
 								addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
 								break;
 						}
-						System.out.println("Right Ran");
 						break;
 					case None:
 						break;
