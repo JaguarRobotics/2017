@@ -25,9 +25,12 @@ public class AutoRecordingDrive extends CommandBase {
 	private ArrayList<String> commands = new ArrayList<String>();
 	private ArrayList<Double> encoderTicks = new ArrayList<Double>();
 	private boolean isTurning = false;
+	private double ju = 0;
 
 	@Override
 	protected void initialize() {
+		commands = new ArrayList<String>();
+		encoderTicks = new ArrayList<Double>();
 		driveSubsystem.resetEncoders(true, true);
 		driveSubsystem.startEncoders();
 	}
@@ -53,7 +56,7 @@ public class AutoRecordingDrive extends CommandBase {
 		double ju2 = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1;
 		boolean isTurn = (Math.abs(ju1) > Math.abs(ju2)) ? false : true;
 		double ju = isTurn ? ju2 : ju1;
-		ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1;
+		// ju = (Math.abs(j0) > Math.abs(j1)) ? j0 : j1;
 		double aju = Math.abs(ju);
 		double pju = Math.pow(aju, powNum);
 		if (Math.abs(pju) > aju)
@@ -69,18 +72,33 @@ public class AutoRecordingDrive extends CommandBase {
 		}
 		left = driveSubsystem.getEncoderLeft();
 		right = driveSubsystem.getEncoderRight();
-		if (isTurning != isTurn) {
-			if (isTurn)
+		if (isTurning != isTurn || (this.ju / Math.abs(this.ju)) != (ju / Math.abs(ju))) {
+			if (isTurning)
 				commands.add("turn");
 			else
 				commands.add("straight");
-			double jrsgn = driveSubsystem.getEncoderRight() / Math.abs(driveSubsystem.getEncoderRight());
+			double jrsgn = 1;
+			if (isTurn) {
+				if (ju > 0) {
+					jrsgn = 1;
+				} else {
+					jrsgn = -1;
+				}
+			} else {
+				if (ju > 0) {
+					jrsgn = 1;
+				} else {
+					jrsgn = -1;
+				}
+			}
+			// (encoderRight == 0) ? 1 : encoderRight / Math.abs(encoderRight);
 			double average = (Math.abs(driveSubsystem.getEncoderLeft()) + Math.abs(driveSubsystem.getEncoderRight())) / 2;
-			encoderTicks.add(jrsgn * average);
+			encoderTicks.add(jrsgn * average); // jrsgn *
 			driveSubsystem.resetEncoders(true, true);
 			driveSubsystem.startEncoders();
 		}
 		isTurning = isTurn;
+		this.ju = ju;
 		end();
 	}
 
@@ -105,6 +123,9 @@ public class AutoRecordingDrive extends CommandBase {
 		// }
 		File file = new File("/home/lvuser/Test" + ".txt");
 		System.out.println(file.getAbsolutePath());
+		if (file.exists()) {
+			file.delete();
+		}
 		try {
 			file.createNewFile();
 		} catch (IOException e3) {
