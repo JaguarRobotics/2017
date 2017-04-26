@@ -7,6 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Drives the robot in teleop based on left and right joystick inputs.
  */
 public class DriveTank extends CommandBase {
+	/**
+	 * Below is an image of the idea we are using for joystick vs motor power.
+	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 */
 	public DriveTank() {
 		requires(driveSubsystem);
 	}
@@ -15,47 +19,51 @@ public class DriveTank extends CommandBase {
 	double right;
 
 	// Called just before this Command runs the first time
-	@Override
+    @Override
 	protected void initialize() {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
+	/**
+	 * Below is an image of the idea we are using for joystick vs motor power.
+	 * <html><img src="https://puu.sh/tEhvx/a211c4f7a1.png"></img></html>
+	 */
 	@Override
 	@SuppressWarnings("deprecation")
-	protected void execute() {
+    protected void execute() {
 		SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
 		SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
 		double powNum = 2;
 		double pointNum = SmartDashboard.getNumber("Joystick Tolerance");
-		double joystick0 = oi.Joystick0.getY() * pointNum;
-		double joystick1 = oi.Joystick1.getY() * pointNum;
-		double absoluteOfJoystick0 = Math.abs(joystick0);
-		double absoluteOfJoystick1 = Math.abs(joystick1);
-		double powerOfJoystick0 = Math.pow(absoluteOfJoystick0, powNum);
-		double powerOfJoystick1 = Math.pow(absoluteOfJoystick1, powNum);
-		if (Math.abs(powerOfJoystick0) > absoluteOfJoystick0)
-			powerOfJoystick0 = absoluteOfJoystick0;
-		if (Math.abs(powerOfJoystick1) > absoluteOfJoystick1)
-			powerOfJoystick1 = absoluteOfJoystick1;
-		left = (powerOfJoystick0 * (absoluteOfJoystick0 / joystick0)) / pointNum;
-		right = (powerOfJoystick1 * (absoluteOfJoystick1 / joystick1)) / pointNum;
+		double j0 = oi.Joystick0.getY() * pointNum;
+		double j1 = oi.Joystick1.getY() * pointNum;
+		double aj0 = Math.abs(j0);
+		double aj1 = Math.abs(j1);
+		double pj0 = Math.pow(aj0, powNum);
+		double pj1 = Math.pow(aj1, powNum);
+		if (Math.abs(pj0) > aj0)
+			pj0 = aj0;
+		if (Math.abs(pj1) > aj1)
+			pj1 = aj1;
+		left = (pj0 * (aj0 / j0)) / pointNum;
+		right = (pj1 * (aj1 / j1)) / pointNum;
 		driveSubsystem.driveTank(-left, -right);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	@Override
+    @Override
 	protected boolean isFinished() {
 		return false;
 	}
 
 	// Called once after isFinished returns true
-	@Override
+    @Override
 	protected void end() {
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-	@Override
+    @Override
 	protected void interrupted() {
 	}
 }

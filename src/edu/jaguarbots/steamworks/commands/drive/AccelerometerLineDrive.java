@@ -4,7 +4,8 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.net.Accelerometer;
 
 /**
- * Drives the robot in a straight line based on the values from the accelerometer
+ * Drives the robot in a straight line based on the values from the
+ * accelerometer
  * 
  * @author Zach Deibert
  * @since 2017
@@ -63,7 +64,8 @@ public class AccelerometerLineDrive extends CommandBase {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(Math.atan2(targetY - Accelerometer.getY(), targetX - Accelerometer.getX()) - Accelerometer.getRotation()) > Math.PI / 2;
+		return Math.abs(Math.atan2(targetY - Accelerometer.getY(), targetX - Accelerometer.getX())
+				- Accelerometer.getRotation()) > Math.PI / 2;
 	}
 
 	@Override

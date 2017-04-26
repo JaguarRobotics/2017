@@ -10,38 +10,38 @@ public class DriveArcade extends CommandBase {
 		requires(driveSubsystem);
 	}
 
-	/**
-	 * left motor power to pass to the driveSubsystem.driveTank().
-	 * 
-	 * @since 2017
-	 */
+    /**
+     * left motor power to pass to the driveSubsystem.driveTank().
+     * 
+     * @since 2017
+     */
 	double left;
-	/**
-	 * right motor power to pass to the driveSubsystem.driveTank().
-	 * 
-	 * @since 2017
-	 */
+    /**
+     * right motor power to pass to the driveSubsystem.driveTank().
+     * 
+     * @since 2017
+     */
 	double right;
-	/**
-	 * the percentage of the x axis push amount on the joystick
-	 * 
-	 * @since 2017
-	 */
+    /**
+     * the percentage of the x axis push amount on the joystick
+     * 
+     * @since 2017
+     */
 	double stickX;
-	/**
-	 * the percentage of the y axis push amount on the joystick
-	 * 
-	 * @since 2017
-	 */
+    /**
+     * the percentage of the y axis push amount on the joystick
+     * 
+     * @since 2017
+     */
 	double stickY;
 
 	// Called just before this Command runs the first time
-	@Override
+    @Override
 	protected void initialize() {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	@Override
+    @Override
 	protected void execute() {
 		stickX = oi.Joystick1.getX();
 		stickY = oi.Joystick1.getY();
@@ -51,19 +51,19 @@ public class DriveArcade extends CommandBase {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	@Override
+    @Override
 	protected boolean isFinished() {
 		return false;
 	}
 
 	// Called once after isFinished returns true
-	@Override
+    @Override
 	protected void end() {
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-	@Override
+    @Override
 	protected void interrupted() {
 	}
 }

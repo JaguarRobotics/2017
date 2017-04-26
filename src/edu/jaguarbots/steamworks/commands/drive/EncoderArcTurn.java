@@ -50,6 +50,14 @@ public class EncoderArcTurn extends CommandBase {
 			right = speed;
 		}
 		driveSubsystem.driveTank(left < 0 ? 0 : left, right < 0 ? 0 : right);
+		// if (angle > 0)
+		// {
+		// driveSubsystem.driveTank(-speed, speed);
+		// }
+		// else if (angle < 0)
+		// {
+		// driveSubsystem.driveTank(-speed, speed);
+		// }
 	}
 
 	@Override
@@ -59,6 +67,9 @@ public class EncoderArcTurn extends CommandBase {
 		if (counter % 5 == 0)
 			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
 		return Math.max(left, right) > arclength;
+		// return Math.max(driveSubsystem.getDistanceInInches(left),
+		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
+		// ROBOT_WIDTH / 2;
 	}
 
 	@Override
@@ -75,14 +86,17 @@ public class EncoderArcTurn extends CommandBase {
 	 * Default constructor
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left, negative is to the right)
+	 *            The angle to turn in radians (positive is to the left,
+	 *            negative is to the right)
 	 * @param speed
 	 *            The speed at which to turn
 	 * @since 2017
 	 */
 	public EncoderArcTurn(double angle, double speed) {
 		requires(driveSubsystem);
+		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
+		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);
 		this.arclength = Math.abs(angle * 13.25);
 	}
 
@@ -90,7 +104,8 @@ public class EncoderArcTurn extends CommandBase {
 	 * Turns the robot at a speed of 0.7
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left, negative is to the right)
+	 *            The angle to turn in radians (positive is to the left,
+	 *            negative is to the right)
 	 * @since 2017
 	 */
 	public EncoderArcTurn(double angle) {

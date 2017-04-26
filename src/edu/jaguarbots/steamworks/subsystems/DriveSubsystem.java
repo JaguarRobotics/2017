@@ -1,7 +1,5 @@
 package edu.jaguarbots.steamworks.subsystems;
 
-import edu.jaguarbots.steamworks.Robot;
-import edu.jaguarbots.steamworks.commands.drive.AutoRecordingDrive;
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -9,12 +7,13 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- * @author Brian, Nathan G, Zach D. Drive subsystem holds all of methods used in the commands for drive
- * @since 2017
+ *  @author Brian, Nathan G, Zach D.
+ *  Drive subsystem holds all of methods used in the commands for drive
+ *  @since 2017
  */
 public class DriveSubsystem extends SubsystemBase {
 
-	static {
+	static { 
 		System.out.println("inside sybsustem");
 	}
 	/**
@@ -36,30 +35,31 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Encoder on left side of drive
 	 */
 	private Encoder leftEncoder = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
-
+	
 	/**
 	 * Encoder on right side of drive
 	 */
 	private Encoder rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
-
+	
 	/**
 	 * distance left encoder has traveled.
 	 */
 	private double leftEncoderValue;
-
+	
 	/**
 	 * distance right encoder has traveled.
 	 */
 	private double rightEncoderValue;
-
+	
 	/**
 	 * array of encoder values with left occupying 0, and right occupying 1.
 	 */
 	private double[] encoderValues = { leftEncoderValue, rightEncoderValue };
-
+	
 	/**
 	 * Diameter of pulleys, used for encoder calculations. (in inches)
 	 */
+	// TODO change to diameter of pulleys
 	public double diameter = 6;
 
 	/**
@@ -75,7 +75,6 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Counter used to count in get motor powers
 	 */
 	int counter = 0;
-
 	/**
 	 * 
 	 * @param encoderTicks
@@ -99,29 +98,28 @@ public class DriveSubsystem extends SubsystemBase {
 		return result;
 	}
 
-	public void initEncoders() {
+	public void initEncoders()
+	{
 		leftEncoder.free();
 		rightEncoder.free();
 		leftEncoder = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
 		rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
 	}
-
+	
 	/**
 	 * 
 	 * @param radians
-	 *            The amount of radians the robot is going to go
+	 * 			The amount of radians the robot is going to go
 	 * @returns the amount of encoder ticks from from radians.
 	 */
 	public double getEncoderTicksFromRadians(double radians) {
 		double result = getEncoderTicksFromInches(radians * ROBOT_WIDTH / 2);
 		return result;
 	}
-
 	/**
 	 * Calculates the amount of radians that is equivilant to a passed in number of degrees
-	 * 
 	 * @param degrees
-	 *            The degrees that the robot should turn
+	 * 			The degrees that the robot should turn
 	 * @return The amount of radians per the amount of degrees passed in
 	 */
 	public double getRadiansFromDegrees(double degrees) {
@@ -129,7 +127,8 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Calculates motor powers for adjusted driving <html>you can view the math below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
+	 * Calculates motor powers for adjusted driving <html>you can view the math
+	 * below<img src="https://puu.sh/tO9Si/990853f967.png"></img></html>
 	 * 
 	 * @return returns an array of powers with left in slot 0 & right in slot 1
 	 */
@@ -137,6 +136,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double left = Math.abs(getEncoderLeft());
 		double right = Math.abs(getEncoderRight());
 		double diff = Math.abs(right - left + 1);
+//		double addition = right + left + 1;
 		double percentage = (diff * 3) / ((right > left) ? right + 1 : left + 1);
 		percentage = Math.min(percentage, 1);
 		double powers[] = new double[2];
@@ -148,15 +148,16 @@ public class DriveSubsystem extends SubsystemBase {
 			powers[1] = 1;
 		}
 		if (counter % 5 == 0)
-			counter++;
+//			System.out.println(left + ", " + right + "	" + percentage);
+		counter++;
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}
-
+	
 	/**
-	 * Corrects the number that is passed in from DriveTurn and converts it into a distance that will not cause the robot to not go way over the amount that it is supposed to. Put the amount you want to go into Desmos with the equation and the intersect is the number you want to pass into EncoderDrive
-	 * 
+	 * Corrects the number that is passed in from DriveTurn and converts it into a distance that will not cause the robot to not go way over the amount that it is supposed to.
+	 * Put the amount you want to go into Desmos with the equation and the intersect is the number you want to pass into EncoderDrive
 	 * @param x
-	 * @return
+	 * @return 
 	 */
 	public double getAdjustedLength(double x) {
 		double x2 = x * x;
@@ -166,10 +167,14 @@ public class DriveSubsystem extends SubsystemBase {
 		double x6 = x5 * x;
 		double x7 = x6 * x;
 		double x8 = x7 * x;
-		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6 + 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2 + 1.31593 * x;
-		/*
-		 * Copy and Paste into Desmos The y value is the actual value. The x value is the inputed value. y = 0.000000000000013994666666667x^8 - 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6 + 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 - 0.0000303244x^3 - 0.00191811x^2 + 1.31593x
-		 */
+		return 0.000000000000013994666666667 * x8 - 0.0000000000001284063492063 * x7 - 0.00000000025159111111112 * x6
+				+ 0.0000000027022222222223 * x5 + 0.0000013007555555556 * x4 - 0.0000303244 * x3 - 0.00191811 * x2
+				+ 1.31593 * x;
+		/*  Copy and Paste into Desmos
+		    The y value is the actual value.
+		    The x value is the inputed value.
+		y = 0.000000000000013994666666667x^8 - 0.0000000000001284063492063x^7 - 0.00000000025159111111112x^6
+		+ 0.0000000027022222222223x^5 + 0.0000013007555555556x^4 - 0.0000303244x^3 - 0.00191811x^2 + 1.31593x */
 	}
 
 	/**
@@ -198,7 +203,8 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * gets encoder values
 	 * 
-	 * @return array of encoder values with left occupying slot 0, and right occupying slot 1
+	 * @return array of encoder values with left occupying slot 0, and right
+	 *         occupying slot 1
 	 */
 	public double[] getEncoders() {
 		leftEncoderValue = leftEncoder.getDistance();
@@ -208,7 +214,8 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Drives the robot based on left and right speeds. Calls adjusted driving when 1 or -1
+	 * Drives the robot based on left and right speeds. Calls adjusted driving
+	 * when 1 or -1
 	 * 
 	 * @param left
 	 *            speed
@@ -275,10 +282,6 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Sets the default command of the subsystem.
 	 */
 	public void initDefaultCommand() {
-//		if (Robot.recordingChooser.getSelected() == Robot.Recording.RecordNewAuto) {
-			setDefaultCommand(new AutoRecordingDrive());
-//		} else {
-//			setDefaultCommand(new DriveTank());
-//		}
+		setDefaultCommand(new DriveTank());
 	}
 }

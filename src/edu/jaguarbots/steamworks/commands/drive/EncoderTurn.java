@@ -23,9 +23,9 @@ public class EncoderTurn extends CommandBase {
 	 * @since 2017
 	 */
 	private double arclength;
-	/**
-	 * The width of the base of the wheels on the robot
-	 */
+
+	private int counter = 0;
+	
 	private final double WHEELBASE_WIDTH = 18.0;
 
 	@Override
@@ -44,13 +44,26 @@ public class EncoderTurn extends CommandBase {
 			driveSubsystem.driveTank(-speed * powers[0], speed * powers[1]);
 		else
 			driveSubsystem.driveTank(-speed, speed);
+		// if (angle > 0)
+		// {
+		// driveSubsystem.driveTank(-speed, speed);
+		// }
+		// else if (angle < 0)
+		// {
+		// driveSubsystem.driveTank(-speed, speed);
+		// }
 	}
 
 	@Override
 	protected boolean isFinished() {
 		double left = Math.abs(driveSubsystem.getEncoderLeft());
 		double right = Math.abs(driveSubsystem.getEncoderRight());
+//		if (counter % 5 == 0)
+//			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
 		return Math.max(left, right) > arclength;
+		// return Math.max(driveSubsystem.getDistanceInInches(left),
+		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
+		// ROBOT_WIDTH / 2;
 	}
 
 	@Override
@@ -67,14 +80,18 @@ public class EncoderTurn extends CommandBase {
 	 * Default constructor
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left, negative is to the right)
+	 *            The angle to turn in radians (positive is to the left,
+	 *            negative is to the right)
 	 * @param speed
 	 *            The speed at which to turn
 	 * @since 2017
 	 */
 	public EncoderTurn(double angle, double speed) {
 		requires(driveSubsystem);
+		// this.speed = speed;
 		this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
+		// this.arclength = Math.abs(angle * ROBOT_WIDTH / 2);
+		// this.arclength = Math.abs(angle * 13.25);
 		this.arclength = Math.abs(angle * WHEELBASE_WIDTH / 2);
 	}
 
@@ -82,7 +99,8 @@ public class EncoderTurn extends CommandBase {
 	 * Turns the robot at a speed of 0.7
 	 * 
 	 * @param angle
-	 *            The angle to turn in radians (positive is to the left, negative is to the right)
+	 *            The angle to turn in radians (positive is to the left,
+	 *            negative is to the right)
 	 * @since 2017
 	 */
 	public EncoderTurn(double angle) {

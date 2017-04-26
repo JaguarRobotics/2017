@@ -20,7 +20,8 @@ public class IOFactory {
 	 * Creates a motor
 	 * 
 	 * @param channel
-	 *            The PWM channel that the motor is attached to. 0-9 are on-board, 10-19 are on the MXP port
+	 *            The PWM channel that the motor is attached to. 0-9 are
+	 *            on-board, 10-19 are on the MXP port
 	 * @param motor
 	 *            The type of motor to create
 	 * @return The motor object
@@ -28,20 +29,20 @@ public class IOFactory {
 	 */
 	public static SpeedController motor(int channel, MotorID motor) {
 		switch (motor) {
-			case CANTJaguar:
-				return new Jaguar(channel);
-			case SD540:
-				return new SD540(channel);
-			case Spark:
-				return new Spark(channel);
-			case Talon:
-				return new Talon(channel);
-			case Victor:
-				return new Victor(channel);
-			case VictorSP:
-				return new VictorSP(channel);
-			default:
-				throw new UnsupportedOperationException("Invalid motor type");
+		case CANTJaguar:
+			return new Jaguar(channel);
+		case SD540:
+			return new SD540(channel);
+		case Spark:
+			return new Spark(channel);
+		case Talon:
+			return new Talon(channel);
+		case Victor:
+			return new Victor(channel);
+		case VictorSP:
+			return new VictorSP(channel);
+		default:
+			throw new UnsupportedOperationException("Invalid motor type");
 		}
 	}
 }

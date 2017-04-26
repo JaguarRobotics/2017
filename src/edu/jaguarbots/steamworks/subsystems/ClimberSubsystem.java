@@ -14,33 +14,28 @@ public class ClimberSubsystem extends SubsystemBase {
 	 * Motor for ascending and descending
 	 */
 	private SpeedController climberMotor = motor(CLIMBER_MOTOR_PORT, CLIMBER_MOTOR_TYPE);
-
 	/**
 	 * The subsystem that holds all of the methods needed for the climber
 	 */
 	public ClimberSubsystem() {
 	}
-
 	/**
 	 * What the subsystem will do when initialized
 	 */
 	public void initDefaultCommand() {
 	}
-
 	/**
 	 * Makes climber motor turn forward
 	 */
 	public void motorForward() {
 		climberMotor.set(1.0);
 	}
-
 	/**
 	 * Makes motor stop running and stop accepting input
 	 */
 	public void stopMotor() {
 		climberMotor.stopMotor();
 	}
-
 	/**
 	 * Makes climber motor turn backward
 	 */

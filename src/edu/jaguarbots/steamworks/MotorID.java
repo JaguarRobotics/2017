@@ -33,7 +33,9 @@ public enum MotorID {
 	 */
 	Talon,
 	/**
-	 * VEX Robotics Victor 888 Speed Controller. The Vex Robotics Victor 884 Speed Controller can also be used with this class but may need to be calibrated per the Victor 884 user manual.
+	 * VEX Robotics Victor 888 Speed Controller. The Vex Robotics Victor 884
+	 * Speed Controller can also be used with this class but may need to be
+	 * calibrated per the Victor 884 user manual.
 	 * 
 	 * @since 2017
 	 */
