@@ -2,6 +2,8 @@ package edu.jaguarbots.steamworks;
 
 import edu.jaguarbots.steamworks.commands.climber.Ascend;
 import edu.jaguarbots.steamworks.commands.climber.Descend;
+import edu.jaguarbots.steamworks.commands.drive.GateValveClosed;
+import edu.jaguarbots.steamworks.commands.drive.GateValveOpen;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftHigh;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
 import edu.wpi.first.wpilibj.Joystick;
@@ -27,8 +29,10 @@ public class OI implements RobotMap {
 		// manipulator controls
 		ManipulatorXbox_A.whileHeld(new Ascend());
 		ManipulatorXbox_Y.whileHeld(new Descend());
-		ManipulatorXbox_LB.whileHeld(new GearShiftHigh());
-		ManipulatorXbox_RB.whileHeld(new GearShiftLow());
+        ManipulatorXbox_LB.whileHeld(new GearShiftHigh());
+        ManipulatorXbox_RB.whileHeld(new GearShiftLow());
+        ManipulatorXbox_Back.whileHeld(new GateValveOpen());
+        ManipulatorXbox_Start.whileHeld(new GateValveClosed());
 		// Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
 		// Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}

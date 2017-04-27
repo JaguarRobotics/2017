@@ -67,10 +67,15 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	private int ppr = (int) (400 * 3 * (36 / 39.5));
 
-	/**
-	 * Solenoid to shift gears.
-	 */
-	private static Solenoid gearSol = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
+    /**
+     * Solenoid to shift gears.
+     */
+    private static Solenoid gearSol = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
+
+    /**
+     * Solenoid to shift gears.
+     */
+    private static Solenoid gateValveSol = new Solenoid(GATE_VALVE_PORT);
 	/**
 	 * Counter used to count in get motor powers
 	 */
@@ -264,19 +269,33 @@ public class DriveSubsystem extends SubsystemBase {
 		return gearSol.get();
 	}
 
-	/**
-	 * Extends solenoid to shift gears on wheels.
-	 */
-	public static void gearShiftHigh() {
-		gearSol.set(false);
-	}
+    /**
+     * Extends solenoid to shift gears on wheels.
+     */
+    public static void gearShiftHigh() {
+        gearSol.set(false);
+    }
 
-	/**
-	 * Retracts solenoid to shift back gear on wheels.
-	 */
-	public static void gearShiftLow() {
-		gearSol.set(true);
-	}
+    /**
+     * Retracts solenoid to shift back gear on wheels.
+     */
+    public static void gearShiftLow() {
+        gearSol.set(true);
+    }
+
+    /**
+     * Retracts solenoid to shift back gear on wheels.
+     */
+    public static void gateValveOpen() {
+        gateValveSol.set(true);
+    }
+
+    /**
+     * Extends solenoid to shift gears on wheels.
+     */
+    public static void gateValveClosed() {
+        gateValveSol.set(false);
+    }
 
 	/**
 	 * Sets the default command of the subsystem.

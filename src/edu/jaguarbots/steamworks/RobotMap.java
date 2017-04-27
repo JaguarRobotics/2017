@@ -41,4 +41,5 @@ public interface RobotMap {
 	public static final int CLIMBER_LIMIT_SWITCH_PORT = 5001;
 	// Gear Shifting Solenoid is on "pcm" port 0.
 	public static final int SOLENOID_GEAR_SHIFT_PORT = 0;
+	public static final int GATE_VALVE_PORT = 1;
 }
