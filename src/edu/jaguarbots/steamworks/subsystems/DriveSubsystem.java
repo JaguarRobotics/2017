@@ -72,6 +72,10 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	private static Solenoid gearSol = new Solenoid(SOLENOID_GEAR_SHIFT_PORT);
 	/**
+	 * Solenoid to open gear door.
+	 */
+	private static Solenoid gearDoor = new Solenoid(SOLENOID_GEAR_DOOR_PORT);
+	/**
 	 * Counter used to count in get motor powers
 	 */
 	int counter = 0;
@@ -137,7 +141,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double right = Math.abs(getEncoderRight());
 		double diff = Math.abs(right - left + 1);
 //		double addition = right + left + 1;
-		double percentage = (diff * 3) / ((right > left) ? right + 1 : left + 1);
+		double percentage = (diff * 3) / ((right >= left) ? right + 1 : left);
 		percentage = Math.min(percentage, 1);
 		double powers[] = new double[2];
 		if (right > left) {
@@ -269,6 +273,7 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	public static void gearShiftHigh() {
 		gearSol.set(false);
+		System.out.println("I RAN HIGH!");
 	}
 
 	/**
@@ -276,8 +281,23 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	public static void gearShiftLow() {
 		gearSol.set(true);
+		System.out.println("I RAN LOW!");
 	}
 
+	/**
+	 * Extends solenoid to shift gears on wheels.
+	 */
+	public static void gearDoorClose() {
+		gearDoor.set(false);
+	}
+
+	/**
+	 * Retracts solenoid to shift back gear on wheels.
+	 */
+	public static void gearDoorOpen() {
+		gearDoor.set(true);
+	}
+	
 	/**
 	 * Sets the default command of the subsystem.
 	 */

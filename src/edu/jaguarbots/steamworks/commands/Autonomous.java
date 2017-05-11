@@ -4,6 +4,8 @@ import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.DrivePause;
 import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
 import edu.jaguarbots.steamworks.commands.drive.EncoderTurn;
+import edu.jaguarbots.steamworks.commands.drive.GearDoorClose;
+import edu.jaguarbots.steamworks.commands.drive.GearDoorOpen;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -43,7 +45,8 @@ public class Autonomous extends CommandGroup {
 	@SuppressWarnings("incomplete-switch")
 	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts, final Robot.Alliance alliance) {
-		new GearShiftLow();
+//		addSequential(new GearDoorOpen());
+		addSequential(new GearShiftLow());
 		double straightSpeed = 0.6;
 		double turnSpeed = 0.7;
 		DriveSubsystem ds = CommandBase.driveSubsystem;
@@ -72,9 +75,9 @@ public class Autonomous extends CommandGroup {
 //			 Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(ds.getAdjustedLength(64),straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
+			addSequential(new EncoderDrive(81,straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
 			addSequential(new DrivePause(1000));
-			addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
+			addSequential(new EncoderDrive(5, straightSpeed));
 			
 			System.out.println(middlePosition);
 			if(middlePosition != Robot.MiddlePosition.Stay)
@@ -127,5 +130,7 @@ public class Autonomous extends CommandGroup {
 //		if (doughnuts == Robot.Doughnuts.Yes)
 //			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
 		addSequential(new GearShiftLow());
+		addSequential(new GearDoorClose());
+		
 	}
 }
