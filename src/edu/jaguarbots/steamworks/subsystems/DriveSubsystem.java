@@ -1,5 +1,6 @@
 package edu.jaguarbots.steamworks.subsystems;
 
+import edu.jaguarbots.steamworks.OversampledEncoder;
 import edu.jaguarbots.steamworks.commands.drive.DriveTank;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -34,12 +35,12 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * Encoder on left side of drive
 	 */
-	private Encoder leftEncoder = new Encoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
+	private Encoder leftEncoder = new OversampledEncoder(LEFT_ENCODER_CHANNEL_A, LEFT_ENCODER_CHANNEL_B);
 	
 	/**
 	 * Encoder on right side of drive
 	 */
-	private Encoder rightEncoder = new Encoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
+	private Encoder rightEncoder = new OversampledEncoder(RIGHT_ENCODER_CHANNEL_A, RIGHT_ENCODER_CHANNEL_B);
 	
 	/**
 	 * distance left encoder has traveled.
