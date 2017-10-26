@@ -11,15 +11,12 @@ public class OversampledEncoder extends Encoder {
     public double getDistance() {
         double value = super.getDistance();
         values[frame % SAMPLES_TO_AVERAGE] = value;
-        if (++frame >= SAMPLES_TO_AVERAGE) {
-            double avg = 0;
-            for (double val : values) {
-                avg += val;
-            }
-            return avg / SAMPLES_TO_AVERAGE;
-        } else {
-            return value;
+        double sum = 0;
+        int numSamples = Math.min(SAMPLES_TO_AVERAGE, ++frame);
+        for (int i = 0; i < numSamples; ++i) {
+            sum += values[i];
         }
+        return sum / numSamples;
     }
 
     public OversampledEncoder(int channelA, int channelB) {
