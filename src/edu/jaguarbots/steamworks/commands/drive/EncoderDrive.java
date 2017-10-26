@@ -63,7 +63,7 @@ public class EncoderDrive extends CommandBase
     @Override
     protected void execute()
     {
-        boolean correctIt = true;
+        boolean correctIt = false;
         double[] powers = driveSubsystem.getMotorPowers();
         if (correctIt)
         {
@@ -87,10 +87,10 @@ public class EncoderDrive extends CommandBase
 //                        "Left " + CommandBase.driveSubsystem.getEncoderLeft());
 //        if (counter % 5 == 0) System.out.println("	Right "
 //                        + CommandBase.driveSubsystem.getEncoderRight());
-        counter++;
+//        counter++;
     }
 
-    int counter = 0;
+//    int counter = 0;
 
     @Override
     protected boolean isFinished()

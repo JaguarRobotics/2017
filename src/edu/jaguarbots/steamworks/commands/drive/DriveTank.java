@@ -47,6 +47,8 @@ public class DriveTank extends CommandBase {
 			pj1 = aj1;
 		left = (pj0 * (aj0 / j0)) / pointNum;
 		right = (pj1 * (aj1 / j1)) / pointNum;
+		System.out.print("Joystick: " + j0 + ", " + j1);
+		System.out.print("CodeNumber: " + left + ", " + right + "\n");
 		driveSubsystem.driveTank(-left, -right);
 	}
 

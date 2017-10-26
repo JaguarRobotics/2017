@@ -4,21 +4,22 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 
 /**
- *	Shifts the robot into low gear.
+ *	Closes the crappy idea of a door panel thing that Jacob made.
  *
- *	@author Max K
+ *	@author Brian Parks, Nathan Gawith, Kyle, K
  *	@since 2017
  */
-public class GearShiftLow extends CommandBase {
+public class GearDoorClose extends CommandBase {
 	/**
-	 *	Shifts the robot into low gear.
+	 *	Closes the crappy idea of a door panel thing that Jacob made.
 	 */
-	public GearShiftLow() {
+	public GearDoorClose() {
 		requires(driveSubsystem);
 	}
 	@Override
 	protected void initialize() {
-		DriveSubsystem.gearShiftLow();
+		DriveSubsystem.gearDoorClose();
+		System.out.println("I AM CLOSED!");
 	}
 
 	@Override
