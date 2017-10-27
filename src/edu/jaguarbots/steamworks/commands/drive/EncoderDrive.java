@@ -63,20 +63,25 @@ public class EncoderDrive extends CommandBase
     @Override
     protected void execute()
     {
-        boolean correctIt = false;
+        boolean correctIt = true;
         double[] powers = driveSubsystem.getMotorPowers();
         if (correctIt)
         {
+        	double adjSpeed = Math.min((double) ((distance - Math.abs(driveSubsystem.getEncoderLeft() + Math.abs(driveSubsystem.getEncoderRight())) / 2.)/distance)*.7 +.3, speed);
+        	System.out.printf("%2.4f %2.4f %2.4f %2.4f%n", distance, driveSubsystem.getEncoderLeft(), driveSubsystem.getEncoderRight(), (double) ((distance - Math.abs(driveSubsystem.getEncoderLeft() + Math.abs(driveSubsystem.getEncoderRight())) / 2.)/distance)*.7 +.3);
+        	System.out.println(adjSpeed);
 //            if( driveSubsystem.getEncoderLeft() >= Math.abs(distance)*.8 || (-1 * driveSubsystem.getEncoderRight()) >= Math.abs(distance)*.8){
-//                driveSubsystem.driveTank(adjustedSpeed * powers[0], adjustedSpeed * powers[1]);
+//                driveSubsystem.driveTank(.6 * powers[0], .6 * powers[1]);
 //            }
 //            else
 //            {
-                driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
+                driveSubsystem.driveTank(adjSpeed * powers[0], adjSpeed * powers[1]);
 //            }
         }
         else
         {
+        	System.out.println("Left Encoder " + CommandBase.driveSubsystem.getEncoderLeft() + ", Right Encoder " + CommandBase.driveSubsystem.getEncoderRight());
+        	System.out.printf("Encoder Values: %2.8f, %2.8f%n", CommandBase.driveSubsystem.getEncoderLeft(), CommandBase.driveSubsystem.getEncoderRight());
             driveSubsystem.driveTank(speed, speed);
             SmartDashboard.putNumber("EncoderLeft",
                             CommandBase.driveSubsystem.getEncoderLeft());
@@ -98,13 +103,11 @@ public class EncoderDrive extends CommandBase
         boolean isFinished = false;
         if (speed > 0)
         {
-            isFinished = driveSubsystem.getEncoderLeft() >= distance || (-1
-                            * driveSubsystem.getEncoderRight()) >= distance;
+            isFinished = (driveSubsystem.getEncoderLeft() + driveSubsystem.getEncoderRight()) / 2 >= distance;
         }
         else
         {
-            isFinished = driveSubsystem.getEncoderLeft() <= distance || (-1
-                            * driveSubsystem.getEncoderRight()) <= distance;
+            isFinished = (driveSubsystem.getEncoderLeft() + driveSubsystem.getEncoderRight()) / 2 <= distance;
         }
         return isFinished;
     }

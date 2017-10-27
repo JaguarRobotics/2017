@@ -75,9 +75,9 @@ public class Autonomous extends CommandGroup {
 //			 Run this auto if we place the robot on the middle of the airship. Also Position right means it will go to the right side while running through auto
 		case Middle:
 			boolean takeRightPath = middlePosition == Robot.MiddlePosition.Right ? true : false;
-			addSequential(new EncoderDrive(81,straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
+			addSequential(new EncoderDrive(40,straightSpeed)); // from wall to airship 111 1/2 inches //57.678 KC regional for 72 inches (Length minus robot length)
 			addSequential(new DrivePause(1000));
-			addSequential(new EncoderDrive(5, straightSpeed));
+//			addSequential(new EncoderDrive(5, straightSpeed));
 			
 			System.out.println(middlePosition);
 			if(middlePosition != Robot.MiddlePosition.Stay)
