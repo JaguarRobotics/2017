@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class EncoderDrive extends CommandBase
 {
+    private static final double CUTOFF_VALUE = 0.3;
     /**
      * The distance to travel
      * 
@@ -52,6 +53,10 @@ public class EncoderDrive extends CommandBase
         this.distance = distance;
         this.speed = (distance < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
     }
+    
+    private double distanceTraveled() {
+        return (Math.abs(driveSubsystem.getEncoderLeft()) + Math.abs(driveSubsystem.getEncoderRight())) / 2;
+    }
 
     @Override
     protected void initialize()
@@ -63,8 +68,9 @@ public class EncoderDrive extends CommandBase
     @Override
     protected void execute()
     {
-        boolean correctIt = false;
+        boolean correctIt = true;
         double[] powers = driveSubsystem.getMotorPowers();
+        double adjSpeed = Math.min(((distance - distanceTraveled()) / distance) * (1 - CUTOFF_VALUE) + CUTOFF_VALUE, speed);
         if (correctIt)
         {
 //            if( driveSubsystem.getEncoderLeft() >= Math.abs(distance)*.8 || (-1 * driveSubsystem.getEncoderRight()) >= Math.abs(distance)*.8){
@@ -72,7 +78,7 @@ public class EncoderDrive extends CommandBase
 //            }
 //            else
 //            {
-                driveSubsystem.driveTank(speed * powers[0], speed * powers[1]);
+                driveSubsystem.driveTank(adjSpeed * powers[0], adjSpeed * powers[1]);
 //            }
         }
         else
@@ -98,13 +104,11 @@ public class EncoderDrive extends CommandBase
         boolean isFinished = false;
         if (speed > 0)
         {
-            isFinished = driveSubsystem.getEncoderLeft() >= distance || (-1
-                            * driveSubsystem.getEncoderRight()) >= distance;
+            isFinished = distanceTraveled() >= distance;
         }
         else
         {
-            isFinished = driveSubsystem.getEncoderLeft() <= distance || (-1
-                            * driveSubsystem.getEncoderRight()) <= distance;
+            isFinished = distanceTraveled() <= distance;
         }
         return isFinished;
     }
