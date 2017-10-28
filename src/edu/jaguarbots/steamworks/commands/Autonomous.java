@@ -56,14 +56,18 @@ public class Autonomous extends CommandGroup {
 			{
 			case Blue:
 				addSequential(new EncoderDrive(ds.getAdjustedLength(83), straightSpeed));
-				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(120)));
+				addSequential(new DrivePause(1000));
+				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(60)));
+				addSequential(new DrivePause(1000));
 				addSequential(new EncoderDrive(ds.getAdjustedLength(47), straightSpeed));
 //				addSequential(new DrivePause(1000));
 //				addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
 				break;
 			case Red:
 				addSequential(new EncoderDrive(ds.getAdjustedLength(83), straightSpeed));
-				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-120)));
+				addSequential(new DrivePause(1000));
+				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-60)));
+				addSequential(new DrivePause(1000));
 				addSequential(new EncoderDrive(ds.getAdjustedLength(47), straightSpeed));
 //				addSequential(new DrivePause(1000));
 //				addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
@@ -95,14 +99,18 @@ public class Autonomous extends CommandGroup {
 			{
 			case Blue:
 				addSequential(new EncoderDrive(ds.getAdjustedLength(83), straightSpeed));
-				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-120)));
+				addSequential(new DrivePause(1000));
+				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-60)));
+				addSequential(new DrivePause(1000));
 				addSequential(new EncoderDrive(ds.getAdjustedLength(47), straightSpeed));
 //				addSequential(new DrivePause(1000));
 //				addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
 			break;
 			case Red:
 				addSequential(new EncoderDrive(ds.getAdjustedLength(83), straightSpeed));
-				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-120)));
+				addSequential(new DrivePause(1000));
+				addSequential(new EncoderTurn(ds.getRadiansFromDegrees(-60)));
+				addSequential(new DrivePause(1000));
 				addSequential(new EncoderDrive(ds.getAdjustedLength(47), straightSpeed));
 //				addSequential(new DrivePause(1000));
 //				addSequential(new EncoderDrive(ds.getAdjustedLength(2), .4));
@@ -122,7 +130,7 @@ public class Autonomous extends CommandGroup {
 		case None:
 		break;
 		case Forward:
-			addSequential(new EncoderDrive(ds.getAdjustedLength(74.7), straightSpeed));
+			addSequential(new EncoderDrive(ds.getAdjustedLength(100), straightSpeed));
 		break;
 		}
 //		Go and do doughnuts during autonomous
