@@ -60,7 +60,7 @@ public class EncoderTurn extends CommandBase {
 		double right = Math.abs(driveSubsystem.getEncoderRight());
 //		if (counter % 5 == 0)
 //			System.out.println("left: " + left + "  right: " + right + "  angle: " + arclength);
-		return Math.max(left, right) > arclength;
+		return Math.max(left, right) >= arclength;
 		// return Math.max(driveSubsystem.getDistanceInInches(left),
 		// driveSubsystem.getDistanceInInches(Math.abs(right))) > angle *
 		// ROBOT_WIDTH / 2;
