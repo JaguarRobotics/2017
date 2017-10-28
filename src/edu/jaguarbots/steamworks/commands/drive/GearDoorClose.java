@@ -1,7 +1,9 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
+import edu.jaguarbots.steamworks.Robot.Gate;
 import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *	Closes the crappy idea of a door panel thing that Jacob made.
@@ -33,6 +35,7 @@ public class GearDoorClose extends CommandBase {
 
 	@Override
 	protected void end() {
+        SmartDashboard.putString("Gate", Gate.Closed.toString());
 	}
 
 	@Override

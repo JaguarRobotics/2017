@@ -1,7 +1,9 @@
 package edu.jaguarbots.steamworks.commands.drive;
 
+import edu.jaguarbots.steamworks.Robot.Gear;
 import edu.jaguarbots.steamworks.commands.CommandBase;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *	Shifts the robot into high gear.
@@ -32,6 +34,7 @@ public class GearShiftHigh extends CommandBase {
 
 	@Override
 	protected void end() {
+        SmartDashboard.putString("Gear", Gear.High.toString());
 	}
 
 	@Override

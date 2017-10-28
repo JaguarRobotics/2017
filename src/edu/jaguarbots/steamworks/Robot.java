@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot
 {
+	private static final long START_TIME = System.currentTimeMillis();
     private Command               autonomousCommand;
     // vars for auto
     /**
@@ -80,7 +81,24 @@ public class Robot extends IterativeRobot
     {
         Yes, No
     }
-
+    /**
+     * enum constants of gate being open or closed
+     * 
+     * @since 2017
+     */
+    public enum Gate
+    {
+    	Open, Closed
+    }
+    /**
+     * enum constants of gear high or low
+     * 
+     * @since 2017
+     */
+    public enum Gear
+    {
+    	Low, High
+    }
     /**
      * This function is run when the robot is first started up and should be used for any initialization code.
      * We are using this to initialize CommandBase and to populate the SmartDashboard.
@@ -95,6 +113,7 @@ public class Robot extends IterativeRobot
         {
             e.printStackTrace();
         }
+        
         allianceChooser.addDefault("Blue", Alliance.Blue);
         allianceChooser.addObject("Red", Alliance.Red);
         SmartDashboard.putData("Alliance",allianceChooser);
@@ -118,11 +137,21 @@ public class Robot extends IterativeRobot
 //        SmartDashboard.putNumber("EncoderRight",
 //                        CommandBase.driveSubsystem.getEncoderRight());
         SmartDashboard.putNumber("Joystick Tolerance", 1);
+        SmartDashboard.putString("Gate", Gate.Open.toString());
+        SmartDashboard.putString("Gear", Gear.Low.toString());
+        SmartDashboard.putNumber("Time", 0);
+        
         // compresser.setClosedLoopControl(true); //should turn on the
         // compresser
     }
 
-    /**
+    @Override
+	public void robotPeriodic() {
+        SmartDashboard.putNumber("Time", ((double) (System.currentTimeMillis() - START_TIME)) / 1000.);
+		super.robotPeriodic();
+	}
+
+	/**
      * This function is called once each time the robot enters Disabled mode. You can use it to reset any subsystem
      * information you want to clear when the robot is disabled.
      */
