@@ -143,7 +143,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double right = Math.abs(getEncoderRight());
 		double diff = Math.abs(right - left + 1);
 //		double addition = right + left + 1;
-		double percentage = (diff * 3) / ((right >= left) ? right + 1 : left);
+		double percentage = (diff * 3) / ((right >= left) ? right + 1 : left)*2;
 		percentage = Math.min(percentage, 1);
 		double powers[] = new double[2];
 		if (right > left) {
