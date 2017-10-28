@@ -66,7 +66,7 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * pulses per rotation for the encoders.
 	 */
-	private int ppr = (int) (400 * 3 * (36 / 39.5));
+	private int ppr = (int) (400 * 3);
 
 	/**
 	 * Solenoid to shift gears.
@@ -99,7 +99,6 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	public double getEncoderTicksFromInches(double inches) {
 		double result = inches * (ppr / (Math.PI * diameter));
-		result = 317;
 		return result;
 	}
 
@@ -112,7 +111,9 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 	
 	/**
+	 * @param radians
 	 * 
+	 * @param radians
 	 * @param radians
 	 * 			The amount of radians the robot is going to go
 	 * @returns the amount of encoder ticks from from radians.
