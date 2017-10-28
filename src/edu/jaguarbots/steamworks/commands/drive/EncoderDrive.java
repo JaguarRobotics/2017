@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class EncoderDrive extends CommandBase
 {
-    private static final double CUTOFF_VALUE = 0.3;
+   private static final double CUTOFF_VALUE = 0.4;
     /**
      * The distance to travel
      * 
