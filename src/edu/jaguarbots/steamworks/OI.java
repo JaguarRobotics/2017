@@ -2,10 +2,10 @@ package edu.jaguarbots.steamworks;
 
 import edu.jaguarbots.steamworks.commands.climber.Ascend;
 import edu.jaguarbots.steamworks.commands.climber.Descend;
-import edu.jaguarbots.steamworks.commands.drive.GearDoorClose;
 import edu.jaguarbots.steamworks.commands.drive.GearDoorOpen;
-import edu.jaguarbots.steamworks.commands.drive.GearShiftHigh;
+import edu.jaguarbots.steamworks.commands.drive.GearDoorClose;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
+import edu.jaguarbots.steamworks.commands.drive.GearShiftHigh;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,17 +22,17 @@ public class OI implements RobotMap {
 													// in case, may be needed to
 													// remove rope)
 		Joystick1_Button1.whileHeld(new Descend());
-		Joystick0_Button3.whenPressed(new GearShiftLow()); // gear shifting
-		Joystick0_Button2.whenPressed(new GearShiftHigh());
-		Joystick1_Button3.whenPressed(new GearShiftLow());
-		Joystick1_Button2.whenPressed(new GearShiftHigh());
+		Joystick0_Button3.whenPressed(new GearShiftHigh()); // gear shifting
+		Joystick0_Button2.whenPressed(new GearShiftLow());
+		Joystick1_Button3.whenPressed(new GearShiftHigh());
+		Joystick1_Button2.whenPressed(new GearShiftLow());
 		// manipulator controls
 		ManipulatorXbox_A.whileHeld(new Ascend());
 		ManipulatorXbox_Y.whileHeld(new Descend());
-		ManipulatorXbox_LB.whileHeld(new GearShiftHigh());
-		ManipulatorXbox_RB.whileHeld(new GearShiftLow());
-		ManipulatorXbox_Back.whenPressed(new GearDoorOpen());
-		ManipulatorXbox_Start.whenPressed(new GearDoorClose());
+		ManipulatorXbox_LB.whileHeld(new GearShiftLow());
+		ManipulatorXbox_RB.whileHeld(new GearShiftHigh());
+		ManipulatorXbox_Back.whenPressed(new GearDoorClose());
+		ManipulatorXbox_Start.whenPressed(new GearDoorOpen());
 		// Joystick0_Button10.whenPressed(new EncoderDrive(36)); //for testing
 		// Joystick1_Button10.whenPressed(new EncoderDrive(36));
 	}

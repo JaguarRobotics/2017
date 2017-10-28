@@ -6,14 +6,14 @@ import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *	Shifts the robot into high gear.
+ *	Shifts the robot into low gear.
  *
  *	@author Max K
  *	@since 2017
  */
 public class GearShiftHigh extends CommandBase {
 	/**
-	 *	Shifts the robot into high gear.
+	 *	Shifts the robot into low gear.
 	 */
 	public GearShiftHigh() {
 		requires(driveSubsystem);
@@ -34,7 +34,7 @@ public class GearShiftHigh extends CommandBase {
 
 	@Override
 	protected void end() {
-        SmartDashboard.putString("Gear", Gear.Low.toString());
+        SmartDashboard.putString("Gear", Gear.High.toString());
 	}
 
 	@Override

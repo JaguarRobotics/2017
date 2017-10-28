@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class DriveSubsystem extends SubsystemBase {
 
 	static { 
-		System.out.println("inside sybsustem");
+		System.out.println("inside drive subsytem");
 	}
 	/**
 	 * left drive motor
@@ -153,8 +153,9 @@ public class DriveSubsystem extends SubsystemBase {
 			powers[0] = 1 - percentage;
 			powers[1] = 1;
 		}
-		if (counter % 5 == 0)
+		if (counter % 5 == 0) {
 //			System.out.println(left + ", " + right + "	" + percentage);
+		}
 		counter++;
 		return (counter > 5) ? powers : new double[] { 1, 1 };
 	}
@@ -276,7 +277,7 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Extends solenoid to shift gears on wheels.
 	 */
 	public static void gearShiftHigh() {
-		gearSol.set(false);
+		gearSol.set(true);
 		System.out.println("I RAN HIGH!");
 	}
 
@@ -284,7 +285,7 @@ public class DriveSubsystem extends SubsystemBase {
 	 * Retracts solenoid to shift back gear on wheels.
 	 */
 	public static void gearShiftLow() {
-		gearSol.set(true);
+		gearSol.set(false);
 		System.out.println("I RAN LOW!");
 	}
 

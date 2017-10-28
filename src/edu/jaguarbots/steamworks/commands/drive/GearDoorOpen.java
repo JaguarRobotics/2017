@@ -6,21 +6,21 @@ import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *	Opens the crappy idea of a door panel thing that Jacob made as high as Snoop Dogg.
+ *	Closes the crappy idea of a door panel thing that Jacob made.
  *
  *	@author Brian Parks, Nathan Gawith, Kyle, K
  *	@since 2017
  */
 public class GearDoorOpen extends CommandBase {
 	/**
-	 *	Lifts the crappy idea of a door panel thing that Jacob made.
+	 *	Closes the crappy idea of a door panel thing that Jacob made.
 	 */
 	public GearDoorOpen() {
 		requires(driveSubsystem);
 	}
 	@Override
 	protected void initialize() {
-		DriveSubsystem.gearDoorOpen();
+		DriveSubsystem.gearDoorClose();
 		System.out.println("I AM OPEN!");
 	}
 
@@ -35,7 +35,7 @@ public class GearDoorOpen extends CommandBase {
 
 	@Override
 	protected void end() {
-        SmartDashboard.putString("Gate", Gate.Closed.toString());
+        SmartDashboard.putString("Gate", Gate.Open.toString());
 	}
 
 	@Override

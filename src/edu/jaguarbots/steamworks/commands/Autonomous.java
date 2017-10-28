@@ -4,6 +4,7 @@ import edu.jaguarbots.steamworks.Robot;
 import edu.jaguarbots.steamworks.commands.drive.DrivePause;
 import edu.jaguarbots.steamworks.commands.drive.EncoderDrive;
 import edu.jaguarbots.steamworks.commands.drive.EncoderTurn;
+import edu.jaguarbots.steamworks.commands.drive.GearDoorOpen;
 import edu.jaguarbots.steamworks.commands.drive.GearDoorClose;
 import edu.jaguarbots.steamworks.commands.drive.GearShiftLow;
 import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
@@ -44,7 +45,7 @@ public class Autonomous extends CommandGroup {
 	@SuppressWarnings("incomplete-switch")
 	public Autonomous(final Robot.Position position, final Robot.MiddlePosition middlePosition,
 			final Robot.Doughnuts doughnuts, final Robot.Alliance alliance) {
-//		addSequential(new GearDoorOpen());
+		addSequential(new GearDoorClose());
 		addSequential(new GearShiftLow());
 		double straightSpeed = 0.6;
 		double turnSpeed = 0.7;
@@ -137,7 +138,7 @@ public class Autonomous extends CommandGroup {
 //		if (doughnuts == Robot.Doughnuts.Yes)
 //			addSequential(new EncoderTurn(ds.getRadiansFromDegrees(314159), 1));
 		addSequential(new GearShiftLow());
-		addSequential(new GearDoorClose());
+		addSequential(new GearDoorOpen());
 		
 	}
 }
