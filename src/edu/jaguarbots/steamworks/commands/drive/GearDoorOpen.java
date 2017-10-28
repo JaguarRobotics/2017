@@ -35,7 +35,7 @@ public class GearDoorOpen extends CommandBase {
 
 	@Override
 	protected void end() {
-        SmartDashboard.putString("Gate", Gate.Open.toString());
+        SmartDashboard.putString("Gate", Gate.Closed.toString());
 	}
 
 	@Override

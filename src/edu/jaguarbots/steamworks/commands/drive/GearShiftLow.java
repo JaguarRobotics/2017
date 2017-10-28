@@ -34,7 +34,7 @@ public class GearShiftLow extends CommandBase {
 
 	@Override
 	protected void end() {
-        SmartDashboard.putString("Gear", Gear.Low.toString());
+        SmartDashboard.putString("Gear", Gear.High.toString());
 	}
 
 	@Override
