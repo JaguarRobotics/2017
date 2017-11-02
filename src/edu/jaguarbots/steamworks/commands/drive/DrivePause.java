@@ -8,8 +8,7 @@ import edu.jaguarbots.steamworks.commands.CommandBase;
  * @author Brian Parks
  * @since 2017
  */
-public class DrivePause extends CommandBase
-{
+public class DrivePause extends CommandBase {
     /**
      * Time to wait in milliseconds
      * 
@@ -22,49 +21,31 @@ public class DrivePause extends CommandBase
      * @since 2017
      */
     private long startTime;
-
     /**
      * Pauses the specified number of milliseconds (only used in Auto)
      * 
      * @since 2017
      */
-    public DrivePause(long waitTime)
-    {
-        requires(driveSubsystem);
-        this.waitTime = waitTime;
+    public DrivePause(long waitTime) {
+	requires(driveSubsystem);
+	this.waitTime = waitTime;
     }
-
-    // Called just before this Command runs the first time
     @Override
-    protected void initialize()
-    {
-        startTime = System.currentTimeMillis();
+    protected void initialize() {
+	startTime = System.currentTimeMillis();
     }
-
-    // Called repeatedly when this Command is scheduled to run
     @Override
-    protected void execute()
-    {
+    protected void execute() {
     }
-
-    // Make this return true when this Command no longer needs to run execute()
     @Override
-    protected boolean isFinished()
-    {
-        long now = System.currentTimeMillis();
-        return (now - startTime) > waitTime;
+    protected boolean isFinished() {
+	long now = System.currentTimeMillis();
+	return (now - startTime) > waitTime;
     }
-
-    // Called once after isFinished returns true
     @Override
-    protected void end()
-    {
+    protected void end() {
     }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     @Override
-    protected void interrupted()
-    {
+    protected void interrupted() {
     }
 }

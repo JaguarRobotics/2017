@@ -14,18 +14,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @version 2017
  */
 abstract class SubsystemBase extends Subsystem implements RobotMap {
-	/**
-	 * Creates a motor
-	 * 
-	 * @param channel
-	 *            The PWM channel that the motor is attached to. 0-9 are
-	 *            on-board, 10-19 are on the MXP port
-	 * @param motor
-	 *            The type of motor to create
-	 * @return The motor object
-	 * @since 2017
-	 */
-	protected static SpeedController motor(int channel, MotorID motor) {
-		return IOFactory.motor(channel, motor);
-	}
+    /**
+     * Creates a motor
+     * 
+     * @param channel
+     *            The PWM channel that the motor is attached to. 0-9 are on-board, 10-19 are on the MXP port
+     * @param motor
+     *            The type of motor to create
+     * @return The motor object
+     * @since 2017
+     */
+    protected static SpeedController motor(int channel, MotorID motor) {
+	return IOFactory.motor(channel, motor);
+    }
 }

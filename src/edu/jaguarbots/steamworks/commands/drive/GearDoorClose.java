@@ -6,39 +6,34 @@ import edu.jaguarbots.steamworks.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *	Opens the crappy idea of a door panel thing that Jacob made as high as Snoop Dogg.
+ * Closes the gear security door
  *
- *	@author Brian Parks, Nathan Gawith, Kyle, K
- *	@since 2017
+ * @author Brian Parks, Nathan Gawith, Kyle, K
+ * @since 2017
  */
 public class GearDoorClose extends CommandBase {
-	/**
-	 *	Lifts the crappy idea of a door panel thing that Jacob made.
-	 */
-	public GearDoorClose() {
-		requires(driveSubsystem);
-	}
-	@Override
-	protected void initialize() {
-		DriveSubsystem.gearDoorOpen();
-		System.out.println("I AM CLOSED!");
-	}
-
-	@Override
-	protected void execute() {
-	}
-
-	@Override
-	protected boolean isFinished() {
-		return true;
-	}
-
-	@Override
-	protected void end() {
-        SmartDashboard.putString("Gate", Gate.Closed.toString());
-	}
-
-	@Override
-	protected void interrupted() {
-	}
+    /**
+     * Closes the gear security door
+     */
+    public GearDoorClose() {
+	requires(driveSubsystem);
+    }
+    @Override
+    protected void initialize() {
+	DriveSubsystem.gearDoorOpen();
+    }
+    @Override
+    protected void execute() {
+    }
+    @Override
+    protected boolean isFinished() {
+	return true;
+    }
+    @Override
+    protected void end() {
+	SmartDashboard.putString("Gate", Gate.Closed.toString());
+    }
+    @Override
+    protected void interrupted() {
+    }
 }
