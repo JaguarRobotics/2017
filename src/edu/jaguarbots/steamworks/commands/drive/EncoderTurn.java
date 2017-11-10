@@ -22,39 +22,39 @@ public class EncoderTurn extends CommandBase {
      * 
      * @since 2017
      */
-    private double arclength;
+    private double       arclength;
     private final double WHEELBASE_WIDTH = 18.0;
+
     @Override
     protected void initialize() {
-	driveSubsystem.resetEncoders(true, true);
-	driveSubsystem.startEncoders();
+        driveSubsystem.resetEncoders(true, true);
+        driveSubsystem.startEncoders();
     }
+
     @Override
     protected void execute() {
-	SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
-	SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
-	boolean correctIt = true;
-	double[] powers = driveSubsystem.getMotorPowers();
-	if (correctIt) {
-	    driveSubsystem.driveTank(-speed * powers[0], speed * powers[1]);
-	} else {
-	    driveSubsystem.driveTank(-speed, speed);
-	}
+        SmartDashboard.putNumber("EncoderLeft", CommandBase.driveSubsystem.getEncoderLeft());
+        SmartDashboard.putNumber("EncoderRight", CommandBase.driveSubsystem.getEncoderRight());
+        driveSubsystem.driveTank(-speed, speed);
     }
+
     @Override
     protected boolean isFinished() {
-	double left = Math.abs(driveSubsystem.getEncoderLeft());
-	double right = Math.abs(driveSubsystem.getEncoderRight());
-	return Math.max(left, right) >= arclength;
+        double left = Math.abs(driveSubsystem.getEncoderLeft());
+        double right = Math.abs(driveSubsystem.getEncoderRight());
+        return Math.max(left, right) >= arclength;
     }
+
     @Override
     protected void end() {
-	driveSubsystem.driveTank(0, 0);
+        driveSubsystem.driveTank(0, 0);
     }
+
     @Override
     protected void interrupted() {
-	end();
+        end();
     }
+
     /**
      * Default constructor
      * 
@@ -65,10 +65,11 @@ public class EncoderTurn extends CommandBase {
      * @since 2017
      */
     public EncoderTurn(double angle, double speed) {
-	requires(driveSubsystem);
-	this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
-	this.arclength = Math.abs(angle * WHEELBASE_WIDTH / 2);
+        requires(driveSubsystem);
+        this.speed = (angle < 0) ? -1 * Math.abs(speed) : Math.abs(speed);
+        this.arclength = Math.abs(angle * WHEELBASE_WIDTH / 2);
     }
+
     /**
      * Turns the robot at a speed of 0.7
      * 
@@ -77,6 +78,6 @@ public class EncoderTurn extends CommandBase {
      * @since 2017
      */
     public EncoderTurn(double angle) {
-	this(angle, 0.7);
+        this(angle, 0.7);
     }
 }
